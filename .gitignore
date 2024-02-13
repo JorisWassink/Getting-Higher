@@ -1,6 +1,7 @@
-GXPEngine/obj
+GXPEngine/obj/
 .vs
 GXPEngine.userprefs
 GXPEngine/bin/Debug/*
-!GXPEngine/bin/Debug/Assets
-GXPEngine/bin/Release
+!GXPEngine/bin/Debug/Assets/
+!GXPEngine/bin/Debug/lib/
+GXPEngine/bin/Release/
