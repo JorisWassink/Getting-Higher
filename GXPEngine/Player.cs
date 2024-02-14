@@ -41,7 +41,7 @@ public class Player : AnimationSprite
     {
         UpdateScreenPosition();
         Movement();
-
+        Console.WriteLine(rotation);
     }
     void UpdateScreenPosition()
     {
@@ -66,7 +66,7 @@ public class Player : AnimationSprite
                 velocity.y -= _speed;
             }
             _autoRotateLeft = true;
-            if (rotation <= 220)
+            if (rotation <= -50)
             {
                 _autoRotateLeft = false;
             }
@@ -86,7 +86,7 @@ public class Player : AnimationSprite
                 velocity.y -= _speed;
             }
 
-            if (rotation >= 320)
+            if (rotation >= 50)
             {
                 _autoRotateRight = false;
             }
