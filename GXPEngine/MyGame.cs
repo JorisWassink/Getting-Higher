@@ -7,7 +7,6 @@ public class RotatingSpaceship : Game
 {
     Player _spaceship;
     EasyDraw _text;
-
     public RotatingSpaceship() : base(800, 600, false, false)
     {
         _spaceship = new Player(new Vec2(width / 2, height / 2), "Assets/spaceship.png", 1, 1);
