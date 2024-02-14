@@ -7,7 +7,12 @@ public class RotatingSpaceship : Game
 {
     Player _spaceship;
     EasyDraw _text;
+<<<<<<< HEAD
     public RotatingSpaceship() : base(800, 600, false, false)
+=======
+
+    public RotatingSpaceship() : base(1920, 1080, false, false)
+>>>>>>> 18bc616f618e16465bb24f22290368eb645d29b0
     {
         _spaceship = new Player(new Vec2(width / 2, height / 2), "Assets/spaceship.png", 1, 1);
         _spaceship.SetXY(width / 2, height / 2);

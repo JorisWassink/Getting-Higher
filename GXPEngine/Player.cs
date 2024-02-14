@@ -44,7 +44,7 @@ public class Player : AnimationSprite
         velocity.x = 0;
         velocity.y = 0;
 
-        velocity.y += gravity;
+        velocity.y -= gravity;
 
         if (Input.GetKey(Key.A))
         {
