@@ -18,7 +18,7 @@ public class Player : AnimationSprite
     public Vec2 velocity;
     Vec2 _position;
 /*    Vec2 pPosition;*/
-    float pSpeed = 2;
+    float pSpeed = 0.4f;
     float _speed;
     float gravity = 1;
     bool _autoRotateLeft = false;
