@@ -13,12 +13,17 @@ public class RotatingSpaceship : Game
     public int currentLevel = 0;
     public RotatingSpaceship() : base(1920, 1080, false, false)
     {
-        levels[0] = "Assets/Level1.tmx";
+        levels[0] = "empty.tmx";
         LoadLevel(levels[0]);
+
+        _spaceship = FindObjectOfType<Player>();
 
         _text = new EasyDraw(200, 20);
         _text.TextAlign(CenterMode.Min, CenterMode.Min);
-        _text.Text("Rotation: 0", 0, 0);
+        if (_spaceship != null)
+        {
+            _text.Text(_spaceship.rotation.ToString(), 0, 0);
+        }
         AddChild(_text);
     }
 
@@ -47,4 +52,5 @@ public class RotatingSpaceship : Game
         Level level = new Level(name);
         LateAddChild(level);
     }
+
 }

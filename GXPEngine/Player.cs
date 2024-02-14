@@ -17,24 +17,31 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Vec2 _position;
-/*    Vec2 pPosition;*/
-    float pSpeed = 0.4f;
     float _speed;
-    float gravity = 1;
+    float gravity = 0.4f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
-    {
-/*        _position = pPosition;*/
-        _speed = pSpeed;
-        SetOrigin(width / 2, height / 2);
 
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base(fileName, 1, 1)
+    {
+        Initialize(obj);
+        
+    }
+
+    void Initialize(TiledObject obj)
+    {
+        _position = new Vec2(x, y);
+        _speed = 0.5f;
+        SetOrigin(width / 2, height / 2);
+        rotation = 270;
+        scale = .3f;
     }
     void Update()
     {
         UpdateScreenPosition();
         Movement();
+
     }
     void UpdateScreenPosition()
     {
@@ -43,15 +50,21 @@ public class Player : AnimationSprite
     }
     void Movement()
     {
-        velocity.x = 0;
-        velocity.y = 0;
-
-        velocity.y += gravity;
+        //add gravity
+        if (velocity.y < 50)
+        {
+            velocity.y += gravity;
+        }
 
         if (Input.GetKey(Key.A))
         {
+            //boost left
             velocity.x -= _speed;
-            velocity.y -= _speed;
+
+            if (velocity.y > -50)
+            {
+                velocity.y -= _speed;
+            }
             _autoRotateLeft = true;
             if (rotation <= 220)
             {
@@ -65,11 +78,15 @@ public class Player : AnimationSprite
         }
         if (Input.GetKey(Key.D))
         {
+            //boost right
             _autoRotateRight = true;
             velocity.x += _speed;
-            velocity.y -= _speed;
+            if (velocity.y > -50)
+            {
+                velocity.y -= _speed;
+            }
 
-            if (rotation >= 330)
+            if (rotation >= 320)
             {
                 _autoRotateRight = false;
             }
@@ -86,11 +103,11 @@ public class Player : AnimationSprite
 
         if (_autoRotateLeft)
         {
-            rotation -= 1.5f;
+            rotation -= 1;
         }
         if (_autoRotateRight)
         {
-            rotation += 1.5f;
+            rotation += 1;
         }
 
         // move in current direction:
@@ -102,6 +119,7 @@ public class Player : AnimationSprite
             }
             else Move(2, 0);
         }
+
         _position += velocity * _speed;
     }
 
