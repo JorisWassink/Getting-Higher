@@ -46,7 +46,7 @@
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
     <Compile Include="GXPEngine\GameObject.cs" />
-    <Compile Include="GXPEngine\Level.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="GXPEngine\Sound.cs" />
     <Compile Include="GXPEngine\SoundChannel.cs" />
     <Compile Include="GXPEngine\Sprite.cs" />

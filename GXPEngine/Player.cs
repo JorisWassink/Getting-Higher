@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GXPEngine;
+using TiledMapParser;
 
 public class Player : AnimationSprite
 {
@@ -16,17 +17,18 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Vec2 _position;
+/*    Vec2 pPosition;*/
+    float pSpeed = 2;
     float _speed;
     float gravity = 1;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
-    public Player(Vec2 pPosition, string fileName, int cols, int rows, float pSpeed = 2) : base(fileName, 1, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
-        _position = pPosition;
+/*        _position = pPosition;*/
         _speed = pSpeed;
         SetOrigin(width / 2, height / 2);
-        rotation = 270;
 
     }
     void Update()
@@ -44,14 +46,14 @@ public class Player : AnimationSprite
         velocity.x = 0;
         velocity.y = 0;
 
-        velocity.y -= gravity;
+        velocity.y += gravity;
 
         if (Input.GetKey(Key.A))
         {
             velocity.x -= _speed;
             velocity.y -= _speed;
             _autoRotateLeft = true;
-            if (rotation <= 190)
+            if (rotation <= 220)
             {
                 _autoRotateLeft = false;
             }
@@ -67,7 +69,7 @@ public class Player : AnimationSprite
             velocity.x += _speed;
             velocity.y -= _speed;
 
-            if (rotation >= 350)
+            if (rotation >= 330)
             {
                 _autoRotateRight = false;
             }

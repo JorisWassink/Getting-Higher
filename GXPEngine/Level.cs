@@ -17,13 +17,16 @@ namespace GXPEngine
         Sound music;
         public Level(string thislevelName)
         {
-            levelName = thislevelName;
-            TiledLoader loader = new TiledLoader(thislevelName, null, true);
-            loader.rootObject = this;
-            loader.LoadImageLayers();
-            loader.LoadTileLayers();
+            TiledLoader loader = new TiledLoader(thislevelName);
             loader.autoInstance = true;
+            loader.rootObject = this;
+            loader.addColliders = false;
+            loader.LoadImageLayers();
+            loader.LoadTileLayers(0);
+            loader.addColliders = true;
+            loader.LoadTileLayers(1);
             loader.LoadObjectGroups(); // player is made -> child of Level
+            player = FindObjectOfType<Player>();
         }
         void Update()
         {
