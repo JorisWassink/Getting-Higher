@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections;
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using GXPEngine;
@@ -7,18 +9,12 @@ public class RotatingSpaceship : Game
 {
     Player _spaceship;
     EasyDraw _text;
-<<<<<<< HEAD
-    public RotatingSpaceship() : base(800, 600, false, false)
-=======
-
+    string[] levels = new string[1];
+    public int currentLevel = 0;
     public RotatingSpaceship() : base(1920, 1080, false, false)
->>>>>>> 18bc616f618e16465bb24f22290368eb645d29b0
     {
-        _spaceship = new Player(new Vec2(width / 2, height / 2), "Assets/spaceship.png", 1, 1);
-        _spaceship.SetXY(width / 2, height / 2);
-        AddChild(_spaceship);
-
-        _spaceship.rotation = 270;
+        levels[0] = "Assets/Level1.tmx";
+        LoadLevel(levels[0]);
 
         _text = new EasyDraw(200, 20);
         _text.TextAlign(CenterMode.Min, CenterMode.Min);
@@ -28,12 +24,27 @@ public class RotatingSpaceship : Game
 
     void Update()
     {
-        _text.Clear(Color.Transparent);
-        _text.Text("Rotation:" + _spaceship.rotation, 0, 0);
+        /*_text.Clear(Color.Transparent);
+        _text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
     }
+
 
     static void Main()
     {
         new RotatingSpaceship().Start();
+    }
+
+
+    void LoadLevel(string name)
+    {
+        List<GameObject> children = GetChildren();
+
+        foreach (GameObject child in children)
+        {
+            child.Destroy();
+        }
+
+        Level level = new Level(name);
+        LateAddChild(level);
     }
 }
