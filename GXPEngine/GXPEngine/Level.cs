@@ -18,6 +18,7 @@ namespace GXPEngine {
         Player player;
         Sound music;
         TiledLoader loader;
+
         public Level(string thislevelName)
         {
            
@@ -74,7 +75,7 @@ namespace GXPEngine {
 
                 y += 300;
 
-                Console.WriteLine(y);
+                //Console.WriteLine(y);
             }
             else
             {

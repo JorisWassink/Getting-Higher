@@ -14,6 +14,7 @@ class Background : EasyDraw
 {
 
     EasyDraw currentWave;
+    Sprite ship;
     Random random;
     int starX;
     int starY;
@@ -27,7 +28,6 @@ class Background : EasyDraw
     {
         width = owidth; height = oheight;
         InitializeHUD();
-
         for (int i = 0; i < 400; i += 1)
         {
             // Calculate the offset based on the current iteration
@@ -37,11 +37,16 @@ class Background : EasyDraw
             starY = random.Next(0, height);
 
             currentWave.Rect(starX, starY, 10, 10);
+            ship = new Sprite("Assets/spaceship.png", false, false);
+            ship.x = starX; ship.y = starY;
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
-            Console.WriteLine("uh oh");
+
+            // Console.WriteLine("uh oh");
+
 
         }
+
     }
 
 

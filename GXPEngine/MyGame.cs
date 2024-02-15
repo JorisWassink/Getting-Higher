@@ -34,6 +34,7 @@ public class RotatingSpaceship : Game
     {
         _text.Clear(Color.Transparent);
         /*_text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
+
     }
 
 
