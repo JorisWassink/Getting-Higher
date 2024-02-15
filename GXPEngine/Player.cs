@@ -23,6 +23,7 @@ public class Player : AnimationSprite
     float fuel = 1000;
     Vec2 _position;
     float _speed;
+    float maxVel = 10;
     float gravity = 0.5f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
@@ -63,6 +64,10 @@ public class Player : AnimationSprite
         {
             velocity.y += gravity;
         }
+        if (velocity.y <= -maxVel)
+        {
+            velocity.y = -maxVel;
+        }
         collisions();
 
         //add gravity
@@ -71,7 +76,7 @@ public class Player : AnimationSprite
         {
             //boost left
             velocity.x -= _speed;
-            fuel -= 1;
+            fuel -= 0.1f;
             ui.SetFuel(fuel);
 
             if (velocity.y > -25)
@@ -92,7 +97,7 @@ public class Player : AnimationSprite
         if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
-            fuel -= 1;
+            fuel -= 0.1f;
             ui.SetFuel(fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
@@ -152,7 +157,7 @@ public class Player : AnimationSprite
                 }
             }
         }
-            if (colx != null)
+        if (colx != null)
         {
             if (colx.normal.x > 0)
             {
@@ -167,6 +172,15 @@ public class Player : AnimationSprite
                 rotation = 0;
             }
         }
-    }
+        GameObject[] collisions = GetCollisions();
+        for (int i = 0; i < collisions.Length; i++)
+        {
+            if (collisions[i] is Pickup)
+            {
+                ((Pickup)collisions[i]).Grab();
+                fuel += 25;
+            }
+        }
+        }
 
 }
