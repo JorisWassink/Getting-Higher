@@ -19,11 +19,11 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Ui ui = null;
-    float tank = 100;
-    float fuel = 100;
+    float tank = 1000;
+    float fuel = 1000;
     Vec2 _position;
     float _speed;
-    float gravity = 0.5f;
+    float gravity = 0.4f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
@@ -36,11 +36,11 @@ public class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.8f;
+        _speed = 0.5f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scaleY = .3f;
-        scaleX = .4f;
+        scaleY = .15f;
+        scaleX = .3f;
         _position.x = game.width / 2;
         _position.y = 3300;
     }
