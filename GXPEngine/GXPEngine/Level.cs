@@ -37,7 +37,7 @@ namespace GXPEngine
 
         void scroll()
         {
-            int boundrySize = 200;
+            int boundrySize = 700;
             if (player != null)
             {
                 if (player.y + y < boundrySize)

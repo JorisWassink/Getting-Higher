@@ -18,7 +18,7 @@ public class Player : AnimationSprite
     public Vec2 velocity;
     Vec2 _position;
     float _speed;
-    float gravity = 0.4f;
+    float gravity = 0.5f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
@@ -26,21 +26,22 @@ public class Player : AnimationSprite
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base(fileName, 1, 1)
     {
         Initialize(obj);
-        
+        Console.WriteLine(x + " " + y);
     }
 
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.5f;
+        _speed = 0.8f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scale = .3f;
+        scaleY = .3f;
+        scaleX = .4f;
     }
     void Update()
     {
-        UpdateScreenPosition();
         Movement();
+        UpdateScreenPosition();
         Console.WriteLine(rotation);
     }
     void UpdateScreenPosition()
@@ -50,6 +51,9 @@ public class Player : AnimationSprite
     }
     void Movement()
     {
+        _position.x = x;
+        _position.y = y;
+
         //add gravity
         if (velocity.y < 50)
         {
