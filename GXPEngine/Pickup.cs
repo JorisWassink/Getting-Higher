@@ -8,18 +8,23 @@ using GXPEngine;
 using TiledMapParser;
 
 
-class Wall : AnimationSprite
+class Pickup : AnimationSprite
 {
     int obwidth;
     int obheight;
 
-    public Wall(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
+    public Pickup(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
         Initialize(obj);
     }
 
     void Initialize(TiledObject obj)
     {
+        collider.isTrigger = true;
         SetOrigin(width / 2, height / 2);
+    }
+    public void Grab()
+    {
+        this.LateDestroy();
     }
 }

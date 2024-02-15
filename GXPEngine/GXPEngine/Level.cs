@@ -14,7 +14,6 @@ namespace GXPEngine
     {
         string levelName;
         Player player;
-        Wall wall;
         Sound music;
         public Level(string thislevelName)
         {
@@ -28,7 +27,6 @@ namespace GXPEngine
             loader.LoadTileLayers(1);
             loader.LoadObjectGroups(); // player is made -> child of Level
             player = FindObjectOfType<Player>();
-            wall = FindObjectOfType<Wall>();
 
         }
         void Update()
