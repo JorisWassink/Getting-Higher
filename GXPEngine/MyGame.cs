@@ -25,6 +25,8 @@ public class RotatingSpaceship : Game
             _text.Text(_spaceship.rotation.ToString(), 0, 0);
         }
         AddChild(_text);
+
+
     }
 
     void Update()

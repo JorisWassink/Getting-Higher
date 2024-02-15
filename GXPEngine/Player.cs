@@ -129,24 +129,28 @@ public class Player : AnimationSprite
             {
                 velocity.y = 0;
                 _position.y += _speed + 1;
+
             }
             if (coly.normal.y < 0)
             {
                 velocity.y = 0;
+                velocity.x = 0;
+                rotation = 0;
             }
         }
         if (colx != null)
         {
             if (colx.normal.x > 0)
             {
-                ;
                 velocity.x = 0;
                 _position.x += 1;
+                rotation = 0;
             }
             if (colx.normal.x < 0)
             {
                 velocity.x = 0;
                 _position.x -= 1;
+                rotation = 0;
             }
         }
     }
