@@ -13,7 +13,7 @@ public class RotatingSpaceship : Game
     public int currentLevel = 0;
     public RotatingSpaceship() : base(1920, 1080, false, false)
     {
-        levels[0] = "empty.tmx";
+        levels[0] = "Assets/empty.tmx";
         LoadLevel(levels[0]);
 
         _spaceship = FindObjectOfType<Player>();
@@ -29,8 +29,8 @@ public class RotatingSpaceship : Game
 
     void Update()
     {
-        /*_text.Clear(Color.Transparent);
-        _text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
+        _text.Clear(Color.Transparent);
+        /*_text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
     }
 
 

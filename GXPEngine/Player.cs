@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GXPEngine;
+using GXPEngine.Core;
 using TiledMapParser;
 
 public class Player : AnimationSprite
@@ -18,15 +19,17 @@ public class Player : AnimationSprite
     public Vec2 velocity;
     Vec2 _position;
     float _speed;
-    float gravity = 0.4f;
+    float gravity = 0.3f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
 
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base(fileName, 1, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
         Initialize(obj);
-        
+        x = 864;
+        y = 3489;
+
     }
 
     void Initialize(TiledObject obj)
@@ -50,6 +53,16 @@ public class Player : AnimationSprite
     }
     void Movement()
     {
+        Collision colx = MoveUntilCollision(_position.x, 0);
+        Collision coly = MoveUntilCollision(0, _position.y);
+        if (colx != null && colx.normal.x < 0)
+        {
+            _position.x += 20;
+        }
+        if (coly != null)
+        {
+            velocity.y = 0;
+        }
         //add gravity
         if (velocity.y < 50)
         {
@@ -111,14 +124,14 @@ public class Player : AnimationSprite
         }
 
         // move in current direction:
-        if (_move)
+        /*if (_move)
         {
             if (Input.GetKey(Key.A) && Input.GetKey(Key.D))
             {
                 Move(4, 0);
             }
             else Move(2, 0);
-        }
+        }*/
 
         _position += velocity * _speed;
     }

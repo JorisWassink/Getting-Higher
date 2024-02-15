@@ -312,6 +312,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" type="Player" gid="1" x="699.333" y="1996.67" width="241" height="164" rotation="270"/>
+  <object id="1" type="Player" gid="1" x="675.333" y="2192.67" width="241" height="164" rotation="270"/>
  </objectgroup>
 </map>
