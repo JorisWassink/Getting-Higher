@@ -19,8 +19,8 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Ui ui = null;
-    float tank = 100;
-    float fuel = 100;
+    int tank = 1000;
+    int fuel = 1000;
     Vec2 _position;
     float _speed;
     float maxVel = 10;
@@ -77,7 +77,7 @@ public class Player : AnimationSprite
         {
             //boost left
             velocity.x -= _speed;
-            fuel -= 0.1f;
+            fuel -= 1;
             ui.SetFuel(fuel);
 
             if (velocity.y > -50)
@@ -106,7 +106,7 @@ public class Player : AnimationSprite
             if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
-            fuel -= 0.1f;
+            fuel -= 1;
             ui.SetFuel(fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
@@ -188,7 +188,7 @@ public class Player : AnimationSprite
             if (collisions[i] is Pickup)
             {
                 ((Pickup)collisions[i]).Grab();
-                fuel += 25;
+                fuel += 250;
             }
         }
         }
