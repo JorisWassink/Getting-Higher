@@ -72,12 +72,26 @@ public class Player : AnimationSprite
 
         //add gravity
 
-        if (Input.GetKey(Key.A) && Input.GetKey(Key.D))
+/*        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
-            // Both A and D pressed, set rotation to 0
-            rotation = 0;
+            if (rotation > 0)
+            {
+                rotation -= .5f;
+            }
+            else if (rotation < 0)
+            {
+                rotation += .5f;
+            }
+            if (velocity.x > 0)
+            {
+                velocity.x -= 1;
+            }
+            if (velocity.x < 0)
+            {
+                velocity.x += 1;
+            }
         }
-        else
+        else*/
 
  if (Input.GetKey(Key.A) && fuel > 0)
         {
