@@ -144,7 +144,7 @@ public class Player : AnimationSprite
             {
                 rotation += 2;
             }
-            velocity.x += 0;
+            velocity.x = 0;
         }
 
         if (_autoRotateLeft)
