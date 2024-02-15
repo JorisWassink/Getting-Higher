@@ -90,12 +90,20 @@ public class Player : AnimationSprite
                 _autoRotateLeft = false;
             }
         }
+        else if (Input.GetKey(Key.D))
+        {
+            _autoRotateLeft = false;
+        }
         else
         {
+            if (rotation < 0)
+            {
+                rotation += 2;
+            }
             _autoRotateLeft = false;
             _move = false;
         }
-        if (Input.GetKey(Key.D) && fuel > 0)
+            if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
             fuel -= 0.1f;
@@ -118,17 +126,21 @@ public class Player : AnimationSprite
         }
         else
         {
+            if (rotation > 0)
+            {
+                rotation -= 2; }
+
             _autoRotateRight = false;
             _move = false;
         }
 
         if (_autoRotateLeft)
         {
-            rotation -= 1;
+            rotation -= 5;
         }
         if (_autoRotateRight)
         {
-            rotation += 1;
+            rotation += 5;
         }
 
         _position += velocity * _speed;
