@@ -19,8 +19,8 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Ui ui = null;
-    float tank = 200;
-    float fuel = 100;
+    float tank = 2000;
+    float fuel = 1000;
     Vec2 _position;
     float _speed;
     float maxVel = 25;
@@ -37,7 +37,7 @@ public class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.5f;
+        _speed = 0.7f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
         scaleY = .15f;
@@ -72,12 +72,19 @@ public class Player : AnimationSprite
 
         //add gravity
 
-        if (Input.GetKey(Key.A) && fuel > 0)
+        if (Input.GetKey(Key.A) && Input.GetKey(Key.D))
+        {
+            // Both A and D pressed, set rotation to 0
+            rotation = 0;
+        }
+        else
+
+ if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
             velocity.x -= _speed;
             fuel -= 1;
-            ui.SetFuel(fuel);
+            ui.SetFuel((int)fuel);
 
             if (velocity.y > -25)
             {
@@ -102,11 +109,11 @@ public class Player : AnimationSprite
             _autoRotateLeft = false;
             _move = false;
         }
-            if (Input.GetKey(Key.D) && fuel > 0)
+            if (Input.GetKey(Key.D) && fuel > 0 && !Input.GetKey(Key.A))
         {
             //boost right
             fuel -= 1;
-            ui.SetFuel(fuel);
+            ui.SetFuel((int)fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
             if (velocity.y > -50)
@@ -133,13 +140,15 @@ public class Player : AnimationSprite
             _move = false;
         }
 
+
+
         if (_autoRotateLeft)
         {
-            rotation -= 5;
+            rotation -= 4;
         }
         if (_autoRotateRight)
         {
-            rotation += 5;
+            rotation += 4;
         }
 
         _position += velocity * _speed;
@@ -165,7 +174,7 @@ public class Player : AnimationSprite
                 {
                     fuel += 5;
                     if (fuel > tank) fuel = tank;
-                    ui.SetFuel(fuel);
+                    ui.SetFuel((int)fuel);
                 }
             }
         }
