@@ -29,6 +29,8 @@ namespace GXPEngine
             loader.LoadObjectGroups(); // player is made -> child of Level
             player = FindObjectOfType<Player>();
             wall = FindObjectOfType<Wall>();
+`
+
 
         }
         void Update()

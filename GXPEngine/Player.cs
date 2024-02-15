@@ -27,7 +27,6 @@ public class Player : AnimationSprite
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
         Initialize(obj);
-        Console.WriteLine(x + " " + y);
     }
 
     void Initialize(TiledObject obj)
@@ -43,7 +42,7 @@ public class Player : AnimationSprite
     {
         Movement();
         UpdateScreenPosition();
-        Console.WriteLine(rotation);
+        //Console.WriteLine(rotation);
     }
     void UpdateScreenPosition()
     {
@@ -67,6 +66,7 @@ public class Player : AnimationSprite
         if (coly != null)
         {
             velocity.y = 0;
+            Console.WriteLine("aaaaaaaaaaa");
         }
 
         //add gravity
