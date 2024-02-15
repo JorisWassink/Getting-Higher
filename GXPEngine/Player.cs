@@ -18,6 +18,9 @@ public class Player : AnimationSprite
         }
     }
     public Vec2 velocity;
+    Ui ui = null;
+    float tank = 100;
+    float fuel = 100;
     Vec2 _position;
     float _speed;
     float gravity = 0.5f;
@@ -43,6 +46,7 @@ public class Player : AnimationSprite
     }
     void Update()
     {
+        if (ui == null) ui = game.FindObjectOfType<Ui>();
         Movement();
         UpdateScreenPosition();
         //Console.WriteLine(rotation);
@@ -63,10 +67,12 @@ public class Player : AnimationSprite
 
         //add gravity
 
-        if (Input.GetKey(Key.A))
+        if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
             velocity.x -= _speed;
+            fuel -= 1;
+            ui.SetFuel(fuel);
 
             if (velocity.y > -50)
             {
@@ -83,9 +89,11 @@ public class Player : AnimationSprite
             _autoRotateLeft = false;
             _move = false;
         }
-        if (Input.GetKey(Key.D))
+        if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
+            fuel -= 1;
+            ui.SetFuel(fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
             if (velocity.y > -50)
@@ -136,9 +144,15 @@ public class Player : AnimationSprite
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
+                if (fuel < tank)
+                {
+                    fuel += 5;
+                    if (fuel > tank) fuel = tank;
+                    ui.SetFuel(fuel);
+                }
             }
         }
-        if (colx != null)
+            if (colx != null)
         {
             if (colx.normal.x > 0)
             {

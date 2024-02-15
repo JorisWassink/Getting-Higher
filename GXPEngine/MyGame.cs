@@ -9,6 +9,7 @@ public class RotatingSpaceship : Game
 {
     Player _spaceship;
     EasyDraw _text;
+    Ui ui;
     string[] levels = new string[1];
     public int currentLevel = 0;
     public RotatingSpaceship() : base(1920, 1080, false, false)
@@ -53,6 +54,8 @@ public class RotatingSpaceship : Game
 
         Level level = new Level(name);
         LateAddChild(level);
+        ui = new Ui();
+        LateAddChild(ui);
     }
 
 }
