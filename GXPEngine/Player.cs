@@ -19,8 +19,8 @@ public class Player : AnimationSprite
     }
     public Vec2 velocity;
     Ui ui = null;
-    float tank = 2000;
-    float fuel = 1000;
+    float tank = 500;
+    float fuel = 500;
     Vec2 _position;
     float _speed;
     float maxVel = 25;
