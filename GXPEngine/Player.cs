@@ -37,7 +37,7 @@ public class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.8f;
+        _speed = 0.5f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
         scaleY = .15f;
@@ -76,7 +76,7 @@ public class Player : AnimationSprite
         {
             //boost left
             velocity.x -= _speed;
-            fuel -= 0.1f;
+            fuel -= 1;
             ui.SetFuel(fuel);
 
             if (velocity.y > -25)
@@ -89,15 +89,23 @@ public class Player : AnimationSprite
                 _autoRotateLeft = false;
             }
         }
+        else if (Input.GetKey(Key.D))
+        {
+            _autoRotateLeft = false;
+        }
         else
         {
+            if (rotation < 0)
+            {
+                rotation += 2;
+            }
             _autoRotateLeft = false;
             _move = false;
         }
-        if (Input.GetKey(Key.D) && fuel > 0)
+            if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
-            fuel -= 0.1f;
+            fuel -= 1;
             ui.SetFuel(fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
@@ -117,17 +125,21 @@ public class Player : AnimationSprite
         }
         else
         {
+            if (rotation > 0)
+            {
+                rotation -= 2; }
+
             _autoRotateRight = false;
             _move = false;
         }
 
         if (_autoRotateLeft)
         {
-            rotation -= 1;
+            rotation -= 5;
         }
         if (_autoRotateRight)
         {
-            rotation += 1;
+            rotation += 5;
         }
 
         _position += velocity * _speed;
@@ -178,7 +190,7 @@ public class Player : AnimationSprite
             if (collisions[i] is Pickup)
             {
                 ((Pickup)collisions[i]).Grab();
-                fuel += 25;
+                fuel += 250;
             }
         }
         }

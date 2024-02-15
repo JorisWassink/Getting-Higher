@@ -1,4 +1,4 @@
-﻿using GXPEngine;
+using GXPEngine;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,18 +13,17 @@ public class Ui : GameObject
     public Ui()
     {
         rowdies = Utils.LoadFont("Assets/Rowdies-Regular.ttf", 40);
-        fuelBar = new EasyDraw(250, 60, false);
+        fuelBar = new EasyDraw(300, 60, false);
         fuelBar.TextFont(rowdies);
         fuelBar.TextAlign(CenterMode.Min, CenterMode.Center);
-        fuelBar.Fill(77, 93, 100);
-        fuelBar.Text("Fuel: 100");
+        fuelBar.Fill(0, 255, 0);
+        fuelBar.Text("Fuel: 1000");
         fuelBar.SetXY(10, 10);
-        /*Console.WriteLine(fuelBar);*/
         AddChild(fuelBar);
         
 
     }
-    public void SetFuel(float fuelCount)
+    public void SetFuel(int fuelCount)
     {
         fuelBar.Text(String.Format("Fuel: " + (float)((int)fuelCount)), true);
     }

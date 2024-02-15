@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="480" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="22">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="120" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="30">
  <editorsettings>
   <chunksize width="16" height="25"/>
  </editorsettings>
@@ -9,7 +9,10 @@
  <tileset firstgid="36" name="SpaceShip" tilewidth="164" tileheight="241" tilecount="1" columns="1">
   <image source="spaceship.png" width="164" height="241"/>
  </tileset>
- <layer id="4" name="Tile Layer 1" width="60" height="480">
+ <tileset firstgid="37" name="JerryCan" tilewidth="35" tileheight="40" tilecount="1" columns="1">
+  <image source="jerrycan.png" width="35" height="40"/>
+ </tileset>
+ <layer id="4" name="Tile Layer 1" width="60" height="120">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -978,9 +981,14 @@
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1" offsetx="2" offsety="2">
-  <object id="18" type="Player" gid="18" x="878" y="14812" width="68" height="70"/>
-  <object id="19" type="Pickup" gid="18" x="1188.36" y="12413.4" width="68" height="70"/>
-  <object id="20" type="Pickup" gid="18" x="782.182" y="9814.52" width="68" height="70"/>
-  <object id="21" type="Pickup" gid="18" x="921.576" y="5493.3" width="68" height="70"/>
+  <object id="16" type="Player" gid="13" x="896" y="3360" width="70.6667" height="72.1927"/>
+  <object id="22" type="Pickup" gid="37" x="1152" y="2368" width="35" height="40"/>
+  <object id="23" type="Pickup" gid="37" x="544" y="2144" width="35" height="40"/>
+  <object id="24" type="Pickup" gid="37" x="1344" y="1856" width="35" height="40"/>
+  <object id="25" type="Pickup" gid="37" x="544" y="1568" width="35" height="40"/>
+  <object id="26" type="Pickup" gid="37" x="1376" y="1280" width="35" height="40"/>
+  <object id="27" type="Pickup" gid="37" x="768" y="992" width="35" height="40"/>
+  <object id="28" type="Pickup" gid="37" x="1216" y="608" width="35" height="40"/>
+  <object id="29" type="Pickup" gid="37" x="800" y="480" width="35" height="40"/>
  </objectgroup>
 </map>

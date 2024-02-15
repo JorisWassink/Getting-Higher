@@ -13,7 +13,7 @@ class Pickup : AnimationSprite
     int obwidth;
     int obheight;
 
-    public Pickup(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
+    public Pickup(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
     {
         Initialize(obj);
     }
