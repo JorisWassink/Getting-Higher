@@ -19,7 +19,7 @@ public class Player : AnimationSprite
     public Vec2 velocity;
     Vec2 _position;
     float _speed;
-    float gravity = 0.3f;
+    float gravity = 0.5f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool _move = false;
@@ -27,23 +27,22 @@ public class Player : AnimationSprite
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
         Initialize(obj);
-        x = 864;
-        y = 3489;
-
+        Console.WriteLine(x + " " + y);
     }
 
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.5f;
+        _speed = 0.8f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scale = .3f;
+        scaleY = .3f;
+        scaleX = .4f;
     }
     void Update()
     {
-        UpdateScreenPosition();
         Movement();
+        UpdateScreenPosition();
         Console.WriteLine(rotation);
     }
     void UpdateScreenPosition()
@@ -53,16 +52,9 @@ public class Player : AnimationSprite
     }
     void Movement()
     {
-        Collision colx = MoveUntilCollision(_position.x, 0);
-        Collision coly = MoveUntilCollision(0, _position.y);
-        if (colx != null && colx.normal.x < 0)
-        {
-            _position.x += 20;
-        }
-        if (coly != null)
-        {
-            velocity.y = 0;
-        }
+        _position.x = x;
+        _position.y = y;
+
         //add gravity
         if (velocity.y < 50)
         {
