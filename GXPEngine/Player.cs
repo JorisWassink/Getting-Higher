@@ -82,7 +82,7 @@ public class Player : AnimationSprite
 
             if (velocity.y > -50)
             {
-                velocity.y -= _speed;
+                velocity.y -= _speed * 1.5f;
             }
             _autoRotateLeft = true;
             if (rotation <= -50)
@@ -103,7 +103,7 @@ public class Player : AnimationSprite
             _autoRotateLeft = false;
             _move = false;
         }
-            if (Input.GetKey(Key.D) && fuel > 0)
+        if (Input.GetKey(Key.D) && fuel > 0)
         {
             //boost right
             fuel -= 1;
@@ -112,7 +112,7 @@ public class Player : AnimationSprite
             velocity.x += _speed;
             if (velocity.y > -50)
             {
-                velocity.y -= _speed;
+                velocity.y -= _speed * 1.5f;
             }
 
             if (rotation >= 50)
@@ -128,10 +128,23 @@ public class Player : AnimationSprite
         {
             if (rotation > 0)
             {
-                rotation -= 2; }
+                rotation -= 2;
+            }
 
             _autoRotateRight = false;
             _move = false;
+        }
+        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
+        {
+            if (rotation > 0)
+            {
+                rotation -= 2;
+            }
+            else if (rotation < 0)
+            {
+                rotation += 2;
+            }
+            velocity.x += 0;
         }
 
         if (_autoRotateLeft)
@@ -191,6 +204,6 @@ public class Player : AnimationSprite
                 fuel += 250;
             }
         }
-        }
+    }
 
 }
