@@ -38,7 +38,7 @@ public class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _position = new Vec2(x, y);
-        _speed = 0.8f;
+        _speed = 0.5f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
         scaleY = .3f;
