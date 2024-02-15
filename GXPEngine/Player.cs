@@ -54,12 +54,22 @@ public class Player : AnimationSprite
     {
         _position.x = x;
         _position.y = y;
-
-        //add gravity
         if (velocity.y < 50)
         {
             velocity.y += gravity;
         }
+        Collision colx = MoveUntilCollision(_position.x, 0);
+        Collision coly = MoveUntilCollision(0, _position.y);
+        /*if (colx != null && colx.normal.x < 0)
+        {
+            _position.x += 20;
+        }*/
+        if (coly != null)
+        {
+            velocity.y = 0;
+        }
+
+        //add gravity
 
         if (Input.GetKey(Key.A))
         {
