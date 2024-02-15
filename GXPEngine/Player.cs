@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,8 @@ public class Player : AnimationSprite
         rotation = 270;
         scaleY = .3f;
         scaleX = .4f;
+        _position.x = game.width / 2;
+        _position.y = 3300;
     }
     void Update()
     {
@@ -49,25 +52,15 @@ public class Player : AnimationSprite
     {
         x = _position.x;
         y = _position.y;
+
     }
     void Movement()
     {
-        _position.x = x;
-        _position.y = y;
         if (velocity.y < 50)
         {
             velocity.y += gravity;
         }
-        Collision colx = MoveUntilCollision(_position.x, 0);
-        Collision coly = MoveUntilCollision(0, _position.y);
-        /*if (colx != null && colx.normal.x < 0)
-        {
-            _position.x += 20;
-        }*/
-        if (coly != null)
-        {
-            velocity.y = 0;
-        }
+        collisions();
 
         //add gravity
 
@@ -125,17 +118,38 @@ public class Player : AnimationSprite
             rotation += 1;
         }
 
-        // move in current direction:
-        /*if (_move)
-        {
-            if (Input.GetKey(Key.A) && Input.GetKey(Key.D))
-            {
-                Move(4, 0);
-            }
-            else Move(2, 0);
-        }*/
-
         _position += velocity * _speed;
+    }
+    void collisions()
+    {
+        Collision colx = MoveUntilCollision(velocity.x, 0);
+        Collision coly = MoveUntilCollision(0, velocity.y);
+        if (coly != null)
+        {
+            if (coly.normal.y > 0)
+            {
+                velocity.y = 0;
+                _position.y += _speed + 1;
+            }
+            if (coly.normal.y < 0)
+            {
+                velocity.y = 0;
+            }
+        }
+        if (colx != null)
+        {
+            if (colx.normal.x > 0)
+            {
+                ;
+                velocity.x = 0;
+                _position.x += 1;
+            }
+            if (colx.normal.x < 0)
+            {
+                velocity.x = 0;
+                _position.x -= 1;
+            }
+        }
     }
 
 }
