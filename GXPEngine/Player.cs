@@ -43,7 +43,7 @@ public class Player : AnimationSprite
         scaleY = .15f;
         scaleX = .3f;
         _position.x = game.width / 2;
-        _position.y = 3300;
+        _position.y = 14800;
     }
     void Update()
     {
