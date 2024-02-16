@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="480" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="22">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="480" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="52">
  <editorsettings>
   <chunksize width="16" height="25"/>
  </editorsettings>
@@ -8,6 +8,9 @@
  </tileset>
  <tileset firstgid="36" name="SpaceShip" tilewidth="164" tileheight="241" tilecount="1" columns="1">
   <image source="spaceship.png" width="164" height="241"/>
+ </tileset>
+ <tileset firstgid="37" name="Spikeball" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="Spikeball.png" width="32" height="32"/>
  </tileset>
  <layer id="4" name="Tile Layer 1" width="60" height="480">
   <data encoding="csv">
@@ -982,5 +985,12 @@
   <object id="19" type="Pickup" gid="18" x="1188.36" y="12413.4" width="68" height="70"/>
   <object id="20" type="Pickup" gid="18" x="782.182" y="9814.52" width="68" height="70"/>
   <object id="21" type="Pickup" gid="18" x="921.576" y="5493.3" width="68" height="70"/>
+  <object id="32" type="Spikes" gid="37" x="192" y="12928" width="32" height="32"/>
+  <object id="33" type="Spikes" gid="37" x="1600" y="10464" width="32" height="32"/>
+  <object id="39" type="EnemyTurn" gid="13" x="32" y="12928" width="32" height="32"/>
+  <object id="40" type="EnemyTurn" gid="13" x="1856" y="12928" width="32" height="32"/>
+  <object id="41" type="EnemyTurn" gid="13" x="1856" y="10464" width="32" height="32"/>
+  <object id="42" type="EnemyTurn" gid="13" x="32" y="10464" width="32" height="32"/>
+  <object id="51" gid="13" x="2738" y="9034" width="32" height="32"/>
  </objectgroup>
 </map>

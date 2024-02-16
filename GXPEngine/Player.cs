@@ -8,7 +8,7 @@ using GXPEngine;
 using GXPEngine.Core;
 using TiledMapParser;
 
-public class Player : AnimationSprite
+class Player : AnimationSprite
 {
     public Vec2 position
     {
@@ -18,16 +18,16 @@ public class Player : AnimationSprite
         }
     }
     public Vec2 velocity;
-    Ui ui = null;
     float tank = 500;
     float fuel = 500;
     Vec2 _position;
+    RotatingSpaceship _mygame;
     float _speed;
     float maxVel = 25;
     float gravity = 0.5f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
-    bool _move = false;
+    Ui ui = null;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
@@ -36,6 +36,7 @@ public class Player : AnimationSprite
 
     void Initialize(TiledObject obj)
     {
+        _mygame = (RotatingSpaceship)game;
         _position = new Vec2(x, y);
         _speed = 0.7f;
         SetOrigin(width / 2, height / 2);
@@ -72,28 +73,27 @@ public class Player : AnimationSprite
 
         //add gravity
 
-/*        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
+        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
-            if (rotation > 0)
+            if (rotation <= -25)
             {
-                rotation -= .5f;
+                rotation += 1f;
             }
-            else if (rotation < 0)
+            else if (rotation >= 25)
             {
-                rotation += .5f;
+                rotation -= 1f;
             }
-            if (velocity.x > 0)
+            if (velocity.x > 25)
             {
                 velocity.x -= 1;
             }
-            if (velocity.x < 0)
+            if (velocity.x < -25)
             {
                 velocity.x += 1;
             }
         }
-        else*/
 
- if (Input.GetKey(Key.A) && fuel > 0)
+        if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
             velocity.x -= _speed;
@@ -121,7 +121,6 @@ public class Player : AnimationSprite
                 rotation += 2;
             }
             _autoRotateLeft = false;
-            _move = false;
         }
         if (Input.GetKey(Key.D) && fuel > 0)
         {
@@ -130,8 +129,9 @@ public class Player : AnimationSprite
             ui.SetFuel((int)fuel);
             _autoRotateRight = true;
             velocity.x += _speed;
-            if (velocity.y > -50)
+            if (velocity.y > -25)
             {
+                // Add velocity
                 velocity.y -= _speed * 1.5f;
             }
 
@@ -152,26 +152,6 @@ public class Player : AnimationSprite
             }
 
             _autoRotateRight = false;
-            _move = false;
-        }
-        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
-        {
-            if (rotation > 0)
-            {
-                rotation -= 2;
-            }
-            else if (rotation < 0)
-            {
-                rotation += 2;
-            }
-            if (velocity.x > 0)
-            {
-                velocity.x -= 1;
-            }
-            if (velocity.x < 0)
-            {
-                velocity.x += 1;
-            }
         }
 
 
@@ -234,6 +214,10 @@ public class Player : AnimationSprite
             {
                 ((Pickup)collisions[i]).Grab();
                 fuel += 250;
+            }
+            if (collisions[i] is Spikes)
+            {
+                _mygame.dead = true;
             }
         }
     }

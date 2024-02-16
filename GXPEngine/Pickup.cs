@@ -10,9 +10,6 @@ using TiledMapParser;
 
 class Pickup : AnimationSprite
 {
-    int obwidth;
-    int obheight;
-
     public Pickup(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
     {
         Initialize(obj);

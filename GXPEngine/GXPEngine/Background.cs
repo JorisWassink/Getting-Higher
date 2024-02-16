@@ -14,6 +14,7 @@ class Background : EasyDraw
 {
 
     EasyDraw currentWave;
+    RotatingSpaceship _mygame;
     Sprite ship;
     Random random;
     int starX;
@@ -52,14 +53,18 @@ class Background : EasyDraw
 
     public void InitializeHUD()
     {
-        currentWave = new EasyDraw(width, height, false);
-        currentWave.ShapeAlign(CenterMode.Min, CenterMode.Min);
-        currentWave.Fill(Color.Yellow);
-        currentWave.NoStroke();
-        random = new Random((int)(DateTime.Now.Ticks));
-    }
+        _mygame = (RotatingSpaceship)game;
+        if (!_mygame.dead)
+        {
+            currentWave = new EasyDraw(width, height, false);
+            currentWave.ShapeAlign(CenterMode.Min, CenterMode.Min);
+            currentWave.Fill(Color.Yellow);
+            currentWave.NoStroke();
+            random = new Random((int)(DateTime.Now.Ticks));
+        }
+        }
 
-    public void Update()
+        public void Update()
     {
 
 

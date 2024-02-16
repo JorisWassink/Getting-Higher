@@ -14,28 +14,32 @@ namespace GXPEngine {
 
     internal class Level : GameObject
     {
-        string levelName;
+        /*string levelName;*/
         Player player;
-        Sound music;
+        Spikes spike;
+        EnemyTurn turn;
+        /*Sound music;*/
         TiledLoader loader;
 
         public Level(string thislevelName)
         {
-           
+
             loader = new TiledLoader(thislevelName);
-            Background background = new Background(loader.map.Width * loader.map.TileWidth, loader.map.Height * loader.map.TileHeight);
-            AddChild(background);
             loader.autoInstance = true;
             loader.rootObject = this;
             loader.addColliders = false;
+            Background background = new Background(loader.map.Width * loader.map.TileWidth, loader.map.Height * loader.map.TileHeight);
+            AddChild(background);
             loader.LoadImageLayers();
             loader.LoadTileLayers(0);
             loader.addColliders = true;
             loader.LoadTileLayers(1);
             loader.LoadObjectGroups(); // player is made -> child of Level
             player = FindObjectOfType<Player>();
+            spike = FindObjectOfType<Spikes>();
+            turn = FindObjectOfType<EnemyTurn>();
 
-            
+
 
         }
         void Update()

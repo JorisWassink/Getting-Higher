@@ -17,7 +17,7 @@ public class Ui : GameObject
         fuelBar.TextFont(rowdies);
         fuelBar.TextAlign(CenterMode.Min, CenterMode.Center);
         fuelBar.Fill(0, 255, 0);
-        fuelBar.Text("Fuel: 1000");
+        fuelBar.Text("Fuel: 500");
         fuelBar.SetXY(10, 10);
         AddChild(fuelBar);
         

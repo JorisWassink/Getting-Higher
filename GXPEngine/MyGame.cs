@@ -10,29 +10,26 @@ public class RotatingSpaceship : Game
     Player _spaceship;
     EasyDraw _text;
     Ui ui;
+    public bool dead;
     string[] levels = new string[1];
     public int currentLevel = 0;
     public RotatingSpaceship() : base(1920, 1080, false, false)
     {
         levels[0] = "Assets/empty.tmx";
         LoadLevel(levels[0]);
+        targetFps = 60;
 
         _spaceship = FindObjectOfType<Player>();
-
-        _text = new EasyDraw(200, 20);
-        _text.TextAlign(CenterMode.Min, CenterMode.Min);
-        if (_spaceship != null)
-        {
-            _text.Text(_spaceship.rotation.ToString(), 0, 0);
-        }
-        AddChild(_text);
 
 
     }
 
     void Update()
     {
-        _text.Clear(Color.Transparent);
+        if (dead)
+        {
+            LoadLevel(levels[0]);
+        }
         /*_text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
 
     }
@@ -47,12 +44,11 @@ public class RotatingSpaceship : Game
     void LoadLevel(string name)
     {
         List<GameObject> children = GetChildren();
-
+        dead = false;
         foreach (GameObject child in children)
         {
             child.Destroy();
         }
-
         Level level = new Level(name);
         LateAddChild(level);
         ui = new Ui();
