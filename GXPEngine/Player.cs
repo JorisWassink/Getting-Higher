@@ -30,6 +30,10 @@ class Player : AnimationSprite
     public bool pInput = true;
     public float pScore;
     Ui ui = null;
+    Sound leftNoise;
+    Sound rightNoise;
+    SoundChannel leftChannel;
+    SoundChannel rightChannel;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
@@ -49,14 +53,21 @@ class Player : AnimationSprite
         _position.x = game.width / 2;
         _position.y = 15291;
         pScore = position.y;
+
+        rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
+        leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
+
+        rightChannel = (SoundChannel)leftNoise.Play();
+        leftChannel = (SoundChannel)rightNoise.Play(); 
+
+        leftNoise.Play(true);
+        rightNoise.Play(true);
     }
     void Update()
     {
         if (ui == null) ui = game.FindObjectOfType<Ui>();
         Movement();
         UpdateScreenPosition();
-        
-
     }
     void UpdateScreenPosition()
     {
@@ -147,13 +158,17 @@ class Player : AnimationSprite
             {
                 _autoRotateLeft = false;
             }
+
+            leftChannel.IsPaused = false;
         }
         else if (Input.GetKey(Key.D))
         {
             _autoRotateLeft = false;
+            leftChannel.IsPaused = true;
         }
         else
         {
+           leftChannel.IsPaused = true;
             if (rotation < 0)
             {
                 rotation += 2;
@@ -180,13 +195,16 @@ class Player : AnimationSprite
             {
                 _autoRotateRight = false;
             }
+            rightChannel.IsPaused = false;
         }
         else if (Input.GetKey(Key.A))
         {
             _autoRotateRight = false;
+            rightChannel.IsPaused = true;
         }
         else
         {
+            rightChannel.IsPaused = true;
             if (rotation > 0)
             {
                 rotation -= 2;
@@ -256,6 +274,8 @@ class Player : AnimationSprite
 
     public void pDead()
     {
+        rightChannel.Stop();
+        leftChannel.Stop();
         pInput = false;
         gravity = 0;
     }
