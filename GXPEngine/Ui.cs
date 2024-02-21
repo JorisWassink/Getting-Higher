@@ -30,7 +30,7 @@ public class Ui : GameObject
         score.TextAlign(CenterMode.Min, CenterMode.Center);
         score.Fill(0, 255, 0);
         score.Text("Fuel: 500");
-        score.SetXY(_mygame.width, 10);
+        score.SetXY(_mygame.width - 600, 10);
         AddChild(score);
 
         if (_mygame != null)
@@ -40,7 +40,7 @@ public class Ui : GameObject
             deathScreen.TextAlign(CenterMode.Center, CenterMode.Center);
             deathScreen.Fill(255, 0, 0);
             deathScreen.Text("u ded");
-            deathScreen.SetXY(_mygame.width / 4, _mygame.height / 4);
+            deathScreen.SetXY(_mygame.width / 8, _mygame.height / 8);
         }
 
     }

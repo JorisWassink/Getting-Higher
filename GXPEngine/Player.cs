@@ -28,7 +28,7 @@ class Player : AnimationSprite
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     public bool pInput = true;
-    public int pScore;
+    public float pScore;
     Ui ui = null;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
@@ -47,7 +47,8 @@ class Player : AnimationSprite
         scaleX = .3f;
         scale = .5f;
         _position.x = game.width / 2;
-        _position.y = 14800;
+        _position.y = 15291;
+        pScore = position.y;
     }
     void Update()
     {
@@ -55,6 +56,7 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         
+
     }
     void UpdateScreenPosition()
     {
@@ -80,12 +82,14 @@ class Player : AnimationSprite
         {
             rotation += 3;
         }
-        if (pScore < y)
-        {
-            pScore++;
-        }
 
-        ui.SetScore((int)pScore);
+        if (pScore > position.y)
+        {
+            pScore = position.y;
+        }
+        if (pInput) {
+            ui.SetScore(-((int)(pScore - 15291) / 3));
+        }
         _position += velocity * _speed;
     }
 
@@ -127,7 +131,7 @@ class Player : AnimationSprite
         if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
-            if (velocity.x > -25)
+            if (velocity.x > -maxVel)
             {
                 velocity.x -= _speed * 1.5f;
             }
@@ -235,9 +239,9 @@ class Player : AnimationSprite
         GameObject[] collisions = GetCollisions();
         for (int i = 0; i < collisions.Length; i++)
         {
-            if (collisions[i] is Pickup)
+            if (collisions[i] is FuelCan)
             {
-                ((Pickup)collisions[i]).Grab();
+                ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
             }
             if (collisions[i] is Spikes)

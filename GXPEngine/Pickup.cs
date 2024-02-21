@@ -8,20 +8,18 @@ using GXPEngine;
 using TiledMapParser;
 
 
-class Pickup : AnimationSprite
+abstract class PickupBase : AnimationSprite
 {
-    public Pickup(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
+    protected PickupBase(string imageFile, int cols, int rows, TiledObject obj = null) : base(imageFile, cols, rows)
     {
         Initialize(obj);
     }
 
-    void Initialize(TiledObject obj)
-    {
-        collider.isTrigger = true;
-        SetOrigin(width / 2, height / 2);
-    }
+    protected abstract void Initialize(TiledObject obj);
+
     public void Grab()
     {
         this.LateDestroy();
     }
 }
+
