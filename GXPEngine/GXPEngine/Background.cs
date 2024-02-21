@@ -42,10 +42,6 @@ class Background : EasyDraw
             ship.x = starX; ship.y = starY;
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
-
-            // Console.WriteLine("uh oh");
-
-
         }
 
     }
@@ -58,15 +54,22 @@ class Background : EasyDraw
         {
             currentWave = new EasyDraw(width, height, false);
             currentWave.ShapeAlign(CenterMode.Min, CenterMode.Min);
-            currentWave.Fill(Color.Yellow);
             currentWave.NoStroke();
+            currentWave.Fill(Color.Yellow);
             random = new Random((int)(DateTime.Now.Ticks));
         }
-        }
-
-        public void Update()
-    {
-
-
     }
+
+    public void DeathEffect()
+    {
+        currentWave.Fill(Color.Red);
+    }
+
+    public void Update()
+    {
+      
+    }
+
+   
 }
+

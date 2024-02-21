@@ -40,17 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Colliders.cs" />
-    <Compile Include="Spikes.cs" />
-    <Compile Include="Ui.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
-    <Compile Include="GXPEngine\Background.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
     <Compile Include="GXPEngine\GameObject.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="GXPEngine\Player.cs" />
     <Compile Include="GXPEngine\Sound.cs" />
     <Compile Include="GXPEngine\SoundChannel.cs" />
     <Compile Include="GXPEngine\Sprite.cs" />
@@ -85,12 +81,9 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
-    <Compile Include="Pickup.cs" />
     <Compile Include="MyGame.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Vec2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GXPEngine\app.config" />
+    <None Include="app.config" />
   </ItemGroup>
 </Project>

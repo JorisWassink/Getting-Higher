@@ -79,9 +79,7 @@ namespace GXPEngine
 			label = pLabel;
 		}
 
-    
-
-        public override string ToString ()
+		public override string ToString ()
 		{
 			return label;
 		}

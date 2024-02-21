@@ -1,0 +1,14 @@
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\bin\Debug\GXPEngine.exe.config
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\Loljk\Documents\CMGT\Y1\Term 3\Game\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.exe.config
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.pdb

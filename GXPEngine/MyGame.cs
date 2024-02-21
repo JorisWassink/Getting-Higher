@@ -13,7 +13,8 @@ public class RotatingSpaceship : Game
     public bool dead;
     string[] levels = new string[1];
     public int currentLevel = 0;
-    public RotatingSpaceship() : base(1920, 1080, false, false)
+    int deathCounter = 180;
+    public RotatingSpaceship() : base(1366, 768, false, false)
     {
         levels[0] = "Assets/empty.tmx";
         LoadLevel(levels[0]);
@@ -28,12 +29,25 @@ public class RotatingSpaceship : Game
     {
         if (dead)
         {
-            LoadLevel(levels[0]);
+            Dead();
         }
-        /*_text.Text("Rotation:" + _spaceship.rotation, 0, 0);*/
-
     }
 
+    void Dead()
+    {
+        Console.WriteLine(deathCounter.ToString());
+        Background background = FindObjectOfType<Background>();
+        background.DeathEffect();
+        Player player = FindObjectOfType<Player>();
+        player.pDead();
+        deathCounter--;
+        if (deathCounter == 0)
+        {
+            deathCounter = 180;
+            dead = false;
+            LoadLevel(levels[0]);
+        }
+    }
 
     static void Main()
     {
@@ -51,7 +65,7 @@ public class RotatingSpaceship : Game
         }
         Level level = new Level(name);
         LateAddChild(level);
-        ui = new Ui();
+        Ui ui = new Ui();
         LateAddChild(ui);
     }
 

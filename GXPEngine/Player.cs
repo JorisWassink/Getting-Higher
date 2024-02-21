@@ -23,10 +23,12 @@ class Player : AnimationSprite
     Vec2 _position;
     RotatingSpaceship _mygame;
     float _speed;
-    float maxVel = 25;
+    float maxVel = 15;
     float gravity = 0.5f;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
+    public bool pInput = true;
+    public int pScore;
     Ui ui = null;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
@@ -43,6 +45,7 @@ class Player : AnimationSprite
         rotation = 270;
         scaleY = .15f;
         scaleX = .3f;
+        scale = .5f;
         _position.x = game.width / 2;
         _position.y = 14800;
     }
@@ -51,7 +54,7 @@ class Player : AnimationSprite
         if (ui == null) ui = game.FindObjectOfType<Ui>();
         Movement();
         UpdateScreenPosition();
-        //Console.WriteLine(rotation);
+        
     }
     void UpdateScreenPosition()
     {
@@ -59,7 +62,34 @@ class Player : AnimationSprite
         y = _position.y;
 
     }
+
+
     void Movement()
+    {
+        SpeedCap();
+        collisions();
+        if (pInput) {
+            PlayerInput();
+        }
+
+        if (_autoRotateLeft)
+        {
+            rotation -= 3;
+        }
+        if (_autoRotateRight)
+        {
+            rotation += 3;
+        }
+        if (pScore < y)
+        {
+            pScore++;
+        }
+
+        ui.SetScore((int)pScore);
+        _position += velocity * _speed;
+    }
+
+    void SpeedCap()
     {
         if (velocity.y < 50)
         {
@@ -69,25 +99,26 @@ class Player : AnimationSprite
         {
             velocity.y = -maxVel;
         }
-        collisions();
+    }
 
-        //add gravity
+    void PlayerInput()
+    {
 
         if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
-            if (rotation <= -25)
+            if (rotation <= -maxVel)
             {
                 rotation += 1f;
             }
-            else if (rotation >= 25)
+            else if (rotation >= maxVel)
             {
                 rotation -= 1f;
             }
-            if (velocity.x > 25)
+            if (velocity.x > maxVel)
             {
                 velocity.x -= 1;
             }
-            if (velocity.x < -25)
+            if (velocity.x < -maxVel)
             {
                 velocity.x += 1;
             }
@@ -96,13 +127,14 @@ class Player : AnimationSprite
         if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
-            if (velocity.x > -25) {
+            if (velocity.x > -25)
+            {
                 velocity.x -= _speed * 1.5f;
             }
             fuel -= 1;
             ui.SetFuel((int)fuel);
 
-            if (velocity.y > -25)
+            if (velocity.y > -maxVel)
             {
                 velocity.y -= _speed * 1.5f;
             }
@@ -130,9 +162,9 @@ class Player : AnimationSprite
             fuel -= 1;
             ui.SetFuel((int)fuel);
             _autoRotateRight = true;
-            if (velocity.x < 25)
+            if (velocity.x < maxVel)
             {
-                velocity.x += _speed * 1.5f; 
+                velocity.x += _speed * 1.5f;
             }
             if (velocity.y > -50)
             {
@@ -158,20 +190,8 @@ class Player : AnimationSprite
 
             _autoRotateRight = false;
         }
-
-
-
-        if (_autoRotateLeft)
-        {
-            rotation -= 4;
-        }
-        if (_autoRotateRight)
-        {
-            rotation += 4;
-        }
-
-        _position += velocity * _speed;
     }
+
     void collisions()
     {
         Collision colx = MoveUntilCollision(velocity.x, 0);
@@ -222,9 +242,18 @@ class Player : AnimationSprite
             }
             if (collisions[i] is Spikes)
             {
+                Spikes ouch = (Spikes)collisions[i];
+                Move(ouch.speed * ouch.direction, 0);
                 _mygame.dead = true;
+                Console.WriteLine("Spike hit detected");
             }
         }
+    }
+
+    public void pDead()
+    {
+        pInput = false;
+        gravity = 0;
     }
 
 }

@@ -5,12 +5,13 @@ using GXPEngine.Core;
 using TiledMapParser;
 class Spikes : AnimationSprite
 {
-    float speed = 8;
-    int direction = 1;
+    public float speed = 8;
+    public int direction = 1;
     public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Spikeball.png", 1, 1)
     {
         SetOrigin(width / 2, height / 2);
         collider.isTrigger = true;
+        
     }
 
     void Update()
