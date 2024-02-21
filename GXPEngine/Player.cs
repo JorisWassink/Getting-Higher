@@ -96,7 +96,9 @@ class Player : AnimationSprite
         if (Input.GetKey(Key.A) && fuel > 0)
         {
             //boost left
-            velocity.x -= _speed;
+            if (velocity.x > -25) {
+                velocity.x -= _speed * 1.5f;
+            }
             fuel -= 1;
             ui.SetFuel((int)fuel);
 
@@ -128,8 +130,11 @@ class Player : AnimationSprite
             fuel -= 1;
             ui.SetFuel((int)fuel);
             _autoRotateRight = true;
-            velocity.x += _speed;
-            if (velocity.y > -25)
+            if (velocity.x < 25)
+            {
+                velocity.x += _speed * 1.5f; 
+            }
+            if (velocity.y > -50)
             {
                 // Add velocity
                 velocity.y -= _speed * 1.5f;
