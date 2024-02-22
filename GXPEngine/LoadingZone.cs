@@ -18,6 +18,8 @@ class LoadingZone : AnimationSprite
         thisManager = manager;
 
         collider.isTrigger = true;
+
+        alpha = 0f;
     }
 
     void Update()
