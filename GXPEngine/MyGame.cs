@@ -11,18 +11,24 @@ public class RotatingSpaceship : Game
     EasyDraw _text;
     Ui ui;
     public bool dead;
-    string[] levels = new string[1];
+    string[] levels = new string[2];
     public int currentLevel = 0;
     int deathCounter = 180;
     public RotatingSpaceship() : base(1366, 768, false, false)
     {
-        levels[0] = "Assets/empty.tmx";
-        LoadLevel(levels[0]);
+/*        levels[0] = "Assets/empty.tmx";
+        levels[1] = "Assets/LevelChunk1.tmx";
+        LoadLevel(levels[1]);
+        LoadLevel(levels[0]);*/
+
+        LevelManager manager = new LevelManager();
+        AddChild(manager);
         targetFps = 60;
 
         _spaceship = FindObjectOfType<Player>();
 
-
+        Ui ui = new Ui();
+        LateAddChild(ui);
     }
 
     void Update()

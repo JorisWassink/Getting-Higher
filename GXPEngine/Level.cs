@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GXPEngine;
 using GXPEngine.Core;
 using TiledMapParser;
+using static TiledMapParser.TiledLoader;
 
 namespace GXPEngine { 
             
@@ -20,12 +21,11 @@ namespace GXPEngine {
         EnemyTurn turn;
         TiledLoader loader;
         RotatingSpaceship _mygame;
+        public string file;
 
-        public Level(string thislevelName)
+        public Level(string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
-            loader = new TiledLoader(thislevelName);
-            Background background = new Background(loader.map.Width * loader.map.TileWidth, loader.map.Height * loader.map.TileHeight);
-            AddChild(background);
+            loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
             loader.autoInstance = true;
             loader.rootObject = this;
             loader.addColliders = false;
@@ -34,19 +34,26 @@ namespace GXPEngine {
             loader.addColliders = true;
             loader.LoadTileLayers(1);
             loader.LoadObjectGroups(); // player is made -> child of Level
+            y -= defaultOriginY;
             player = FindObjectOfType<Player>();
             spike = FindObjectOfType<Spikes>();
             turn = FindObjectOfType<EnemyTurn>();
+            file = thislevelName;
         }
         void Update()
         {
-            if (player != null)
-            {
-                if (player.pInput)
+            /*    if (player != null)
                 {
-                    scroll();
-                }
-            } 
+                    if (player.pInput)
+                    {
+                        scroll();
+                    }
+                } */
+          //  Console.WriteLine(file);
+
+            
+               
+            
         }
 
         void scroll()

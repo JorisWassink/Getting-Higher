@@ -18,22 +18,23 @@ class Player : AnimationSprite
         }
     }
     public Vec2 velocity;
-    float tank = 500;
-    float fuel = 500;
     Vec2 _position;
-    RotatingSpaceship _mygame;
-    float _speed;
-    float maxVel = 15;
-    float gravity = 0.5f;
-    bool _autoRotateLeft = false;
-    bool _autoRotateRight = false;
-    public bool pInput = true;
-    public float pScore;
     Ui ui = null;
     Sound leftNoise;
     Sound rightNoise;
     SoundChannel leftChannel;
     SoundChannel rightChannel;
+    RotatingSpaceship _mygame;
+    float _speed;
+    float maxVel = 15;
+    float gravity = 0.5f;
+    float tank = 500;
+    float fuel = 500;
+    bool _autoRotateLeft = false;
+    bool _autoRotateRight = false;
+    public bool pInput = true;
+    public float pScore;
+
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
@@ -43,15 +44,17 @@ class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _mygame = (RotatingSpaceship)game;
+
         _position = new Vec2(x, y);
-        _speed = 0.7f;
         SetOrigin(width / 2, height / 2);
         rotation = 270;
         scaleY = .15f;
         scaleX = .3f;
         scale = .5f;
         _position.x = game.width / 2;
-        _position.y = 15291;
+        //_position.y = 15291;
+
+        _speed = 0.7f;
         pScore = position.y;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
@@ -59,23 +62,25 @@ class Player : AnimationSprite
 
         rightChannel = (SoundChannel)leftNoise.Play();
         leftChannel = (SoundChannel)rightNoise.Play(); 
-
-        leftNoise.Play(true);
-        rightNoise.Play(true);
     }
     void Update()
     {
-        if (ui == null) ui = game.FindObjectOfType<Ui>();
+        if (ui == null)
+        {
+            ui = game.FindObjectOfType<Ui>();
+        }
         Movement();
         UpdateScreenPosition();
     }
+
+    /// <summary>
+    /// Translates the _position vector to coordinates 
+    /// </summary>
     void UpdateScreenPosition()
     {
         x = _position.x;
         y = _position.y;
-
     }
-
 
     void Movement()
     {
@@ -267,7 +272,6 @@ class Player : AnimationSprite
                 Spikes ouch = (Spikes)collisions[i];
                 Move(ouch.speed * ouch.direction, 0);
                 _mygame.dead = true;
-                Console.WriteLine("Spike hit detected");
             }
         }
     }
