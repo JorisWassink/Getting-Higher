@@ -60,7 +60,11 @@ class Background : EasyDraw
         }
     }
 
+<<<<<<< Updated upstream
     public void DeathEffect()
+=======
+    public void Update()
+>>>>>>> Stashed changes
     {
         currentWave.Fill(Color.Red);
     }
