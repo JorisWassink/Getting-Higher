@@ -27,6 +27,7 @@ class Player : AnimationSprite
     SoundChannel rightChannel;
     RotatingSpaceship _mygame;
     Collider oldCollider;
+    AnimationSprite visual;
     float _speed;
     float falling;
     float maxVel = 15;
@@ -96,7 +97,7 @@ class Player : AnimationSprite
         }
         if (velocity.y == 2)
         {
-            falling = position.y;
+           falling = position.y;
             Console.WriteLine(falling);
         }
         if (position.y >= falling + 500)
@@ -107,6 +108,7 @@ class Player : AnimationSprite
         {
             InvisFrames();
         }
+
     }
 
     /// <summary>
@@ -120,9 +122,9 @@ class Player : AnimationSprite
 
     public void Boost()
     {
-        if (velocity.y > -78 && velocity.y < -1)
+        if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y *= 2;
+            velocity.y -= velocity.y + 50;
             /*velocity.x *= 1.5f;*/
             isBoosting = true;
             boostCount = 30;
@@ -176,7 +178,7 @@ class Player : AnimationSprite
     }
 
 
-
+    //TODO: improve this code a lot this is a mess
     void PlayerInput()
     {
 

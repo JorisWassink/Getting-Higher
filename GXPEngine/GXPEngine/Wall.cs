@@ -23,7 +23,6 @@ using TiledMapParser;
     void Update()
     {
         GameObject[] collisions = GetCollisions();
-        Console.WriteLine(collisions.Length);
         for (int i = 0; i < collisions.Length; i++)
         {
             if (collisions[i] is Player)

@@ -30,6 +30,7 @@ namespace GXPEngine {
             loader.rootObject = this;
             loader.addColliders = false;
             loader.LoadImageLayers();
+            
             loader.LoadTileLayers(0);
             loader.addColliders = true;
             loader.LoadTileLayers(1);
@@ -39,6 +40,10 @@ namespace GXPEngine {
             spike = FindObjectOfType<Spikes>();
             turn = FindObjectOfType<EnemyTurn>();
             file = thislevelName;
+
+           
+
+
         }
         void Update()
         {
@@ -49,11 +54,9 @@ namespace GXPEngine {
                         scroll();
                     }
                 } */
-          //  Console.WriteLine(file);
+            //  Console.WriteLine(file);
 
-            
-               
-            
+
         }
 
         void scroll()

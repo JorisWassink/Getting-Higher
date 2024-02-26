@@ -37,13 +37,17 @@ using static TiledMapParser.TiledLoader;
             levels[3] = "Assets/LevelChunk3.tmx";
             levels[4] = "Assets/LevelChunk4.tmx";
             levels[5] = "Assets/LevelChunk5.tmx";
-            LoadLevel(levels[1], true, .5f, .5f);
+
+
+        Background background = new Background(1366, 768 * 20);
+        LateAddChild(background);
+
+        LoadLevel(levels[1], true, .5f, .5f);
             LoadLevel(levels[2], true, 0.5f, 640);
 
             random = new Random((int)(DateTime.Now.Ticks));
 
-            Background background = new Background(1366, 768 * 20);
-            LateAddChild(background);
+
 
     }
         void Update()
@@ -69,7 +73,15 @@ using static TiledMapParser.TiledLoader;
             //Console.WriteLine(dist);
         }
 
-        
+
+        player = FindObjectOfType<Player>();
+        int count = GetChildCount();
+
+        if (player != null)
+        {
+            SetChildIndex(player, count); // int.MaxValue means the highest rendering order
+        }
+
     }
 
         public void LoadLevelNow()
