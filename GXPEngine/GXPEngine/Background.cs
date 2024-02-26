@@ -40,6 +40,7 @@ class Background : EasyDraw
             currentWave.Rect(starX, starY, 10, 10);
             ship = new Sprite("Assets/spaceship.png", false, false);
             ship.x = starX; ship.y = starY;
+            currentWave.blendMode = BlendMode.ADDITIVE;
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
         }

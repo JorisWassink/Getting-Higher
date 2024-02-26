@@ -453,8 +453,10 @@ namespace TiledMapParser {
 			if (map.ImageLayers.Length<=index) return;
 			ImageLayer layer = map.ImageLayers[index];
 			Console.WriteLine("Loading image: "+layer.Image);
-			Sprite image = new Sprite(Path.Combine(_foldername, layer.Image.FileName), false, addColliders);
-			image.x=layer.offsetX;
+            //Sprite image = new Sprite(Path.Combine(_foldername, layer.Image.FileName), false, addColliders);
+            Sprite image = new Sprite(Path.Combine(_foldername, layer.Image.FileName), false, false);
+
+            image.x=layer.offsetX;
 			image.y=layer.offsetY;
 			image.alpha=layer.Opacity;
 
