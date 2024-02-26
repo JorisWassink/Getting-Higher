@@ -10,6 +10,7 @@ using TiledMapParser;
     {
         public FuelCan(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
         {
+
         }
 
         protected override void Initialize(TiledObject obj)

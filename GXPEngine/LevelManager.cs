@@ -18,7 +18,7 @@ using static TiledMapParser.TiledLoader;
         EnemyTurn turn;
         TiledLoader loader;
         RotatingSpaceship _mygame;
-     Random random;
+        Random random;
         string[] levels = new string[6];
         int loadNumber = 0;
    
@@ -39,8 +39,7 @@ using static TiledMapParser.TiledLoader;
             levels[5] = "Assets/LevelChunk5.tmx";
 
 
-        Background background = new Background(1366, 768 * 20);
-        LateAddChild(background);
+        
 
         LoadLevel(levels[1], true, .5f, .5f);
             LoadLevel(levels[2], true, 0.5f, 640);

@@ -16,10 +16,7 @@ public class RotatingSpaceship : Game
     int deathCounter = 180;
     public RotatingSpaceship() : base(1366, 768, false, false)
     {
-/*        levels[0] = "Assets/empty.tmx";
-        levels[1] = "Assets/LevelChunk1.tmx";
-        LoadLevel(levels[1]);
-        LoadLevel(levels[0]);*/
+
 
         LevelManager manager = new LevelManager();
         AddChild(manager);
