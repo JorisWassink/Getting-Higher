@@ -74,8 +74,6 @@ using static TiledMapParser.TiledLoader;
 
         public void LoadLevelNow()
     {
-
-
         LoadLevel(levels[random.Next(2, 5)], true, .5f, 640 * loadNumber);
         //LoadLevel(levels[3], true, .5f, 640 * loadNumber);
         Console.WriteLine("level loaded");
