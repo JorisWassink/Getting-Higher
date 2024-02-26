@@ -41,62 +41,6 @@ namespace GXPEngine {
             turn = FindObjectOfType<EnemyTurn>();
             file = thislevelName;
 
-           
-
-
-        }
-        void Update()
-        {
-            /*    if (player != null)
-                {
-                    if (player.pInput)
-                    {
-                        scroll();
-                    }
-                } */
-            //  Console.WriteLine(file);
-
-
-        }
-
-        void scroll()
-        {
-            int boundarySize = 600;
-
-            if (player != null)
-            {
-                if (player.y + y < boundarySize)
-                {
-                    y = boundarySize - player.y;
-                }
-                if (player.y + this.y > game.height - boundarySize)
-                {
-                    this.y = game.height - boundarySize - player.y;
-                }
-
-                // Cap scrolling within the boundary limits
-
-
-                if (y > -300)
-                {
-                    y = -300;
-                }
-
-
-                if (y < -(loader.map.Height * loader.map.TileHeight - boundarySize * 0.8f))
-                {
-                    y = -(loader.map.Height * loader.map.TileHeight) + boundarySize * 0.8f;
-                }
-
-                y += 300;
-
-                //Console.WriteLine(y);
-            }
-            else
-            {
-                Console.WriteLine("Player not found, scrolling not possible");
-            }
-
         }
     }
 }

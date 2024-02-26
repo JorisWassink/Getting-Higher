@@ -15,7 +15,6 @@ class Background : EasyDraw
 
     EasyDraw currentWave;
     RotatingSpaceship _mygame;
-    Sprite ship;
     Random random;
     int starX;
     int starY;
@@ -31,16 +30,11 @@ class Background : EasyDraw
         InitializeHUD();
         for (int i = 0; i < 400; i += 1)
         {
-            // Calculate the offset based on the current iteration
-
-            // Display current wave text
             starX = random.Next(0, width);
             starY = random.Next(0, height);
 
             currentWave.Rect(starX, starY, 10, 10);
-            ship = new Sprite("Assets/spaceship.png", false, false);
-            ship.x = starX; ship.y = starY;
-            currentWave.blendMode = BlendMode.ADDITIVE;
+            currentWave.blendMode = BlendMode.LIGHTING;
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
         }
@@ -53,7 +47,7 @@ class Background : EasyDraw
         _mygame = (RotatingSpaceship)game;
         if (!_mygame.dead)
         {
-            currentWave = new EasyDraw(width, height, false);
+            currentWave = new EasyDraw(1376, 640, false);
             currentWave.ShapeAlign(CenterMode.Min, CenterMode.Min);
             currentWave.NoStroke();
             currentWave.Fill(Color.Yellow);
