@@ -59,15 +59,13 @@ class Background : EasyDraw
             random = new Random((int)(DateTime.Now.Ticks));
         }
     }
-
     public void DeathEffect()
     {
         currentWave.Fill(Color.Red);
     }
-
     public void Update()
     {
-      
+        currentWave.Fill(Color.Red);
     }
 
    

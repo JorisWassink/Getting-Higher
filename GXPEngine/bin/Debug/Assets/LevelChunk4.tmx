@@ -3,7 +3,10 @@
  <tileset firstgid="1" name="spaceship - Copy" tilewidth="32" tileheight="32" tilecount="35" columns="5">
   <image source="spaceship - Copy.png" width="164" height="241"/>
  </tileset>
- <layer id="1" name="Tile Layer 1" width="43" height="20">
+ <tileset firstgid="36" name="Background" tilewidth="1376" tileheight="640" tilecount="1" columns="1">
+  <image source="Space Background4.png" width="1376" height="640"/>
+ </tileset>
+ <layer id="1" name="background" width="43" height="20">
   <data encoding="csv">
 23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,
 23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,

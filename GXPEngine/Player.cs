@@ -27,8 +27,9 @@ class Player : AnimationSprite
     RotatingSpaceship _mygame;
     Collider oldCollider;
     float _speed;
+    float falling;
     float maxVel = 15;
-    float gravity = 0.5f;
+    float gravity = 0.25f;
     float tank = 500;
     public float fuel = 500;
     bool _autoRotateLeft = false;
@@ -86,6 +87,15 @@ class Player : AnimationSprite
         } else
         {
             velocity.y += 2;
+        }
+        if (velocity.y == 2)
+        {
+            falling = position.y;
+            Console.WriteLine(falling);
+        }
+        if (position.y >= falling + 500)
+        {
+            Console.WriteLine("dead");
         }
     }
 
