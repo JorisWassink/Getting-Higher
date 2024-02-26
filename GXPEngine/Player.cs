@@ -56,7 +56,7 @@ class Player : AnimationSprite
 
         oldCollider = _collider;
 
-        
+
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
@@ -73,7 +73,7 @@ class Player : AnimationSprite
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
 
         rightChannel = (SoundChannel)leftNoise.Play();
-        leftChannel = (SoundChannel)rightNoise.Play(); 
+        leftChannel = (SoundChannel)rightNoise.Play();
     }
     void Update()
     {
@@ -89,8 +89,9 @@ class Player : AnimationSprite
         {
             _speed = 0.7f;
             isBoosting = false;
-           // _collider = oldCollider;
-        } else
+            // _collider = oldCollider;
+        }
+        else
         {
             velocity.y += 2;
         }
@@ -150,7 +151,8 @@ class Player : AnimationSprite
         {
             pScore = position.y;
         }
-        if (pInput) {
+        if (pInput)
+        {
             ui.SetScore(-((int)(pScore - 15291) / 3));
         }
 
@@ -176,101 +178,127 @@ class Player : AnimationSprite
     //TODO: improve this code a lot this is a mess
     void PlayerInput()
     {
+        HandleRotationInput();
+        //HandleBoostInput();
+        UpdateFuelUI();
+    }
 
+    void HandleRotationInput()
+    {
         if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
-            if (rotation <= -maxVel)
-            {
-                rotation += 1f;
-            }
-            else if (rotation >= maxVel)
-            {
-                rotation -= 1f;
-            }
-            if (velocity.x > maxVel)
-            {
-                velocity.x -= 1;
-            }
-            if (velocity.x < -maxVel)
-            {
-                velocity.x += 1;
-            }
-        }
-
-        if (Input.GetKey(Key.A) && fuel > 0)
-        {
-            //boost left
-            if (velocity.x > -maxVel)
-            {
-                velocity.x -= _speed * 1.5f;
-            }
-            fuel -= 1;
-            ui.SetFuel((int)fuel);
-
-            if (velocity.y > -maxVel)
-            {
-                velocity.y -= _speed * 1.5f;
-            }
-            _autoRotateLeft = true;
-            if (rotation <= -50)
-            {
-                _autoRotateLeft = false;
-            }
-
-            leftChannel.IsPaused = false;
-        }
-        else if (Input.GetKey(Key.D))
-        {
-            _autoRotateLeft = false;
-            leftChannel.IsPaused = true;
-        }
-        else
-        {
-           leftChannel.IsPaused = true;
-            if (rotation < 0)
-            {
-                rotation += 2;
-            }
-            _autoRotateLeft = false;
-        }
-        if (Input.GetKey(Key.D) && fuel > 0)
-        {
-            //boost right
-            fuel -= 1;
-            ui.SetFuel((int)fuel);
-            _autoRotateRight = true;
-            if (velocity.x < maxVel)
-            {
-                velocity.x += _speed * 1.5f;
-            }
-            if (velocity.y > -50)
-            {
-                // Add velocity
-                velocity.y -= _speed * 1.5f;
-            }
-
-            if (rotation >= 50)
-            {
-                _autoRotateRight = false;
-            }
-            rightChannel.IsPaused = false;
+            HandleFullRotationInput();
         }
         else if (Input.GetKey(Key.A))
         {
-            _autoRotateRight = false;
-            rightChannel.IsPaused = true;
+            HandleLeftRotationInput();
+        }
+        else if (Input.GetKey(Key.D))
+        {
+            HandleRightRotationInput();
         }
         else
         {
-            rightChannel.IsPaused = true;
-            if (rotation > 0)
-            {
-                rotation -= 2;
-            }
-
-            _autoRotateRight = false;
+            ResetRotation();
         }
     }
+
+    void HandleFullRotationInput()
+    {
+        if (rotation <= -maxVel)
+        {
+            rotation += 1f;
+        }
+        else if (rotation >= maxVel)
+        {
+            rotation -= 1f;
+        }
+
+        //AdjustVelocityX();
+
+    }
+
+    void HandleLeftRotationInput()
+    {
+        if (fuel > 0)
+        {
+            BoostLeft();
+            _autoRotateLeft = rotation > -50;
+            leftChannel.IsPaused = !_autoRotateLeft;
+        }
+        else
+        {
+            ResetRotation();
+            leftChannel.IsPaused = true;
+        }
+    }
+
+    void HandleRightRotationInput()
+    {
+        if (fuel > 0)
+        {
+            BoostRight();
+            _autoRotateRight = rotation < 50;
+            rightChannel.IsPaused = !_autoRotateRight;
+        }
+        else
+        {
+            ResetRotation();
+            rightChannel.IsPaused = true;
+        }
+    }
+
+    void ResetRotation()
+    {
+        if (rotation < 0)
+        {
+            rotation += 2;
+        }
+        else if (rotation > 0)
+        {
+            rotation -= 2;
+        }
+
+        _autoRotateLeft = _autoRotateRight = false;
+    }
+
+    void BoostLeft()
+    {
+        fuel -= 1;
+        ui.SetFuel((int)fuel);
+
+        if (velocity.x > -maxVel)
+        {
+            velocity.x -= _speed * 1.5f;
+        }
+
+        if (velocity.y > -maxVel)
+        {
+            velocity.y -= _speed * 1.5f;
+        }
+    }
+
+    void BoostRight()
+    {
+        fuel -= 1;
+        ui.SetFuel((int)fuel);
+
+        if (velocity.x < maxVel)
+        {
+            velocity.x += _speed * 1.5f;
+        }
+
+        if (velocity.y > -50)
+        {
+            velocity.y -= _speed * 1.5f;
+        }
+    }
+
+    void UpdateFuelUI()
+    {
+        // Additional fuel UI update logic if needed
+    }
+
 
     void collisions()
     {
@@ -324,7 +352,7 @@ class Player : AnimationSprite
             {
                 Spikes ouch = (Spikes)collisions[i];
                 _lives -= 1;
-                velocity = velocity * -1;
+                velocity = velocity * _speed * -1;
                 canCollide = false;
                 timeHit = Time.time;
                 if (_lives == 0)
@@ -332,8 +360,17 @@ class Player : AnimationSprite
                     Move(ouch.speed * ouch.direction, 0);
                     _mygame.dead = true;
                 }
-                }
             }
+            if (collisions[i] is Wall && isBoosting)
+            {
+                ((Wall)collisions[i]).LateDestroy();
+            }
+            else if (collisions[i] is WallHit && isBoosting)
+            {
+                Wall wall = (Wall)collisions[i].parent;
+                wall.LateDestroy();
+            }
+        }
     }
     void InvisFrames()
     {
