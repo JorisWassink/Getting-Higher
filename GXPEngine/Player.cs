@@ -79,9 +79,9 @@ class Player : AnimationSprite
         UpdateScreenPosition();
 
         boostCount--;
-
         if (boostCount < 0)
         {
+            _speed = 0.7f;
             isBoosting = false;
            // _collider = oldCollider;
         } else
@@ -110,13 +110,14 @@ class Player : AnimationSprite
 
     public void Boost()
     {
-        if (velocity.y > -78)
+        if (velocity.y > -78 && velocity.y < -1)
         {
-            velocity.y -= 55;
+            velocity.y *= 2;
+            /*velocity.x *= 1.5f;*/
             isBoosting = true;
             boostCount = 30;
-           // _collider = null;
-            
+            // _collider = null;
+
         }
     }
 
@@ -145,6 +146,7 @@ class Player : AnimationSprite
         if (pInput) {
             ui.SetScore(-((int)(pScore - 15291) / 3));
         }
+
         _position += velocity * _speed;
     }
 

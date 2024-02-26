@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="3">
  <tileset firstgid="1" name="spaceship - Copy" tilewidth="32" tileheight="32" tilecount="35" columns="5">
   <image source="spaceship - Copy.png" width="164" height="241"/>
  </tileset>
@@ -56,5 +56,6 @@
  </layer>
  <objectgroup id="3" name="Object Layer 1">
   <object id="1" name="fuel" type="FuelCan" gid="23" x="673.774" y="316.537" width="32" height="32"/>
+  <object id="2" type="BoostPad" gid="18" x="800" y="384" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="6">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="7">
  <tileset firstgid="1" name="spaceship - Copy" tilewidth="32" tileheight="32" tilecount="35" columns="5">
   <image source="spaceship - Copy.png" width="164" height="241"/>
  </tileset>
@@ -9,7 +9,7 @@
  <tileset firstgid="71" name="Background" tilewidth="1376" tileheight="640" tilecount="1" columns="1">
   <image source="Space Background2.png" width="1376" height="640"/>
  </tileset>
- <layer id="1" name="Background" width="43" height="20" locked="1">
+ <layer id="1" name="Background" width="43" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -30,7 +30,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-71,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="2" name="Copy of Tile Layer 1" width="43" height="20">
@@ -61,5 +61,6 @@
   <object id="1" type="Spikes" gid="13" x="992" y="320" width="32" height="32"/>
   <object id="2" type="EnemyTurn" gid="13" x="1312" y="320" width="32" height="32"/>
   <object id="3" type="EnemyTurn" gid="13" x="32" y="320" width="32" height="32"/>
+  <object id="6" type="BoostPad" gid="18" x="672" y="512" width="32" height="32"/>
  </objectgroup>
 </map>
