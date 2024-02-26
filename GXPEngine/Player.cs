@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GXPEngine;
 using GXPEngine.Core;
@@ -34,10 +35,14 @@ class Player : AnimationSprite
     public float fuel = 500;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
+    bool canCollide = true;
     public bool pInput = true;
     public float pScore;
     public bool isBoosting = false;
     int boostCount;
+    int _lives;
+    int timeHit = 0;
+    int coolDownTime = 1000;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
@@ -61,6 +66,7 @@ class Player : AnimationSprite
         //_position.y = 15291;
 
         _speed = 0.7f;
+        _lives = 2;
         pScore = position.y;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
@@ -96,6 +102,10 @@ class Player : AnimationSprite
         if (position.y >= falling + 500)
         {
             Console.WriteLine("dead");
+        }
+        if (canCollide == false)
+        {
+            InvisFrames();
         }
     }
 
@@ -313,16 +323,29 @@ class Player : AnimationSprite
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
             }
-            if (collisions[i] is Spikes)
+            if (collisions[i] is Spikes && canCollide)
             {
                 Spikes ouch = (Spikes)collisions[i];
-                Move(ouch.speed * ouch.direction, 0);
-                _mygame.dead = true;
+                _lives -= 1;
+                velocity = velocity * -1;
+                canCollide = false;
+                timeHit = Time.time;
+                if (_lives == 0)
+                {
+                    Move(ouch.speed * ouch.direction, 0);
+                    _mygame.dead = true;
+                }
+                }
             }
+    }
+    void InvisFrames()
+    {
+        if ((Time.time - timeHit) >= coolDownTime)
+        {
+            canCollide = true;
         }
     }
 
-  
     public void pDead()
     {
         rightChannel.Stop();
