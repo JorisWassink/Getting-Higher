@@ -19,6 +19,7 @@ namespace GXPEngine {
         Player player;
         Spikes spike;
         EnemyTurn turn;
+        Wall wall;
         TiledLoader loader;
         RotatingSpaceship _mygame;
         public string file;
@@ -39,6 +40,7 @@ namespace GXPEngine {
             player = FindObjectOfType<Player>();
             spike = FindObjectOfType<Spikes>();
             turn = FindObjectOfType<EnemyTurn>();
+            wall = FindObjectOfType<Wall>();
             file = thislevelName;
 
         }

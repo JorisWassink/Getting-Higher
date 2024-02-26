@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="3">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="4">
  <tileset firstgid="1" name="spaceship - Copy" tilewidth="32" tileheight="32" tilecount="35" columns="5">
   <image source="spaceship - Copy.png" width="164" height="241"/>
  </tileset>
  <tileset firstgid="36" name="Background" tilewidth="1376" tileheight="640" tilecount="1" columns="1">
   <image source="Space Background4.png" width="1376" height="640"/>
+ </tileset>
+ <tileset firstgid="37" name="jerrycan" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="jerrycan.png" width="35" height="40"/>
  </tileset>
  <imagelayer id="4" name="Background">
   <image source="Space Background4.png" width="1376" height="640"/>
@@ -60,5 +63,6 @@
  <objectgroup id="3" name="Object Layer 1">
   <object id="1" name="fuel" type="FuelCan" gid="23" x="673.774" y="316.537" width="32" height="32"/>
   <object id="2" type="BoostPad" gid="18" x="800" y="384" width="32" height="32"/>
+  <object id="3" type="Wall" gid="37" x="611.534" y="189.438" width="266.786" height="32"/>
  </objectgroup>
 </map>

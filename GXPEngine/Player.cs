@@ -368,7 +368,7 @@ class Player : AnimationSprite
             else if (collisions[i] is WallHit && isBoosting)
             {
                 Wall wall = (Wall)collisions[i].parent;
-                wall.LateDestroy();
+                wall.Destroy();
             }
         }
     }
