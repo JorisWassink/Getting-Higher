@@ -27,8 +27,7 @@ using static TiledMapParser.TiledLoader;
         {
         //loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
         _mygame = (RotatingSpaceship)game;
-            Background background = new Background(1366, 768 * 20);
-            LateAddChild(background);
+            
 
 
 
@@ -42,6 +41,9 @@ using static TiledMapParser.TiledLoader;
             LoadLevel(levels[2], true, 0.5f, 640);
 
             random = new Random((int)(DateTime.Now.Ticks));
+
+            Background background = new Background(1366, 768 * 20);
+            LateAddChild(background);
 
     }
         void Update()
@@ -59,7 +61,7 @@ using static TiledMapParser.TiledLoader;
             for (int i = 0; i < levels.Length; i++)
         {
             float dist = player.y - levels[i].y;
-            if (dist < -1000 && levels[i].file != "Assets/LevelChunk1.tmx")
+            if (dist < -2000 && levels[i].file != "Assets/LevelChunk1.tmx")
             {
                 Console.WriteLine("deleting:" + levels[i].file);
                 levels[i].Destroy();
@@ -72,17 +74,18 @@ using static TiledMapParser.TiledLoader;
 
         public void LoadLevelNow()
     {
-                
-   
-                LoadLevel(levels[random.Next(2, 5)], true, .5f, 640 * loadNumber);
-                Console.WriteLine("level loaded");
+
+
+        LoadLevel(levels[random.Next(2, 5)], true, .5f, 640 * loadNumber);
+        //LoadLevel(levels[3], true, .5f, 640 * loadNumber);
+        Console.WriteLine("level loaded");
     }
 
         public void LoadLevel(string name, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
             Level level = new Level(name, addColliders, defaultOriginX, defaultOriginY);
             LateAddChild(level);
-            LoadingZone zone = new LoadingZone(0, level.y, 1366, 20, this);
+            LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
             LateAddChild(zone);
             loadNumber++;
         }

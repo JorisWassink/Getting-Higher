@@ -25,16 +25,18 @@ class Player : AnimationSprite
     SoundChannel leftChannel;
     SoundChannel rightChannel;
     RotatingSpaceship _mygame;
+    Collider oldCollider;
     float _speed;
     float maxVel = 15;
     float gravity = 0.5f;
     float tank = 500;
-    float fuel = 500;
+    public float fuel = 500;
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     public bool pInput = true;
     public float pScore;
-
+    public bool isBoosting = false;
+    int boostCount;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
     {
@@ -45,6 +47,9 @@ class Player : AnimationSprite
     {
         _mygame = (RotatingSpaceship)game;
 
+        oldCollider = _collider;
+
+        
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
@@ -71,6 +76,17 @@ class Player : AnimationSprite
         }
         Movement();
         UpdateScreenPosition();
+
+        boostCount--;
+
+        if (boostCount < 0)
+        {
+            isBoosting = false;
+           // _collider = oldCollider;
+        } else
+        {
+            velocity.y += 2;
+        }
     }
 
     /// <summary>
@@ -81,6 +97,19 @@ class Player : AnimationSprite
         x = _position.x;
         y = _position.y;
     }
+
+    public void Boost()
+    {
+        if (velocity.y > -78)
+        {
+            velocity.y -= 55;
+            isBoosting = true;
+            boostCount = 30;
+           // _collider = null;
+            
+        }
+    }
+
 
     void Movement()
     {
@@ -111,15 +140,20 @@ class Player : AnimationSprite
 
     void SpeedCap()
     {
-        if (velocity.y < 50)
+        if (!isBoosting)
         {
-            velocity.y += gravity;
-        }
-        if (velocity.y <= -maxVel)
-        {
-            velocity.y = -maxVel;
+            if (velocity.y < 50)
+            {
+                velocity.y += gravity;
+            }
+            if (velocity.y <= -maxVel)
+            {
+                velocity.y = -maxVel;
+            }
         }
     }
+
+
 
     void PlayerInput()
     {
@@ -276,6 +310,7 @@ class Player : AnimationSprite
         }
     }
 
+  
     public void pDead()
     {
         rightChannel.Stop();

@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Colliders.cs" />
     <Compile Include="FuelCan.cs" />
+    <Compile Include="BoostPad.cs" />
+    <Compile Include="GXPEngine\Wall.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="LoadingZone.cs" />
     <Compile Include="Spikes.cs" />
