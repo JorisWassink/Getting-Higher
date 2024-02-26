@@ -58,6 +58,6 @@
 </data>
  </layer>
  <objectgroup id="3" name="Objects">
-  <object id="1" name="Player" type="Player" gid="24" x="668" y="504" width="32" height="32"/>
+  <object id="1" name="Player" type="Player" gid="24" x="665.25" y="600.5" width="32" height="32"/>
  </objectgroup>
 </map>

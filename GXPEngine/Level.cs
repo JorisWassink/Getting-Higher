@@ -40,7 +40,6 @@ namespace GXPEngine {
             spike = FindObjectOfType<Spikes>();
             turn = FindObjectOfType<EnemyTurn>();
             file = thislevelName;
-
         }
     }
 }
