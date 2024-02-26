@@ -25,7 +25,6 @@ public class Ui : GameObject
         fuelBar.SetXY(10, 10);
         AddChild(fuelBar);
 
-<<<<<<< Updated upstream
         score = new EasyDraw(_mygame.width, 60, false);
         score.TextFont(rowdies);
         score.TextAlign(CenterMode.Min, CenterMode.Center);
@@ -43,8 +42,6 @@ public class Ui : GameObject
             deathScreen.Text("u ded");
             deathScreen.SetXY(_mygame.width / 8, _mygame.height / 8);
         }
-=======
->>>>>>> Stashed changes
 
     }
     public void SetFuel(int fuelCount)

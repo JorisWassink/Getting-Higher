@@ -11,15 +11,7 @@ using GXPEngine.Core;
 using TiledMapParser;
 using static TiledMapParser.TiledLoader;
 
-<<<<<<< Updated upstream:GXPEngine/LevelManager.cs
   internal class LevelManager : GameObject
-=======
-namespace GXPEngine
-{
-
-
-    internal class Level : GameObject
->>>>>>> Stashed changes:GXPEngine/GXPEngine/Level.cs
     {
         Player player;
         Spikes spike;
