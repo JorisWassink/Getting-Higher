@@ -9,7 +9,8 @@ internal class LevelManager : GameObject
     private RotatingSpaceship _mygame;
     private Player player;
     private Random random;
-    private string[] levels = new string[6];
+    private string[] levels = new string[7];
+    private int[] levelOrder = new int[6];
     private int loadNumber = 0;
 
     public LevelManager()
@@ -21,7 +22,9 @@ internal class LevelManager : GameObject
         levels[2] = "Assets/LevelChunk2.tmx";
         levels[3] = "Assets/LevelChunk3.tmx";
         levels[4] = "Assets/LevelChunk4.tmx";
-        levels[5] = "Assets/LevelChunk5.tmx";
+        levels[5] = "Assets/LevelChunkRest.tmx";
+        levels[6] = "Assets/LevelChunkSpikes.tmx";
+
 
         StartGame();
     }
@@ -78,7 +81,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        LoadLevel(levels[random.Next(2, 5)], true, .5f, 640 * loadNumber);
+        LoadLevel(levels[random.Next(2, 7)], true, .5f, 640 * loadNumber);
         Console.WriteLine("Level loaded");
     }
 
@@ -90,11 +93,7 @@ internal class LevelManager : GameObject
         LateAddChild(zone);
         loadNumber++;
     }
-    public void DeathEffect()
-    {
-        
-        
-    }
+
 
     private void Scroll()
     {
