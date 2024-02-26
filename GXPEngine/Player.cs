@@ -55,7 +55,7 @@ class Player : AnimationSprite
 
         oldCollider = _collider;
 
-        
+
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
@@ -73,7 +73,7 @@ class Player : AnimationSprite
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
 
         rightChannel = (SoundChannel)leftNoise.Play();
-        leftChannel = (SoundChannel)rightNoise.Play(); 
+        leftChannel = (SoundChannel)rightNoise.Play();
     }
     void Update()
     {
@@ -89,8 +89,9 @@ class Player : AnimationSprite
         {
             _speed = 0.7f;
             isBoosting = false;
-           // _collider = oldCollider;
-        } else
+            // _collider = oldCollider;
+        }
+        else
         {
             velocity.y += 2;
         }
@@ -122,7 +123,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -1)
         {
-            velocity.y *= 2;
+            velocity.y -= velocity.y + 50;
             /*velocity.x *= 1.5f;*/
             isBoosting = true;
             boostCount = 30;
@@ -136,7 +137,8 @@ class Player : AnimationSprite
     {
         SpeedCap();
         collisions();
-        if (pInput) {
+        if (pInput)
+        {
             PlayerInput();
         }
 
@@ -153,7 +155,8 @@ class Player : AnimationSprite
         {
             pScore = position.y;
         }
-        if (pInput) {
+        if (pInput)
+        {
             ui.SetScore(-((int)(pScore - 15291) / 3));
         }
 
@@ -229,7 +232,7 @@ class Player : AnimationSprite
         }
         else
         {
-           leftChannel.IsPaused = true;
+            leftChannel.IsPaused = true;
             if (rotation < 0)
             {
                 rotation += 2;
@@ -327,7 +330,7 @@ class Player : AnimationSprite
             {
                 Spikes ouch = (Spikes)collisions[i];
                 _lives -= 1;
-                velocity = velocity * -1;
+                velocity = velocity * _speed * -1;
                 canCollide = false;
                 timeHit = Time.time;
                 if (_lives == 0)
@@ -335,6 +338,14 @@ class Player : AnimationSprite
                     Move(ouch.speed * ouch.direction, 0);
                     _mygame.dead = true;
                 }
+            }
+            if (collisions[i] is Wall && isBoosting)
+            {
+                ((Wall)collisions[i]).LateDestroy();
+            }
+            else if (collisions[i] is Wall && !isBoosting)
+            {
+                    velocity = velocity * _speed * -2;
                 }
             }
     }
