@@ -9,9 +9,12 @@ internal class LevelManager : GameObject
     private RotatingSpaceship _mygame;
     private Player player;
     private Random random;
+    Ui ui;
     private string[] levels = new string[7];
     private int[] levelOrder = new int[6];
-    private int loadNumber = 0;
+    public int loadNumber = 0;
+    public bool onMenu = true;
+    private bool gameStart = false;
 
     public LevelManager()
     {
@@ -32,10 +35,8 @@ internal class LevelManager : GameObject
     public void StartGame()
     {
         Console.WriteLine("starting game...");
-        LoadLevel(levels[1], true, .5f, .5f);
-        LoadLevel(levels[2], true, 0.5f, 640);
-
-        random = new Random((int)(DateTime.Now.Ticks));
+        loadNumber--;
+        LoadLevel(levels[0], true, .5f, .5f);
     }
 
     public void DestroyAll()
@@ -51,6 +52,11 @@ internal class LevelManager : GameObject
 
     public void Update()
     {
+        if (Input.GetKeyUp(Key.ENTER) && !gameStart)
+        {
+            gameStart = true;
+            /*onMenu = false;*/
+        }
         player = FindObjectOfType<Player>();
 
         if (player != null && player.pInput)
@@ -61,16 +67,28 @@ internal class LevelManager : GameObject
         Level[] levelObjects = FindObjectsOfType<Level>();
         foreach (var level in levelObjects)
         {
-            float dist = player.y - level.y;
-            if (dist < -2000 && level.file != "Assets/LevelChunk1.tmx")
+            if (gameStart)
             {
-                Console.WriteLine("Deleting: " + level.file);
+                DestroyAll();
                 level.Destroy();
-               
+                gameStart = false;
+                LoadLevel(levels[1], true, .5f, .5f);
+                LoadLevel(levels[2], true, 0.5f, 640);
+                random = new Random((int)(DateTime.Now.Ticks));
+                onMenu = false;
             }
-        }
+            if (player != null) {
+                float dist = player.y - level.y;
+                if (dist < -2000 && level.file != "Assets/LevelChunk1.tmx")
+                {
+                    Console.WriteLine("Deleting: " + level.file);
+                    level.Destroy();
 
-        player = FindObjectOfType<Player>();
+                }
+            }
+            }
+
+            player = FindObjectOfType<Player>();
         int count = GetChildCount();
 
         if (player != null)
@@ -81,7 +99,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        LoadLevel(levels[random.Next(2, 7)], true, .5f, 640 * loadNumber);
+        LoadLevel(levels[random.Next(2, 6)], true, .5f, 640 * loadNumber);
         Console.WriteLine("Level loaded");
     }
 
@@ -91,6 +109,7 @@ internal class LevelManager : GameObject
         LateAddChild(level);
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);
+
         loadNumber++;
     }
 

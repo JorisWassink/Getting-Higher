@@ -24,12 +24,16 @@ public class RotatingSpaceship : Game
 
         _spaceship = FindObjectOfType<Player>();
 
-        ui = new Ui();
-        LateAddChild(ui);
     }
 
     void Update()
     {
+        if (manager.loadNumber >= 0 && !manager.onMenu)
+        {
+            ui = new Ui();
+            LateAddChild(ui);
+            manager.onMenu = true;
+        }
         if (dead)
         {
             Dead();
@@ -61,11 +65,17 @@ public class RotatingSpaceship : Game
             manager.Destroy();
             manager = new LevelManager();
             LateAddChild(manager);
-            ui.Destroy();
-            ui = new Ui();
-            LateAddChild(ui);
+            if (ui != null)
+            {
+                ui.Destroy();
+            }
+            if (manager.loadNumber >= 0 && !manager.onMenu)
+            {
+                ui = new Ui();
+                LateAddChild(ui);
+            }
         }
-    }
+        }
 
     static void Main()
     {
