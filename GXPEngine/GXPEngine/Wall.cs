@@ -20,7 +20,6 @@ class Wall : AnimationSprite
     void Initialize(TiledObject obj)
     {
         SetOrigin(width / 2, height / 2);
-        collider.isTrigger = true;
     }
 
     void Update()

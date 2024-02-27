@@ -97,7 +97,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= velocity.y + 50;
+            velocity.y -= /*velocity.y +*/ 50;
             isBoosting = true;
             boostCount = 30;
         }
@@ -313,6 +313,11 @@ class Player : AnimationSprite
                     Move(ouch.speed * ouch.direction, 0);
                     _mygame.dead = true;
                 }
+            }
+            if (collisions[i] is WallHit && isBoosting)
+            {
+                Wall wall = (Wall)collisions[i].parent;
+                wall.Destroy();
             }
         }
     }
