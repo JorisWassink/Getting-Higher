@@ -41,7 +41,7 @@ public class WallHit : Sprite
 
     void Update()
     {
-        Console.WriteLine("wallhit:" + x + ' ' + y);
+       // Console.WriteLine("wallhit:" + x + ' ' + y);
     }
 }
 

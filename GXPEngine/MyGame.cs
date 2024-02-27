@@ -37,15 +37,18 @@ public class RotatingSpaceship : Game
         {
             Dead();
         }
+        string yay = GetDiagnostics();
+        Console.WriteLine(yay);
+        Console.WriteLine("current fps:" + currentFps);
     }
 
     public void Dead()
     {
         Background background = FindObjectOfType<Background>();
-        if (background != null)
+/*        if (background != null)
         {
             background.DeathEffect();
-        }
+        }*/
         Player player = FindObjectOfType<Player>();
         player.pDead();
         deathCounter--;

@@ -9,9 +9,10 @@ internal class LevelManager : GameObject
     private RotatingSpaceship _mygame;
     private Player player;
     private Random random;
-    private string[] levels = new string[7];
-    private int[] levelOrder = new int[6];
+    private string[] levels = new string[10];
+    private int[] levelOrder = new int[7];
     private int loadNumber = 0;
+    Level[] levelObjects;
 
     public LevelManager()
     {
@@ -24,9 +25,12 @@ internal class LevelManager : GameObject
         levels[4] = "Assets/LevelChunk4.tmx";
         levels[5] = "Assets/LevelChunkRest.tmx";
         levels[6] = "Assets/LevelChunkSpikes.tmx";
-
-
+        /*        levels[7] = "Assets/level2_try1_pt0.tmx";
+                levels[8] = "Assets/level3_try1_pt0.tmx";
+                levels[9] = "Assets/level4_try1_pt0.tmx";*/
         StartGame();
+        
+        player = FindObjectOfType<Player>();
     }
 
     public void StartGame()
@@ -59,19 +63,21 @@ internal class LevelManager : GameObject
             Scroll();
         }
 
-        Level[] levelObjects = FindObjectsOfType<Level>();
-        foreach (var level in levelObjects)
+        if (player != null)
         {
-            float dist = player.y - level.y;
-            if (dist < -2000 && level.file != "Assets/LevelChunk1.tmx")
+            levelObjects = FindObjectsOfType<Level>();
+            foreach (var level in levelObjects)
             {
-                Console.WriteLine("Deleting: " + level.file);
-                level.Destroy();
-               
+                float dist = player.y - level.y;
+                if (dist < -1000 && level.file != "Assets/LevelChunk1.tmx")
+                {
+                    Console.WriteLine("Deleting: " + level.file);
+                    level.Destroy();
+
+                }
             }
         }
 
-        player = FindObjectOfType<Player>();
         int count = GetChildCount();
 
         if (player != null)
@@ -82,7 +88,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        LoadLevel(levels[random.Next(2, 7)], true, .5f, 640 * loadNumber);
+        LoadLevel(levels[random.Next(2, 6)], true, .5f, 640 * loadNumber);
         Console.WriteLine("Level loaded");
     }
 
@@ -92,6 +98,7 @@ internal class LevelManager : GameObject
         LateAddChild(level);
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);
+
         loadNumber++;
     }
 

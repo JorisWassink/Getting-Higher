@@ -120,7 +120,7 @@ class Player : AnimationSprite
             falling = position.y;
             Console.WriteLine(falling);
         }
-        if (position.y >= falling + 500)
+        if (position.y >= falling + 700)
         {
             _mygame.dead = true;
             falling = position.y;

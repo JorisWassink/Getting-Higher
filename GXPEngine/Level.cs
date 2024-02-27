@@ -30,6 +30,8 @@ namespace GXPEngine {
             loader.autoInstance = true;
             loader.rootObject = this;
             loader.addColliders = false;
+            Background background = new Background(1366, 640);
+            AddChild(background);
             loader.LoadImageLayers();
             loader.LoadTileLayers(0);
             loader.addColliders = true;
@@ -42,8 +44,7 @@ namespace GXPEngine {
             wall = FindObjectOfType<Wall>();
             file = thislevelName;
 
-            Background background = new Background(1366, 640);
-            AddChild(background);
+            
         }
     }
 }
