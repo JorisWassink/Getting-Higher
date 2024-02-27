@@ -28,7 +28,7 @@ class Background : EasyDraw
     {
         width = owidth; height = oheight;
         InitializeHUD();
-        for (int i = 0; i < 400; i += 1)
+        for (int i = 0; i < 40; i += 1)
         {
             starX = random.Next(0, width);
             starY = random.Next(0, height);

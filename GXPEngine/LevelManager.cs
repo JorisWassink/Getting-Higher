@@ -34,6 +34,7 @@ internal class LevelManager : GameObject
         Console.WriteLine("starting game...");
         LoadLevel(levels[1], true, .5f, .5f);
         LoadLevel(levels[2], true, 0.5f, 640);
+        
 
         random = new Random((int)(DateTime.Now.Ticks));
     }

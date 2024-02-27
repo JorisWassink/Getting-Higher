@@ -42,6 +42,9 @@ namespace GXPEngine {
             turn = FindObjectOfType<EnemyTurn>();
             wall = FindObjectOfType<Wall>();
             file = thislevelName;
+
+            Background background = new Background(1366, 640);
+            AddChild(background);
         }
     }
 }

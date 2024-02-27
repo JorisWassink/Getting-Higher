@@ -27,6 +27,8 @@ public class RotatingSpaceship : Game
 
         ui = new Ui();
         LateAddChild(ui);
+
+
     }
 
     void Update()
@@ -47,7 +49,7 @@ public class RotatingSpaceship : Game
         Player player = FindObjectOfType<Player>();
         player.pDead();
         deathCounter--;
-        //manager.DeathEffect();
+        //fbmanager.DeathEffect();
         /*AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
         sprite.width = width;
         sprite.height = height * 2;
