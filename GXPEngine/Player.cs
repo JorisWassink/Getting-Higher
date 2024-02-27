@@ -136,7 +136,8 @@ class Player : AnimationSprite
     {
         SpeedCap();
         collisions();
-        if (pInput) {
+        if (pInput)
+        {
             PlayerInput();
         }
 
@@ -187,39 +188,30 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.A) && fuel > 0)
         {
-            rotation += 1f;
-        }
-        else if (rotation >= maxVel)
-        {
-            rotation -= 1f;
-        }
+            //boost left
+            if (velocity.x > -maxVel)
+            {
+                velocity.x -= _speed * 1.5f;
+            }
+            fuel -= 1;
+            ui.SetFuel((int)fuel);
 
-        //AdjustVelocityX();
+            if (velocity.y > -maxVel)
+            {
+                velocity.y -= _speed * 1.5f;
+            }
+            _autoRotateLeft = true;
+            if (rotation <= -50)
+            {
+                _autoRotateLeft = false;
+            }
 
-    }
-
-    void HandleLeftRotationInput()
-    {
-        if (fuel > 0)
-        {
-            BoostLeft();
-            _autoRotateLeft = rotation > -50;
-            leftChannel.IsPaused = !_autoRotateLeft;
+            leftChannel.IsPaused = false;
         }
-        else
+        else if (Input.GetKey(Key.D))
         {
-            ResetRotation();
+            _autoRotateLeft = false;
             leftChannel.IsPaused = true;
-        }
-    }
-
-    void HandleRightRotationInput()
-    {
-        if (fuel > 0)
-        {
-            BoostRight();
-            _autoRotateRight = rotation < 50;
-            rightChannel.IsPaused = !_autoRotateRight;
         }
         else
         {
@@ -236,45 +228,40 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.D) && fuel > 0)
         {
-            rotation += 2;
+            //boost right
+            fuel -= 1;
+            ui.SetFuel((int)fuel);
+            _autoRotateRight = true;
+            if (velocity.x < maxVel)
+            {
+                velocity.x += _speed * 1.5f;
+            }
+            if (velocity.y > -50)
+            {
+                // Add velocity
+                velocity.y -= _speed * 1.5f;
+            }
+
+            if (rotation >= 50)
+            {
+                _autoRotateRight = false;
+            }
+            rightChannel.IsPaused = false;
         }
-        else if (rotation > 0)
+        else if (Input.GetKey(Key.A))
         {
-            rotation -= 2;
+            _autoRotateRight = false;
+            rightChannel.IsPaused = true;
         }
-
-        _autoRotateLeft = _autoRotateRight = false;
-    }
-
-    void BoostLeft()
-    {
-        fuel -= 1;
-        ui.SetFuel((int)fuel);
-
-        if (velocity.x > -maxVel)
+        else
         {
-            velocity.x -= _speed * 1.5f;
-        }
+            rightChannel.IsPaused = true;
+            if (rotation > 0)
+            {
+                rotation -= 2;
+            }
 
-        if (velocity.y > -maxVel)
-        {
-            velocity.y -= _speed * 1.5f;
-        }
-    }
-
-    void BoostRight()
-    {
-        fuel -= 1;
-        ui.SetFuel((int)fuel);
-
-        if (velocity.x < maxVel)
-        {
-            velocity.x += _speed * 1.5f;
-        }
-
-        if (velocity.y > -50)
-        {
-            velocity.y -= _speed * 1.5f;
+            _autoRotateRight = false;
         }
     }
 
