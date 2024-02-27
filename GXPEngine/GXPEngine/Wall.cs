@@ -13,32 +13,18 @@ class Wall : AnimationSprite
     WallHit wallhit = new WallHit();
     public Wall(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/Perfect.png", 1, 1)
     {
-        /*Initialize(obj);*/
-        SetOrigin(width / 2, height / 2);
-        /*alpha = 0;*/
+        Initialize(obj);
         AddChild(wallhit);
     }
 
-/*    void Initialize(TiledObject obj)
+    void Initialize(TiledObject obj)
     {
         SetOrigin(width / 2, height / 2);
         collider.isTrigger = true;
-    }*/
+    }
 
     void Update()
     {
-        /*GameObject[] collisions = GetCollisions();
-        for (int i = 0; i < collisions.Length; i++)
-        {
-            if (collisions[i] is Player)
-            {
-                if (((Player)collisions[i]).isBoosting)
-                {
-                    Destroy();
-                }
-
-            }
-        }*/
     }
 }
 public class WallHit : Sprite
@@ -48,7 +34,6 @@ public class WallHit : Sprite
         collider.isTrigger = true;
         /*alpha = 0;*/
         SetOrigin(width/2, height - 50);
-        /*scaleX = parent.x;*/
     }
 }
 
