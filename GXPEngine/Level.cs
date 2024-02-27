@@ -31,7 +31,6 @@ namespace GXPEngine {
             loader.rootObject = this;
             loader.addColliders = false;
             loader.LoadImageLayers();
-            
             loader.LoadTileLayers(0);
             loader.addColliders = true;
             loader.LoadTileLayers(1);

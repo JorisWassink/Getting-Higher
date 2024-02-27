@@ -8,18 +8,25 @@ using GXPEngine;
 using TiledMapParser;
 
 
-abstract class PickupBase : AnimationSprite
+public class PickUp : AnimationSprite
 {
-    protected PickupBase(string imageFile, int cols, int rows, TiledObject obj = null) : base(imageFile, cols, rows)
+    protected PickUp(string imageFile, int cols, int rows, TiledObject obj = null) : base(imageFile, cols, rows)
     {
         Initialize(obj);
     }
 
-    protected abstract void Initialize(TiledObject obj);
+    public void Initialize(TiledObject obj)
+    {
+    }
 
-    public void Grab()
+public void Grab()
     {
         this.LateDestroy();
     }
 }
 
+/*public class Shield(string imageFile, int cols, int rows, TiledObject obj = null) : PickUp("Shield.png", 1, 1)
+{
+
+
+}*/
