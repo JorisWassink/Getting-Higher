@@ -8,7 +8,6 @@ using GXPEngine;
 public class RotatingSpaceship : Game
 {
     Player _spaceship;
-    EasyDraw _text;
     Ui ui;
     LevelManager manager;
     public bool dead;

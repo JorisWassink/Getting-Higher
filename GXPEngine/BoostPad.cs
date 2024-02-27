@@ -28,6 +28,7 @@ class BoostPad : PickUpBase
             {
                 ((Player)collisions[i]).Boost();
                 ((Player)collisions[i]).fuel += 20;
+                Wall.WallTrigger = true;
             }
         }
     }

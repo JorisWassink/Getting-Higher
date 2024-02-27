@@ -23,4 +23,16 @@ abstract class PickUpBase : AnimationSprite
     }
 }
 
+class ShieldPickUp : PickUpBase
+{
+    public ShieldPickUp(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/Shield.png", 1, 1)
+    {
+        Initialize(obj);
+    }
+    protected override void Initialize(TiledObject obj)
+    {
+        collider.isTrigger = true;
+        SetOrigin(width / 2, height / 2);
+    }
 
+}

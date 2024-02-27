@@ -67,6 +67,6 @@
   <object id="1" name="Player" type="Player" gid="24" x="1055.57" y="531.622" width="32" height="32"/>
   <object id="3" type="Wall" gid="1" x="896" y="192" width="266.786" height="32"/>
   <object id="4" type="BoostPad" gid="1" x="977.388" y="447.137" width="154.572" height="32"/>
-  <object id="5" type="Wall" gid="1" x="480" y="224" width="32" height="32"/>
+  <object id="5" type="ShieldPickUp" gid="1" x="480" y="224" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TiledMapParser;
 
 
-    class FuelCan : PickupBase
+    class FuelCan : PickUpBase
     {
         public FuelCan(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
         {
