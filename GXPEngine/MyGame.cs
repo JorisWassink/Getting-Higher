@@ -69,28 +69,13 @@ public class RotatingSpaceship : Game
             ui.Destroy();
             ui = new Ui();
             LateAddChild(ui);
+            
         }
     }
 
     static void Main()
     {
         new RotatingSpaceship().Start();
-    }
-
-
-    void LoadLevel(string name)
-    {
-        List<GameObject> children = GetChildren();
-        dead = false;
-        foreach (GameObject child in children)
-        {
-            child.Destroy();
-        }
-        Level level = new Level(name);
-        LateAddChild(level);
-        Ui ui = new Ui();
-        LateAddChild(ui);
-        
     }
 
 }

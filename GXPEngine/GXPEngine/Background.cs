@@ -44,17 +44,17 @@ class Background : EasyDraw
         _mygame = (RotatingSpaceship)game;
         width = owidth; height = oheight;
         background = new EasyDraw(1376, 640, false);
-               /* InitializeHUD();
-                for (int i = 0; i < 40; i += 1)
-                {
-                    starX = random.Next(0, width);
-                    starY = random.Next(0, height);
+        /*InitializeHUD();
+        for (int i = 0; i < 40; i += 1)
+        {
+            starX = random.Next(0, width);
+            starY = random.Next(0, height);
 
-                    currentWave.Rect(starX, starY, 10, 10);
+            currentWave.Rect(starX, starY, 10, 10);
             currentWave.blendMode = BlendMode.MULTIPLY;
-                    //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
-                    AddChild(currentWave);
-                }*/
+            //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
+            AddChild(currentWave);
+        }*/
         InitializeBackground();
 
     }

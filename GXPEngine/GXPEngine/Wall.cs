@@ -13,7 +13,6 @@ class Wall : AnimationSprite
     public static bool WallTrigger = false;
     public Wall(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/Perfect.png", 1, 1)
     {
-        wallhit = new WallHit();
         Initialize(obj);
     }
 
