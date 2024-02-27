@@ -60,7 +60,7 @@
  <objectgroup id="4" name="Object Layer 1">
   <object id="1" type="Spikes" gid="36" x="329.409" y="191.313" width="32" height="32"/>
   <object id="2" type="Spikes" gid="36" x="1018.14" y="417.759" width="32" height="32"/>
-  <object id="3" type="Colliders" gid="36" x="-4.52116" y="571.159" width="32" height="572.549" visible="0"/>
-  <object id="4" type="Colliders" gid="36" x="1339.55" y="492.894" width="32" height="447.325" visible="0"/>
+  <object id="3" type="EnemyTurn" gid="36" x="-4.52116" y="571.159" width="32" height="572.549"/>
+  <object id="4" type="EnemyTurn" gid="36" x="1339.55" y="492.894" width="32" height="447.325"/>
  </objectgroup>
 </map>
