@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TiledMapParser;
 
 
-class BoostPad : PickupBase
+class BoostPad : PickUpBase
 {
     public BoostPad(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
     {
