@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,6 +29,12 @@ class Player : AnimationSprite
     RotatingSpaceship _mygame;
     Collider oldCollider;
     AnimationSprite visual;
+    EasyDraw shield;
+    /*Shield shield;*/
+    int shieldWidth;
+    int shieldHeight;
+    float shieldX;
+    float shieldY;
     float _speed;
     float falling;
     float maxVel = 15;
@@ -37,6 +44,7 @@ class Player : AnimationSprite
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
     bool canCollide = true;
+    bool shieldOn = false;
     public bool pInput = true;
     public float pScore;
     public bool isBoosting = false;
@@ -65,7 +73,7 @@ class Player : AnimationSprite
         scale = .5f;
         _position.x = game.width / 2;
         _speed = 0.7f;
-        _lives = 2;
+        _lives = 1;
         pScore = position.y;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
@@ -84,10 +92,24 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
+/*        shieldX = position.x;
+        shieldY = position.y;
+        shieldWidth = this.width;
+        shieldHeight = this.height;
+        shield = new EasyDraw(1000, 1000, false);
+        shield.Fill(255, 255, 255);
+        shield.StrokeWeight(10);
+        shield.Ellipse(shieldX, shieldY, 1000, 1000);
+        shield.SetXY(shieldX, shieldY);
+        if (shieldOn)
+        {
+            *//*AddChild(shield);*/
+            /*shield.Destroy();*//*
+        }*/
     }
 
 
-    void UpdateScreenPosition()
+        void UpdateScreenPosition()
     {
         x = _position.x;
         y = _position.y;
@@ -110,6 +132,7 @@ class Player : AnimationSprite
         {
             _speed = 0.7f;
             isBoosting = false;
+            Wall.WallTrigger = false;
         }
         else
         {
@@ -301,6 +324,13 @@ class Player : AnimationSprite
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
             }
+            if (collisions[i] is ShieldPickUp)
+            {
+                ((ShieldPickUp)collisions[i]).Grab();
+                _lives = 2;
+                /*AddChild(shield);*/
+                shieldOn = true;
+            }
             if (collisions[i] is Spikes && canCollide)
             {
                 Spikes ouch = (Spikes)collisions[i];
@@ -314,10 +344,9 @@ class Player : AnimationSprite
                     _mygame.dead = true;
                 }
             }
-            if (collisions[i] is WallHit && isBoosting)
+            if (collisions[i] is Wall && isBoosting)
             {
-                Wall wall = (Wall)collisions[i].parent;
-                wall.Destroy();
+                ((Wall)collisions[i]).Destroy();
             }
         }
     }
@@ -379,5 +408,4 @@ class Player : AnimationSprite
         pInput = false;
         gravity = 0;
     }
-
 }
