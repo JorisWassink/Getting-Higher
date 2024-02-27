@@ -10,6 +10,7 @@ public class RotatingSpaceship : Game
     Player _spaceship;
     EasyDraw _text;
     Ui ui;
+    LevelManager manager;
     public bool dead;
     string[] levels = new string[2];
     public int currentLevel = 0;
@@ -18,13 +19,13 @@ public class RotatingSpaceship : Game
     {
 
 
-        LevelManager manager = new LevelManager();
+        manager = new LevelManager();
         AddChild(manager);
         targetFps = 60;
 
         _spaceship = FindObjectOfType<Player>();
 
-        Ui ui = new Ui();
+        ui = new Ui();
         LateAddChild(ui);
     }
 
@@ -36,19 +37,34 @@ public class RotatingSpaceship : Game
         }
     }
 
-    void Dead()
+    public void Dead()
     {
-        Console.WriteLine(deathCounter.ToString());
         Background background = FindObjectOfType<Background>();
-        background.DeathEffect();
+        if (background != null)
+        {
+            background.DeathEffect();
+        }
         Player player = FindObjectOfType<Player>();
         player.pDead();
         deathCounter--;
+        //manager.DeathEffect();
+        /*AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
+        sprite.width = width;
+        sprite.height = height * 2;
+        sprite.blendMode = BlendMode.MULTIPLY;
+        int count = GetChildCount();
+        SetChildIndex(sprite, count);
+        AddChild(sprite);*/
         if (deathCounter == 0)
         {
             deathCounter = 180;
             dead = false;
-            LoadLevel(levels[0]);
+            manager.Destroy();
+            manager = new LevelManager();
+            LateAddChild(manager);
+            ui.Destroy();
+            ui = new Ui();
+            LateAddChild(ui);
         }
     }
 
@@ -70,6 +86,7 @@ public class RotatingSpaceship : Game
         LateAddChild(level);
         Ui ui = new Ui();
         LateAddChild(ui);
+        
     }
 
 }

@@ -42,7 +42,6 @@ namespace GXPEngine {
             turn = FindObjectOfType<EnemyTurn>();
             wall = FindObjectOfType<Wall>();
             file = thislevelName;
-
         }
     }
 }

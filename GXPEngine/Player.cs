@@ -64,7 +64,6 @@ class Player : AnimationSprite
         scaleX = .3f;
         scale = .5f;
         _position.x = game.width / 2;
-
         _speed = 0.7f;
         _lives = 2;
         pScore = position.y;
@@ -81,34 +80,10 @@ class Player : AnimationSprite
         {
             ui = game.FindObjectOfType<Ui>();
         }
+
         Movement();
         UpdateScreenPosition();
-
-        boostCount--;
-        if (boostCount < 0)
-        {
-            _speed = 0.7f;
-            isBoosting = false;
-            // _collider = oldCollider;
-        }
-        else
-        {
-            velocity.y += 2;
-        }
-        if (velocity.y == 2)
-        {
-           falling = position.y;
-            Console.WriteLine(falling);
-        }
-        if (position.y >= falling + 500)
-        {
-            Console.WriteLine("dead");
-        }
-        if (canCollide == false)
-        {
-            InvisFrames();
-        }
-
+        HandleBoosting();
     }
 
 
@@ -128,12 +103,39 @@ class Player : AnimationSprite
         }
     }
 
+    void HandleBoosting()
+    {
+        boostCount--;
+        if (boostCount < 0)
+        {
+            _speed = 0.7f;
+            isBoosting = false;
+        }
+        else
+        {
+            velocity.y += 2;
+        }
+        if (velocity.y == 2)
+        {
+            falling = position.y;
+            Console.WriteLine(falling);
+        }
+        if (position.y >= falling + 500)
+        {
+            _mygame.dead = true;
+            falling = position.y;
+
+        }
+        if (canCollide == false)
+        {
+            InvisFrames();
+        }
+    }
 
     void Movement()
     {
         SpeedCap();
         collisions();
-
         if (pInput) {
             PlayerInput();
         }
@@ -174,38 +176,16 @@ class Player : AnimationSprite
         }
     }
 
-
-    //TODO: improve this code a lot this is a mess
     void PlayerInput()
     {
-        HandleRotationInput();
-        //HandleBoostInput();
-        UpdateFuelUI();
+        HandleLeftThrust();
+        HandleRightThrust();
+        HandleStraightThrust();
     }
 
-    void HandleRotationInput()
+    void HandleLeftThrust()
     {
-        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
-        {
-            HandleFullRotationInput();
-        }
-        else if (Input.GetKey(Key.A))
-        {
-            HandleLeftRotationInput();
-        }
-        else if (Input.GetKey(Key.D))
-        {
-            HandleRightRotationInput();
-        }
-        else
-        {
-            ResetRotation();
-        }
-    }
-
-    void HandleFullRotationInput()
-    {
-        if (rotation <= -maxVel)
+        if (Input.GetKey(Key.A) && fuel > 0)
         {
             rotation += 1f;
         }
@@ -243,14 +223,18 @@ class Player : AnimationSprite
         }
         else
         {
-            ResetRotation();
-            rightChannel.IsPaused = true;
+            leftChannel.IsPaused = true;
+            if (rotation < 0)
+            {
+                rotation += 2;
+            }
+            _autoRotateLeft = false;
         }
     }
 
-    void ResetRotation()
+    void HandleRightThrust()
     {
-        if (rotation < 0)
+        if (Input.GetKey(Key.D) && fuel > 0)
         {
             rotation += 2;
         }
@@ -294,13 +278,59 @@ class Player : AnimationSprite
         }
     }
 
-    void UpdateFuelUI()
+    //make sure that if the player goes straight up that the rotation slowly turns to normal
+    void HandleStraightThrust()
     {
-        // Additional fuel UI update logic if needed
+        if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
+        {
+            if (rotation <= -maxVel)
+            {
+                rotation += 1f;
+            }
+            else if (rotation >= maxVel)
+            {
+                rotation -= 1f;
+            }
+            if (velocity.x > maxVel)
+            {
+                velocity.x -= 1;
+            }
+            if (velocity.x < -maxVel)
+            {
+                velocity.x += 1;
+            }
+        }
     }
 
-
     void collisions()
+    {
+        HandleWalls();
+
+        GameObject[] collisions = GetCollisions();
+        for (int i = 0; i < collisions.Length; i++)
+        {
+            if (collisions[i] is FuelCan)
+            {
+                ((FuelCan)collisions[i]).Grab();
+                fuel += 250;
+            }
+            if (collisions[i] is Spikes && canCollide)
+            {
+                Spikes ouch = (Spikes)collisions[i];
+                _lives -= 1;
+                velocity = velocity * -1;
+                canCollide = false;
+                timeHit = Time.time;
+                if (_lives == 0)
+                {
+                    Move(ouch.speed * ouch.direction, 0);
+                    _mygame.dead = true;
+                }
+            }
+        }
+    }
+
+    void HandleWalls()
     {
         Collision colx = MoveUntilCollision(velocity.x, 0);
         Collision coly = MoveUntilCollision(0, velocity.y);
@@ -340,38 +370,8 @@ class Player : AnimationSprite
                 rotation = 0;
             }
         }
-        GameObject[] collisions = GetCollisions();
-        for (int i = 0; i < collisions.Length; i++)
-        {
-            if (collisions[i] is FuelCan)
-            {
-                ((FuelCan)collisions[i]).Grab();
-                fuel += 250;
-            }
-            if (collisions[i] is Spikes && canCollide)
-            {
-                Spikes ouch = (Spikes)collisions[i];
-                _lives -= 1;
-                velocity = velocity * _speed * -1;
-                canCollide = false;
-                timeHit = Time.time;
-                if (_lives == 0)
-                {
-                    Move(ouch.speed * ouch.direction, 0);
-                    _mygame.dead = true;
-                }
-            }
-            if (collisions[i] is Wall && isBoosting)
-            {
-                ((Wall)collisions[i]).LateDestroy();
-            }
-            else if (collisions[i] is WallHit && isBoosting)
-            {
-                Wall wall = (Wall)collisions[i].parent;
-                wall.Destroy();
-            }
-        }
     }
+
     void InvisFrames()
     {
         if ((Time.time - timeHit) >= coolDownTime)

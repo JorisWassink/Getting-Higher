@@ -58,7 +58,6 @@ public class Ui : GameObject
         {
             AddChild(deathScreen);
             RemoveChild(fuelBar);
-           
         }
     }
 }
