@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GXPEngine;
 using TiledMapParser;
 using static TiledMapParser.TiledLoader;
@@ -16,7 +17,7 @@ internal class LevelManager : GameObject
     //Level[] levelObjects;
     List<Level> levelObjects = new List<Level>();
     private string[] levels = new string[7];
-    private int[] levelOrder = new int[6];
+   // List<Level> Levels = new List<Level>();
 
     public LevelManager()
     {
@@ -69,9 +70,9 @@ internal class LevelManager : GameObject
             /*onMenu = false;*/
         }
 
-        
-        foreach (var level in levelObjects)
+        for (int i = 0; i < levelObjects.Count; i++)
         {
+            Level level = levelObjects[i];   
             if (player != null)
             {
                 float dist = player.y - level.y;
