@@ -13,7 +13,8 @@ internal class LevelManager : GameObject
     public int loadNumber = 0;
     public bool onMenu = true;
     private bool gameStart = false;
-    Level[] levelObjects;
+    //Level[] levelObjects;
+    List<Level> levelObjects = new List<Level>();
     private string[] levels = new string[7];
     private int[] levelOrder = new int[6];
 
@@ -68,7 +69,7 @@ internal class LevelManager : GameObject
             /*onMenu = false;*/
         }
 
-        levelObjects = FindObjectsOfType<Level>();
+        
         foreach (var level in levelObjects)
         {
             if (player != null)
@@ -114,7 +115,7 @@ internal class LevelManager : GameObject
         LateAddChild(level);
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);
-
+        levelObjects.Add(level);
         loadNumber++;
     }
 
