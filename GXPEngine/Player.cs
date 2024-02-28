@@ -54,7 +54,7 @@ class Player : AnimationSprite
     int timeHit = 0;
     int coolDownTime = 1000;
 
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spaceship.png", 1, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 1, 1)
     {
         Initialize(obj);
     }
@@ -69,7 +69,7 @@ class Player : AnimationSprite
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scaleY = .15f;
+        scaleY = 10f;
         scaleX = .3f;
         scale = .5f;
         _position.x = game.width / 2;
