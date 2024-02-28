@@ -14,7 +14,7 @@ public class RotatingSpaceship : Game
     string[] levels = new string[2];
     public int currentLevel = 0;
     int deathCounter = 180;
-    public RotatingSpaceship() : base(1366, 768, false, false)
+    public RotatingSpaceship() : base(1376, 768, false, false)
     {
 
 

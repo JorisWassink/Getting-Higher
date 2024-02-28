@@ -30,6 +30,7 @@ internal class LevelManager : GameObject
         levels[4] = "Assets/LevelChunk4.tmx";
         levels[5] = "Assets/LevelChunkRest.tmx";
         levels[6] = "Assets/LevelChunkSpikes.tmx";
+
         /*        levels[7] = "Assets/level2_try1_pt0.tmx";
                 levels[8] = "Assets/level3_try1_pt0.tmx";
                 levels[9] = "Assets/level4_try1_pt0.tmx";*/
@@ -89,7 +90,7 @@ internal class LevelManager : GameObject
                     level.Destroy();
                     gameStart = false;
                     LoadLevel(levels[1], true, .5f, .5f);
-                    LoadLevel(levels[2], true, 0.5f, 640);
+                    //LoadLevel(levels[2], true, 0.5f, 640);
                     random = new Random((int)(DateTime.Now.Ticks));
                     onMenu = false;
             }
