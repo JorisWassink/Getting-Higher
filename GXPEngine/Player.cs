@@ -120,7 +120,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= /*velocity.y +*/ 50;
+            velocity.y -= /*velocity.y +*/ 30;
             isBoosting = true;
             boostCount = 30;
         }
@@ -355,6 +355,12 @@ class Player : AnimationSprite
             {
                 ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
                 ((LoadingZone)collisions[i]).Destroy();
+            }
+            if (collisions[i] is BoostPad)
+            {
+                Boost();
+                fuel += 20;
+                Wall.WallTrigger = true;
             }
         }
     }

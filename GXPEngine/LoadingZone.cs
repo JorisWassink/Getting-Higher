@@ -23,14 +23,5 @@ class LoadingZone : AnimationSprite
 
     void Update()
     {
-        /*GameObject[] collisions = GetCollisions();
-        for (int i = 0; i < collisions.Length; i++)
-        {
-            if (collisions[i] is Player)
-            { 
-                thisManager.LoadLevelNow();
-                Destroy();
-            }
-        }*/
     }
 }
