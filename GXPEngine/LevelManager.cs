@@ -90,7 +90,7 @@ internal class LevelManager : GameObject
                     level.Destroy();
                     gameStart = false;
                     LoadLevel(levels[1], true, .5f, .5f);
-                    //LoadLevel(levels[2], true, 0.5f, 640);
+                    //LoadLevel(levels[2], true, 0.5f, 1280);
                     random = new Random((int)(DateTime.Now.Ticks));
                     onMenu = false;
             }

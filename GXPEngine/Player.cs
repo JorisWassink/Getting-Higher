@@ -65,6 +65,7 @@ class Player : AnimationSprite
 
         oldCollider = _collider;
 
+        y += 420;
 
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
@@ -75,7 +76,7 @@ class Player : AnimationSprite
         _position.x = game.width / 2;
         _speed = 0.7f;
         _lives = 1;
-        pScore = position.y;
+        pScore = position.y ;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
@@ -93,20 +94,25 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
-/*        shieldX = position.x;
+        shieldX = position.x;
         shieldY = position.y;
         shieldWidth = this.width;
         shieldHeight = this.height;
         shield = new EasyDraw(1000, 1000, false);
         shield.Fill(255, 255, 255);
         shield.StrokeWeight(10);
-        shield.Ellipse(shieldX, shieldY, 1000, 1000);
-        shield.SetXY(shieldX, shieldY);
+        shield.Ellipse(shieldX, shieldY, 500, 500);
+        shield.Fill(Color.Aqua);
+        //shield.SetXY(shieldX, shieldY);
         if (shieldOn)
         {
-            *//*AddChild(shield);*/
-            /*shield.Destroy();*//*
-        }*/
+            AddChild(shield);
+            if(GetChildren().Count > 1)
+            {
+                GetChildren()[1].Destroy();
+            }
+            Console.WriteLine(GetChildren().Count);
+        }
     }
 
 
@@ -120,7 +126,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= /*velocity.y +*/ 50;
+            velocity.y -= /*velocity.y +*/ 40;
             isBoosting = true;
             boostCount = 30;
         }
@@ -180,7 +186,7 @@ class Player : AnimationSprite
         }
         if (pInput && ui != null)
         {
-            ui.SetScore(-((int)(pScore) / 3));
+            ui.SetScore(-((int)(pScore) / 3) + 140);
         }
 
         _position += velocity * _speed;
