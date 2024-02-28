@@ -84,16 +84,18 @@ class Player : AnimationSprite
         rightChannel = (SoundChannel)leftNoise.Play();
         leftChannel = (SoundChannel)rightNoise.Play();
 
-        shieldX = position.x /10;
-        shieldY = position.y/2;
+        shieldX = position.x;
+        shieldY = position.y;
         shieldWidth = this.width;
         shieldHeight = this.height;
-        shield = new EasyDraw(1000, 2000, false);
-        shield.SetOrigin(width / 2, height / 2);
+        shield = new EasyDraw(2000, 2000, false);
+        //shield.SetOrigin(width, height);
         shield.Stroke(Color.Black);
         shield.StrokeWeight(5);
         shield.Ellipse(shieldX, shieldY, 350, 500);
+        shield.SetXY(-shieldX, -shieldY);
         shield.SetColor(0, 100, 100);
+        shield.alpha = 0;
         AddChild(shield);       
     }
     void Update()
@@ -103,17 +105,17 @@ class Player : AnimationSprite
             ui = game.FindObjectOfType<Ui>();
         }
 
+        if (_lives > 1)
+        {
+            shield.alpha = 0.7f;
+        } else
+        {
+            shield.alpha = 0;
+        }
+
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
-/*        shieldX = position.x;
-        shieldY = position.y ;
-        shieldWidth = this.width;
-        shieldHeight = this.height;*/
-  /*      shield.SetOrigin(shieldWidth/2, shieldHeight/2);
-        shield.Stroke(Color.Black);
-        shield.StrokeWeight(5);*/
-        //shield.SetXY(shieldX, shieldY);
     }
 
 
