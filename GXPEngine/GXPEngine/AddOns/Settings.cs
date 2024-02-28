@@ -46,7 +46,7 @@ namespace GXPEngine {
 	{
 		// Settings that are related to this class and the parsing process:
 		public static string SettingsFileName = "settings.txt"; // should be in bin/Debug or bin/Release. Use "MySubFolder/settings.txt" for subfolders.
-		public static bool ShowSettingsParsing = false;  // If true, settings parsing progress is printed to console
+		public static bool ShowSettingsParsing = true;  // If true, settings parsing progress is printed to console
 		public static bool ThrowExceptionOnMissingSetting = true; 
 
 		// Resolution values - use these when creating a new MyGame instance:
@@ -121,6 +121,7 @@ namespace GXPEngine {
 			StreamReader reader = new StreamReader(SettingsFileName);
 
 			string line = reader.ReadLine();
+
 			while (line != null)
 			{
 				if (line.Length < 2 || line.Substring(0, 2) != "//")
