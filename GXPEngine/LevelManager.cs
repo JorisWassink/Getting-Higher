@@ -44,6 +44,9 @@ internal class LevelManager : GameObject
         Console.WriteLine("starting game...");
         loadNumber--;
         LoadLevel(levels[0], true, .5f, .5f);
+        /*LoadLevel(levels[1], true, .5f, .5f);
+        LoadLevel(levels[2], true, 0.5f, 640);
+        random = new Random((int)(DateTime.Now.Ticks));*/
     }
 
     public void DestroyAll()
@@ -84,7 +87,7 @@ internal class LevelManager : GameObject
 
                 }
             }
-            else if(gameStart)
+            else if (gameStart)
             {
                     DestroyAll();
                     level.Destroy();

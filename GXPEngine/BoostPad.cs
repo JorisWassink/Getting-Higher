@@ -21,16 +21,7 @@ class BoostPad : PickUpBase
 
     void Update()
     {
-        GameObject[] collisions = GetCollisions();
-        for (int i = 0; i < collisions.Length; i++)
-        {
-            if (collisions[i] is Player)
-            {
-                ((Player)collisions[i]).Boost();
-                ((Player)collisions[i]).fuel += 20;
-                Wall.WallTrigger = true;
-            }
-        }
+        
     }
 }
 
