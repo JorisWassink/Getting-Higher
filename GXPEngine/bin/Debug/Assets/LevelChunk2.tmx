@@ -67,6 +67,5 @@
   <object id="1" type="Spikes" gid="13" x="992" y="320" width="32" height="32"/>
   <object id="2" type="EnemyTurn" gid="13" x="1312" y="320" width="32" height="32"/>
   <object id="3" type="EnemyTurn" gid="13" x="32" y="320" width="32" height="32"/>
-  <object id="6" type="Wall" gid="72" x="544" y="224" width="266.786" height="32"/>
  </objectgroup>
 </map>

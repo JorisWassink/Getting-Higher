@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GXPEngine;
 using TiledMapParser;
@@ -10,11 +10,12 @@ internal class LevelManager : GameObject
     private Player player;
     private Random random;
     Ui ui;
-    private string[] levels = new string[7];
-    private int[] levelOrder = new int[6];
     public int loadNumber = 0;
     public bool onMenu = true;
     private bool gameStart = false;
+    Level[] levelObjects;
+    private string[] levels = new string[10];
+    private int[] levelOrder = new int[7];
 
     public LevelManager()
     {
@@ -27,9 +28,12 @@ internal class LevelManager : GameObject
         levels[4] = "Assets/LevelChunk4.tmx";
         levels[5] = "Assets/LevelChunkRest.tmx";
         levels[6] = "Assets/LevelChunkSpikes.tmx";
-
-
+        /*        levels[7] = "Assets/level2_try1_pt0.tmx";
+                levels[8] = "Assets/level3_try1_pt0.tmx";
+                levels[9] = "Assets/level4_try1_pt0.tmx";*/
         StartGame();
+        
+        player = FindObjectOfType<Player>();
     }
 
     public void StartGame()
@@ -64,9 +68,10 @@ internal class LevelManager : GameObject
             Scroll();
         }
 
-        Level[] levelObjects = FindObjectsOfType<Level>();
-        foreach (var level in levelObjects)
+        if (player != null)
         {
+            levelObjects = FindObjectsOfType<Level>();
+            foreach (var level in levelObjects)
             if (gameStart)
             {
                 DestroyAll();

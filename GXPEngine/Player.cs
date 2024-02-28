@@ -31,6 +31,7 @@ class Player : AnimationSprite
     AnimationSprite visual;
     EasyDraw shield;
     /*Shield shield;*/
+    //LevelManager thisManager;
     int shieldWidth;
     int shieldHeight;
     float shieldX;
@@ -143,7 +144,7 @@ class Player : AnimationSprite
             falling = position.y;
             Console.WriteLine(falling);
         }
-        if (position.y >= falling + 500)
+        if (position.y >= falling + 700)
         {
             _mygame.dead = true;
             falling = position.y;
@@ -179,7 +180,7 @@ class Player : AnimationSprite
         }
         if (pInput && ui != null)
         {
-            ui.SetScore(-((int)(pScore - 15291) / 3));
+            ui.SetScore(-((int)(pScore) / 3));
         }
 
         _position += velocity * _speed;
@@ -349,6 +350,11 @@ class Player : AnimationSprite
             if (collisions[i] is Wall && isBoosting)
             {
                 ((Wall)collisions[i]).Destroy();
+            }
+            if (collisions[i] is LoadingZone)
+            {
+                ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
+                ((LoadingZone)collisions[i]).Destroy();
             }
         }
     }

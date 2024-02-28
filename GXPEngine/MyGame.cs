@@ -38,19 +38,22 @@ public class RotatingSpaceship : Game
         {
             Dead();
         }
+        string yay = GetDiagnostics();
+        Console.WriteLine(yay);
+        Console.WriteLine("current fps:" + currentFps);
     }
 
     public void Dead()
     {
         Background background = FindObjectOfType<Background>();
-        if (background != null)
+/*        if (background != null)
         {
             background.DeathEffect();
-        }
+        }*/
         Player player = FindObjectOfType<Player>();
         player.pDead();
         deathCounter--;
-        //manager.DeathEffect();
+        //fbmanager.DeathEffect();
         /*AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
         sprite.width = width;
         sprite.height = height * 2;
@@ -80,22 +83,6 @@ public class RotatingSpaceship : Game
     static void Main()
     {
         new RotatingSpaceship().Start();
-    }
-
-
-    void LoadLevel(string name)
-    {
-        List<GameObject> children = GetChildren();
-        dead = false;
-        foreach (GameObject child in children)
-        {
-            child.Destroy();
-        }
-        Level level = new Level(name);
-        LateAddChild(level);
-        Ui ui = new Ui();
-        LateAddChild(ui);
-        
     }
 
 }
