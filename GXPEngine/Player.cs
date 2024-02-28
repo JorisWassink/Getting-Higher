@@ -382,35 +382,71 @@ class Player : AnimationSprite
         {
             if (coly.normal.y > 0)
             {
-                velocity.y = 0;
+                velocity = velocity * -1;
                 _position.y += _speed + 1;
-                _mygame.dead = true;
+                if (canCollide)
+                {
+                    _lives -= 1;
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
             }
-            if (coly.normal.y < 0)
+                if (coly.normal.y < 0)
             {
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                _mygame.dead = true;
+                /*if (canCollide)
+                {
+                    _lives -= 1;
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }*/
+                }
             }
-        }
         if (colx != null)
         {
             if (colx.normal.x > 0)
             {
-                velocity.x = 0;
+                velocity.x += 10;
                 _position.x += 1;
                 rotation = 0;
-                _mygame.dead = true;
-            }
-            if (colx.normal.x < 0)
+                if (canCollide)
+                {
+                    _lives -= 1;
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
+                }
+                if (colx.normal.x < 0)
             {
-                velocity.x = 0;
+                velocity.x -= 10;
                 _position.x -= 1;
                 rotation = 0;
-                _mygame.dead = true;
+                if (canCollide)
+                {
+                    _lives -= 1;
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
+                }
             }
-        }
     }
 
     void InvisFrames()
