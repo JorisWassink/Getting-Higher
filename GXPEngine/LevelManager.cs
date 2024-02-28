@@ -14,8 +14,8 @@ internal class LevelManager : GameObject
     public bool onMenu = true;
     private bool gameStart = false;
     Level[] levelObjects;
-    private string[] levels = new string[10];
-    private int[] levelOrder = new int[7];
+    private string[] levels = new string[7];
+    private int[] levelOrder = new int[6];
 
     public LevelManager()
     {
@@ -32,7 +32,7 @@ internal class LevelManager : GameObject
                 levels[8] = "Assets/level3_try1_pt0.tmx";
                 levels[9] = "Assets/level4_try1_pt0.tmx";*/
         StartGame();
-        
+
         player = FindObjectOfType<Player>();
     }
 
@@ -68,21 +68,11 @@ internal class LevelManager : GameObject
             Scroll();
         }
 
-        if (player != null)
+        levelObjects = FindObjectsOfType<Level>();
+        foreach (var level in levelObjects)
         {
-            levelObjects = FindObjectsOfType<Level>();
-            foreach (var level in levelObjects)
-            if (gameStart)
+            if (player != null)
             {
-                DestroyAll();
-                level.Destroy();
-                gameStart = false;
-                LoadLevel(levels[1], true, .5f, .5f);
-                LoadLevel(levels[2], true, 0.5f, 640);
-                random = new Random((int)(DateTime.Now.Ticks));
-                onMenu = false;
-            }
-            if (player != null) {
                 float dist = player.y - level.y;
                 if (dist < -2000 && level.file != "Assets/LevelChunk1.tmx")
                 {
@@ -91,9 +81,19 @@ internal class LevelManager : GameObject
 
                 }
             }
+            else if(gameStart)
+            {
+                    DestroyAll();
+                    level.Destroy();
+                    gameStart = false;
+                    LoadLevel(levels[1], true, .5f, .5f);
+                    LoadLevel(levels[2], true, 0.5f, 640);
+                    random = new Random((int)(DateTime.Now.Ticks));
+                    onMenu = false;
             }
+        }
 
-            player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
         int count = GetChildCount();
 
         if (player != null)
