@@ -114,7 +114,7 @@ class Background : EasyDraw
             
         } else
         {
-            Console.WriteLine("fdsg");
+            /*Console.WriteLine("fdsg");*/
         }
 
     }

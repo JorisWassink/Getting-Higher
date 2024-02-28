@@ -24,36 +24,43 @@ class Player : AnimationSprite
     Ui ui = null;
     Sound leftNoise;
     Sound rightNoise;
+
     SoundChannel leftChannel;
     SoundChannel rightChannel;
+
     RotatingSpaceship _mygame;
     Collider oldCollider;
     AnimationSprite visual;
     EasyDraw shield;
-    /*Shield shield;*/
-    //LevelManager thisManager;
-    int shieldWidth;
-    int shieldHeight;
+
     float shieldX;
     float shieldY;
+
+    float shieldWidth;
+    float shieldHeight;
+
     float _speed;
     float falling;
     float maxVel = 15;
     float gravity = 0.25f;
+
     float tank = 500;
     public float fuel = 500;
-    bool _autoRotateLeft = false;
-    bool _autoRotateRight = false;
-    bool canCollide = true;
-    bool shieldOn = false;
-    public bool pInput = true;
+
     public float pScore;
-    public bool isBoosting = false;
     int boostCount;
+    public bool isBoosting = false;
+
     int _lives;
     int timeHit = 0;
     int coolDownTime = 1000;
+    bool canCollide = true;
 
+    bool _autoRotateLeft = false;
+    bool _autoRotateRight = false;
+
+    bool shieldOn = false;
+    public bool pInput = true;
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 1, 1)
     {
         Initialize(obj);
@@ -62,10 +69,10 @@ class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _mygame = (RotatingSpaceship)game;
+        x = obj.X;
+        y = obj.Y;
 
         oldCollider = _collider;
-
-        y += 420;
 
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
@@ -73,11 +80,10 @@ class Player : AnimationSprite
         scaleY = 10f;
         scaleX = .3f;
         scale = .5f;
-        _position.x = game.width / 2;
+        /*_position.x = game.width / 2;*/
         _speed = 0.7f;
         _lives = 1;
-        pScore = position.y ;
-
+        pScore = position.y;
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
 
@@ -100,6 +106,7 @@ class Player : AnimationSprite
     }
     void Update()
     {
+        /*Console.WriteLine(position);*/
         if (ui == null)
         {
             ui = game.FindObjectOfType<Ui>();
@@ -151,7 +158,7 @@ class Player : AnimationSprite
         if (velocity.y == 2)
         {
             falling = position.y;
-            Console.WriteLine(falling);
+            /*Console.WriteLine(falling);*/
         }
         if (position.y >= falling + 700)
         {
@@ -191,7 +198,6 @@ class Player : AnimationSprite
         {
             ui.SetScore(-((int)(pScore) / 3) + 140);
         }
-
         _position += velocity * _speed;
     }
 
@@ -386,7 +392,7 @@ class Player : AnimationSprite
                 _position.y += _speed + 1;
                 if (canCollide)
                 {
-                    _lives -= 1;
+                    /*_lives -= 1;*/
                     canCollide = false;
                     timeHit = Time.time;
                     if (_lives == 0)
@@ -400,16 +406,6 @@ class Player : AnimationSprite
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                /*if (canCollide)
-                {
-                    _lives -= 1;
-                    canCollide = false;
-                    timeHit = Time.time;
-                    if (_lives == 0)
-                    {
-                        _mygame.dead = true;
-                    }
-                }*/
                 }
             }
         if (colx != null)
@@ -421,7 +417,7 @@ class Player : AnimationSprite
                 rotation = 0;
                 if (canCollide)
                 {
-                    _lives -= 1;
+                    /*_lives -= 1;*/
                     canCollide = false;
                     timeHit = Time.time;
                     if (_lives == 0)
@@ -437,7 +433,7 @@ class Player : AnimationSprite
                 rotation = 0;
                 if (canCollide)
                 {
-                    _lives -= 1;
+                    /*_lives -= 1;*/
                     canCollide = false;
                     timeHit = Time.time;
                     if (_lives == 0)

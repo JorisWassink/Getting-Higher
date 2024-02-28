@@ -39,8 +39,8 @@ public class RotatingSpaceship : Game
             Dead();
         }
         string yay = GetDiagnostics();
-        Console.WriteLine(yay);
-        Console.WriteLine("current fps:" + currentFps);
+        /*Console.WriteLine(yay);
+        Console.WriteLine("current fps:" + currentFps);*/
     }
 
     public void Dead()

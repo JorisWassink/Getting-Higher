@@ -41,7 +41,7 @@ internal class LevelManager : GameObject
 
     public void StartGame()
     {
-        Console.WriteLine("starting game...");
+        /*Console.WriteLine("starting game...");*/
         loadNumber--;
         LoadLevel(levels[0], true, .5f, .5f);
         /*LoadLevel(levels[1], true, .5f, .5f);
@@ -57,7 +57,7 @@ internal class LevelManager : GameObject
             levels[i].LateDestroy();
         }
 
-        Console.WriteLine("Game cleared");
+        /*Console.WriteLine("Game cleared");*/
     }
 
     public void Update()
@@ -82,7 +82,7 @@ internal class LevelManager : GameObject
                 float dist = player.y - level.y;
                 if (dist < -1000 && level.file != "Assets/LevelChunk1.tmx")
                 {
-                    Console.WriteLine("Deleting: " + level.file);
+                    /*Console.WriteLine("Deleting: " + level.file);*/
                     level.Destroy();
 
                 }
@@ -111,7 +111,7 @@ internal class LevelManager : GameObject
     public void LoadLevelNow()
     {
         LoadLevel(levels[random.Next(2, 6)], true, .5f, 1280 * loadNumber);
-        Console.WriteLine("Level loaded");
+        /*Console.WriteLine("Level loaded");*/
     }
 
     public void LoadLevel(string name, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
