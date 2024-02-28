@@ -56,16 +56,16 @@ internal class LevelManager : GameObject
 
     public void Update()
     {
-        if (Input.GetKeyUp(Key.ENTER) && !gameStart)
-        {
-            gameStart = true;
-            /*onMenu = false;*/
-        }
         player = FindObjectOfType<Player>();
 
         if (player != null && player.pInput)
         {
             Scroll();
+        }
+        else if (Input.GetKeyUp(Key.ENTER) && !gameStart)
+        {
+            gameStart = true;
+            /*onMenu = false;*/
         }
 
         levelObjects = FindObjectsOfType<Level>();
@@ -74,7 +74,7 @@ internal class LevelManager : GameObject
             if (player != null)
             {
                 float dist = player.y - level.y;
-                if (dist < -2000 && level.file != "Assets/LevelChunk1.tmx")
+                if (dist < -1000 && level.file != "Assets/LevelChunk1.tmx")
                 {
                     Console.WriteLine("Deleting: " + level.file);
                     level.Destroy();
