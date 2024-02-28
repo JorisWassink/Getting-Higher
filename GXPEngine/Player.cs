@@ -65,6 +65,7 @@ class Player : AnimationSprite
 
         oldCollider = _collider;
 
+        y += 420;
 
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
@@ -75,13 +76,25 @@ class Player : AnimationSprite
         _position.x = game.width / 2;
         _speed = 0.7f;
         _lives = 1;
-        pScore = position.y;
+        pScore = position.y ;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
 
         rightChannel = (SoundChannel)leftNoise.Play();
         leftChannel = (SoundChannel)rightNoise.Play();
+
+        shieldX = position.x /10;
+        shieldY = position.y/2;
+        shieldWidth = this.width;
+        shieldHeight = this.height;
+        shield = new EasyDraw(1000, 2000, false);
+        shield.SetOrigin(width / 2, height / 2);
+        shield.Stroke(Color.Black);
+        shield.StrokeWeight(5);
+        shield.Ellipse(shieldX, shieldY, 350, 500);
+        shield.SetColor(0, 100, 100);
+        AddChild(shield);       
     }
     void Update()
     {
@@ -94,19 +107,13 @@ class Player : AnimationSprite
         UpdateScreenPosition();
         HandleBoosting();
 /*        shieldX = position.x;
-        shieldY = position.y;
+        shieldY = position.y ;
         shieldWidth = this.width;
-        shieldHeight = this.height;
-        shield = new EasyDraw(1000, 1000, false);
-        shield.Fill(255, 255, 255);
-        shield.StrokeWeight(10);
-        shield.Ellipse(shieldX, shieldY, 1000, 1000);
-        shield.SetXY(shieldX, shieldY);
-        if (shieldOn)
-        {
-            *//*AddChild(shield);*/
-            /*shield.Destroy();*//*
-        }*/
+        shieldHeight = this.height;*/
+  /*      shield.SetOrigin(shieldWidth/2, shieldHeight/2);
+        shield.Stroke(Color.Black);
+        shield.StrokeWeight(5);*/
+        //shield.SetXY(shieldX, shieldY);
     }
 
 
@@ -180,7 +187,7 @@ class Player : AnimationSprite
         }
         if (pInput && ui != null)
         {
-            ui.SetScore(-((int)(pScore) / 3));
+            ui.SetScore(-((int)(pScore) / 3) + 140);
         }
 
         _position += velocity * _speed;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="11">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="43" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="13">
  <tileset firstgid="1" name="spaceship - Copy" tilewidth="32" tileheight="32" tilecount="35" columns="5">
   <image source="spaceship - Copy.png" width="164" height="241"/>
  </tileset>
@@ -94,15 +94,15 @@
 23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23
 </data>
  </layer>
- <objectgroup id="3" name="Object Layer 1">
-  <object id="1" type="BoostPad" gid="18" x="608" y="320" width="32" height="32"/>
-  <object id="3" type="Wall" gid="18" x="480" y="160" width="320.303" height="32"/>
-  <object id="10" type="Wall" gid="18" x="1088" y="224" width="32" height="32"/>
- </objectgroup>
  <imagelayer id="4" name="Image Layer 1">
   <image source="Trunk3.png" width="1366" height="640"/>
  </imagelayer>
  <imagelayer id="5" name="Copy of Image Layer 1" offsetx="-2" offsety="640">
   <image source="Trunk1.png" width="1366" height="640"/>
  </imagelayer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="1" type="BoostPad" gid="18" x="608" y="320" width="32" height="32"/>
+  <object id="3" type="Wall" gid="18" x="480" y="160" width="320.303" height="32"/>
+  <object id="10" type="Wall" gid="18" x="1088" y="224" width="32" height="32"/>
+ </objectgroup>
 </map>

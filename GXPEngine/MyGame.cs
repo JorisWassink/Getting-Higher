@@ -75,7 +75,7 @@ public class RotatingSpaceship : Game
             if (manager.loadNumber >= 0 && !manager.onMenu)
             {
                 ui = new Ui();
-                LateAddChild(ui);
+                AddChild(ui);
             }
         }
         }
