@@ -83,6 +83,18 @@ class Player : AnimationSprite
 
         rightChannel = (SoundChannel)leftNoise.Play();
         leftChannel = (SoundChannel)rightNoise.Play();
+
+        shieldX = position.x /10;
+        shieldY = position.y/2;
+        shieldWidth = this.width;
+        shieldHeight = this.height;
+        shield = new EasyDraw(1000, 2000, false);
+        shield.SetOrigin(width / 2, height / 2);
+        shield.Stroke(Color.Black);
+        shield.StrokeWeight(5);
+        shield.Ellipse(shieldX, shieldY, 350, 500);
+        shield.SetColor(0, 100, 100);
+        AddChild(shield);       
     }
     void Update()
     {
@@ -94,25 +106,14 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
-        shieldX = position.x;
-        shieldY = position.y;
+/*        shieldX = position.x;
+        shieldY = position.y ;
         shieldWidth = this.width;
-        shieldHeight = this.height;
-        shield = new EasyDraw(1000, 1000, false);
-        shield.Fill(255, 255, 255);
-        shield.StrokeWeight(10);
-        shield.Ellipse(shieldX, shieldY, 500, 500);
-        shield.Fill(Color.Aqua);
+        shieldHeight = this.height;*/
+  /*      shield.SetOrigin(shieldWidth/2, shieldHeight/2);
+        shield.Stroke(Color.Black);
+        shield.StrokeWeight(5);*/
         //shield.SetXY(shieldX, shieldY);
-        if (shieldOn)
-        {
-            AddChild(shield);
-            if(GetChildren().Count > 1)
-            {
-                GetChildren()[1].Destroy();
-            }
-            Console.WriteLine(GetChildren().Count);
-        }
     }
 
 
