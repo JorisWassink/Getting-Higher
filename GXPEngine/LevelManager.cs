@@ -42,11 +42,11 @@ internal class LevelManager : GameObject
     public void StartGame()
     {
         Console.WriteLine("starting game...");
-        /*loadNumber--;*/
-        /*LoadLevel(levels[0], true, .5f, .5f);*/
-        LoadLevel(levels[1], true, .5f, .5f);
+        loadNumber--;
+        LoadLevel(levels[0], true, .5f, .5f);
+        /*LoadLevel(levels[1], true, .5f, .5f);
         LoadLevel(levels[2], true, 0.5f, 640);
-        random = new Random((int)(DateTime.Now.Ticks));
+        random = new Random((int)(DateTime.Now.Ticks));*/
     }
 
     public void DestroyAll()
@@ -87,16 +87,16 @@ internal class LevelManager : GameObject
 
                 }
             }
-/*            else if(gameStart)
+            else if (gameStart)
             {
-                    DestroyAll();
-                    level.Destroy();
-                    gameStart = false;
-                    LoadLevel(levels[1], true, .5f, .5f);
-                    //LoadLevel(levels[2], true, 0.5f, 640);
-                    random = new Random((int)(DateTime.Now.Ticks));
-                    onMenu = false;
-            }*/
+                DestroyAll();
+                level.Destroy();
+                gameStart = false;
+                LoadLevel(levels[1], true, .5f, .5f);
+                //LoadLevel(levels[2], true, 0.5f, 1280);
+                random = new Random((int)(DateTime.Now.Ticks));
+                onMenu = false;
+            }
         }
 
         player = FindObjectOfType<Player>();
