@@ -14,9 +14,15 @@ public class RotatingSpaceship : Game
     string[] levels = new string[2];
     public int currentLevel = 0;
     int deathCounter = 180;
+    Sound music;
+    SoundChannel noise;
     public RotatingSpaceship() : base(1376, 768, false, false)
     {
+        music = new Sound("Assets/Lift_Off_Soundtrack_with_delay.wav", true);
+        //music.Play();
 
+        noise = (SoundChannel)music.Play();
+        
 
         manager = new LevelManager();
         AddChild(manager);
@@ -38,9 +44,11 @@ public class RotatingSpaceship : Game
         {
             Dead();
         }
+
         string yay = GetDiagnostics();
-        Console.WriteLine(yay);
-        Console.WriteLine("current fps:" + currentFps);
+        //Console.WriteLine(yay);
+        //Console.WriteLine("current fps:" + currentFps);
+
     }
 
     public void Dead()

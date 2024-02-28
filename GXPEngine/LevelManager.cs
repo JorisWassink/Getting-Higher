@@ -19,6 +19,8 @@ internal class LevelManager : GameObject
     private string[] levels = new string[7];
    // List<Level> Levels = new List<Level>();
 
+
+
     public LevelManager()
     {
         _mygame = (RotatingSpaceship)game;
@@ -36,7 +38,7 @@ internal class LevelManager : GameObject
                 levels[9] = "Assets/level4_try1_pt0.tmx";*/
         StartGame();
 
-        player = FindObjectOfType<Player>();
+        
     }
 
     public void StartGame()
@@ -44,6 +46,7 @@ internal class LevelManager : GameObject
         Console.WriteLine("starting game...");
         loadNumber--;
         LoadLevel(levels[0], true, .5f, .5f);
+        //player = FindObjectOfType<Player>();
         /*LoadLevel(levels[1], true, .5f, .5f);
         LoadLevel(levels[2], true, 0.5f, 640);
         random = new Random((int)(DateTime.Now.Ticks));*/
@@ -62,6 +65,7 @@ internal class LevelManager : GameObject
 
     public void Update()
     {
+        //TODO: FIX THIS RYAN
         player = FindObjectOfType<Player>();
 
         if (player != null && player.pInput)
@@ -80,9 +84,9 @@ internal class LevelManager : GameObject
             if (player != null)
             {
                 float dist = player.y - level.y;
-                if (dist < -1000 && level.file != "Assets/LevelChunk1.tmx")
+                if (dist < -900 && level.file != "Assets/LevelChunk1.tmx")
                 {
-                    Console.WriteLine("Deleting: " + level.file);
+                   // Console.WriteLine("Deleting: " + level.file);
                     level.Destroy();
 
                 }
@@ -99,7 +103,6 @@ internal class LevelManager : GameObject
             }
         }
 
-        player = FindObjectOfType<Player>();
         int count = GetChildCount();
 
         if (player != null)
@@ -110,8 +113,37 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        LoadLevel(levels[random.Next(2, 6)], true, .5f, 1280 * loadNumber);
-        Console.WriteLine("Level loaded");
+        Console.WriteLine(loadNumber);
+
+        switch (loadNumber)
+        {
+            case 1:
+                LoadLevel(levels[2], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            case 2:
+                LoadLevel(levels[3], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            case 3:
+                LoadLevel(levels[4], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            case 4:
+                LoadLevel(levels[2], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            case int n when n > 4:
+                LoadLevel(levels[random.Next(2, 6)], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            // Add more cases if needed
+
+            default:
+                // Handle the default case if loadNumber doesn't match any of the above cases
+                break;
+        }
+
     }
 
     public void LoadLevel(string name, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -53,6 +54,8 @@ class Player : AnimationSprite
     int _lives;
     int timeHit = 0;
     int coolDownTime = 1000;
+    StreamWriter highScore;
+    StreamReader highScoreReader;
 
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 1, 1)
     {
@@ -80,6 +83,7 @@ class Player : AnimationSprite
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
+        
 
         rightChannel = (SoundChannel)leftNoise.Play();
         leftChannel = (SoundChannel)rightNoise.Play();
@@ -96,7 +100,13 @@ class Player : AnimationSprite
         shield.SetXY(-shieldX, -shieldY);
         shield.SetColor(0, 100, 100);
         shield.alpha = 0;
-        AddChild(shield);       
+        AddChild(shield);
+
+/*        highScore = new StreamWriter("Assets/highscore.txt");
+        highScore.WriteLine(fuel + 1);
+        highScore.Close();*/
+        //highScore.WriteLine(pScore);
+
     }
     void Update()
     {
@@ -169,6 +179,7 @@ class Player : AnimationSprite
     {
         SpeedCap();
         collisions();
+
         if (pInput)
         {
             PlayerInput();
@@ -186,6 +197,21 @@ class Player : AnimationSprite
         if (pScore > position.y)
         {
             pScore = position.y;
+        }
+        highScoreReader = new StreamReader("Assets/highscore.txt");
+        string high = highScoreReader.ReadLine();
+        
+        if (pScore < float.Parse(high))
+        {
+            highScoreReader.Close();
+            highScore = new StreamWriter("Assets/highscore.txt");
+            highScore.WriteLine(pScore);
+            highScore.Close();
+        }
+        Console.WriteLine(high);
+        if (highScoreReader != null)
+        {
+            highScoreReader.Close();
         }
         if (pInput && ui != null)
         {
@@ -221,6 +247,7 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.A) && fuel > 0)
         {
+
             //boost left
             if (velocity.x > -maxVel)
             {
@@ -459,9 +486,15 @@ class Player : AnimationSprite
 
     public void pDead()
     {
+        leftChannel.IsPaused = true;
+        rightChannel.IsPaused = true;
         rightChannel.Stop();
         leftChannel.Stop();
         pInput = false;
         gravity = 0;
+        if (highScore != null)
+        {
+            highScore.Close();
+        }
     }
 }
