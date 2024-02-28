@@ -37,7 +37,7 @@ internal class LevelManager : GameObject
     {
         Console.WriteLine("starting game...");
         LoadLevel(levels[1], true, .5f, .5f);
-        LoadLevel(levels[2], true, 0.5f, 640);
+        LoadLevel(levels[2], true, 0.5f, 1280);
         
 
         random = new Random((int)(DateTime.Now.Ticks));
@@ -88,7 +88,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        LoadLevel(levels[random.Next(2, 6)], true, .5f, 640 * loadNumber);
+        LoadLevel(levels[random.Next(2, 6)], true, .5f, 1280 * loadNumber);
         Console.WriteLine("Level loaded");
     }
 
@@ -122,6 +122,6 @@ internal class LevelManager : GameObject
             y = -(_mygame.height) + boundarySize * 0.8f;
         }
 
-        y += 410;
+        y += 420;
     }
 }
