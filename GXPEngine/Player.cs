@@ -385,13 +385,13 @@ class Player : AnimationSprite
                         _mygame.dead = true;
                     }
                 }
-                }
+            }
                 if (coly.normal.y < 0)
             {
-                velocity = velocity * -1;
+                velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                if (canCollide)
+                /*if (canCollide)
                 {
                     _lives -= 1;
                     canCollide = false;
@@ -400,7 +400,7 @@ class Player : AnimationSprite
                     {
                         _mygame.dead = true;
                     }
-                }
+                }*/
                 }
             }
         if (colx != null)
