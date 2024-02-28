@@ -178,7 +178,7 @@ class Player : AnimationSprite
         {
             pScore = position.y;
         }
-        if (pInput)
+        if (pInput && ui != null)
         {
             ui.SetScore(-((int)(pScore) / 3));
         }
@@ -218,6 +218,7 @@ class Player : AnimationSprite
                 velocity.x -= _speed * 1.5f;
             }
             fuel -= 1;
+            if(ui != null)
             ui.SetFuel((int)fuel);
 
             if (velocity.y > -maxVel)
@@ -254,6 +255,7 @@ class Player : AnimationSprite
         {
             //boost right
             fuel -= 1;
+            if(ui != null)
             ui.SetFuel((int)fuel);
             _autoRotateRight = true;
             if (velocity.x < maxVel)
@@ -367,19 +369,14 @@ class Player : AnimationSprite
             {
                 velocity.y = 0;
                 _position.y += _speed + 1;
-
+                _mygame.dead = true;
             }
             if (coly.normal.y < 0)
             {
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                if (fuel < tank)
-                {
-                    fuel += 5;
-                    if (fuel > tank) fuel = tank;
-                    ui.SetFuel((int)fuel);
-                }
+                _mygame.dead = true;
             }
         }
         if (colx != null)
@@ -389,12 +386,14 @@ class Player : AnimationSprite
                 velocity.x = 0;
                 _position.x += 1;
                 rotation = 0;
+                _mygame.dead = true;
             }
             if (colx.normal.x < 0)
             {
                 velocity.x = 0;
                 _position.x -= 1;
                 rotation = 0;
+                _mygame.dead = true;
             }
         }
     }
