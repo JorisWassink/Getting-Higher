@@ -55,16 +55,17 @@ namespace GXPEngine {
 
             StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
             string highScoreText = highScoreReader.ReadLine();
-
-         
-
-                    menu = new EasyDraw(1376, 768, false);
+            levelManager = (LevelManager)parent;
+            //TODO: investigate why levelmanager is null
+                if (levelManager.onMenu)
+                {
+                    menu = new EasyDraw(1376, 768);
                     menu.Text("HIGHSCORE:" + highScoreText);
                     menu.SetXY(1376 / 2, 768 / 2);
                     menu.SetColor(100, 0, 10);
                     menu.TextSize(100);
                     AddChild(menu);
-                highScoreReader.Close();
+                }
            
         }
 
