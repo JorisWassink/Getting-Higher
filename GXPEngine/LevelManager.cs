@@ -69,6 +69,10 @@ internal class LevelManager : GameObject
     {
         //TODO: FIX THIS RYAn
         /*player = FindObjectOfType<Player>();*/
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
         if (player != null && player.pInput)
         {
             Scroll();
@@ -88,7 +92,6 @@ internal class LevelManager : GameObject
                 if (dist < -900 && level.file != "Assets/LevelChunk1.tmx")
                 {
                     // Console.WriteLine("Deleting: " + level.file);
-                    player = FindObjectOfType<Player>();
                     level.Destroy();
 
                 }
@@ -103,10 +106,6 @@ internal class LevelManager : GameObject
                 random = new Random((int)(DateTime.Now.Ticks));
                 onMenu = false;
             }
-        }
-        if (player == null)
-        {
-            player = FindObjectOfType<Player>();
         }
 
         if (player != null)
@@ -157,7 +156,6 @@ internal class LevelManager : GameObject
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);
         levelObjects.Add(level);
-        player = FindObjectOfType<Player>();
         loadNumber++;
     }
 
