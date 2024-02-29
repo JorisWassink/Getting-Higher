@@ -183,7 +183,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= /*velocity.y +*/ 30;
+            velocity.y -= 10;
             isBoosting = true;
             boostCount = 30;
         }
