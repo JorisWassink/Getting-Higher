@@ -12,3 +12,10 @@ C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngi
 C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\joris\OneDrive\Documenten\CMGT\Y1T3\Lift off\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+D:\Desktop\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.exe.config
+D:\Desktop\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.exe
+D:\Desktop\Third-project\Game\GXPEngine\bin\Debug\GXPEngine.pdb
+D:\Desktop\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+D:\Desktop\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+D:\Desktop\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.exe
+D:\Desktop\Third-project\Game\GXPEngine\obj\x86\Debug\GXPEngine.pdb
