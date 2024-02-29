@@ -55,7 +55,7 @@ class Background : EasyDraw
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
         }*/
-        InitializeBackground();
+        //InitializeBackground();
 
     }
 

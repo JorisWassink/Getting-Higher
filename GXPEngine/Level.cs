@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -27,6 +28,7 @@ namespace GXPEngine {
         RotatingSpaceship _mygame;
         LevelManager levelManager;
         EasyDraw menu;
+        Font rowdies;
         
         public string file;
 
@@ -60,15 +62,24 @@ namespace GXPEngine {
         {
             StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
             string highScoreText = highScoreReader.ReadLine();
-            if (!levelManager.onMenu)
+            if (levelManager.loadNumber == -1)
             {
-                menu = new EasyDraw(1376, 768, false);
-                menu.Text("HIGHSCORE:" + highScoreText);
-                //menu.SetXY(1376 / 2, 768 / 2);
-                menu.SetColor(100, 0, 10);
-                menu.TextSize(100);
-                AddChild(menu);
+                rowdies = Utils.LoadFont("Assets/Rowdies-Regular.ttf", 40);
+                menu = new EasyDraw(1000, 200, false);
+                menu.TextFont(rowdies);
+                menu.Fill(Color.Yellow);
+                menu.TextAlign(CenterMode.Center, CenterMode.Center);
+                menu.Text("GETTING HIGHER" + " \nCURRENT HIGHSCORE:" + highScoreText);
+                menu.SetOrigin(menu.TextWidth("HIGHSCORE:" + highScoreText)/2, menu.TextHeight("HIGHSCORE:" + "\n GETTING") / 2);
+                menu.SetXY(_mygame.width/3, _mygame.height/3);
+                LateAddChild(menu);
             }
+            highScoreReader.Close();
+        }
+
+        void Update()
+        {
+            Console.WriteLine(Input.mouseX + " " + Input.mouseY);
         }
     }
 }

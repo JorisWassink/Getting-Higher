@@ -45,7 +45,7 @@ internal class LevelManager : GameObject
     {
         /*Console.WriteLine("starting game...");*/
         loadNumber--;
-        LoadLevel(levels[0], true, .5f, .5f);
+        LoadLevel(levels[0], false, .5f, .5f);
         //player = FindObjectOfType<Player>();
         /*LoadLevel(levels[1], true, .5f, .5f);
         LoadLevel(levels[2], true, 0.5f, 640);
@@ -67,21 +67,22 @@ internal class LevelManager : GameObject
 
     public void Update()
     {
-        //TODO: FIX THIS RYAn
-        /*player = FindObjectOfType<Player>();*/
+ 
         if (player == null)
         {
             player = FindObjectOfType<Player>();
+           
         }
         if (player != null && player.pInput)
         {
             Scroll();
-        }
+        } 
         else if (Input.GetKeyUp(Key.ENTER) && !gameStart)
         {
             gameStart = true;
-            /*onMenu = false;*/
+            //onMenu = false;
         }
+
 
         for (int i = 0; i < levelObjects.Count; i++)
         {
@@ -108,11 +109,7 @@ internal class LevelManager : GameObject
             }
         }
 
-        if (player != null)
-        {
-            int count = GetChildCount();
-            SetChildIndex(player, count); // int.MaxValue means the highest rendering order
-        }
+
     }
 
     public void LoadLevelNow()
@@ -140,10 +137,9 @@ internal class LevelManager : GameObject
                 LoadLevel(levels[random.Next(2, 6)], true, 0.5f, 1280 * loadNumber);
                 break;
 
-            // Add more cases if needed
-
+            
             default:
-                // Handle the default case if loadNumber doesn't match any of the above cases
+                //LoadLevel(levels[0]);
                 break;
         }
 
@@ -157,6 +153,8 @@ internal class LevelManager : GameObject
         LateAddChild(zone);
         levelObjects.Add(level);
         loadNumber++;
+
+
     }
 
 
