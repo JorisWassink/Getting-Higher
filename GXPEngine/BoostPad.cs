@@ -9,7 +9,7 @@ using TiledMapParser;
 
 class BoostPad : PickUpBase
 {
-    public BoostPad(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/jerrycan.png", 1, 1)
+    public BoostPad(string imageFile, int cols, int rows, TiledObject obj = null) : base("Assets/Booshtpd.png", 1, 1)
     {
     }
 

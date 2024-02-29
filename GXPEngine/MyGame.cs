@@ -59,7 +59,11 @@ public class RotatingSpaceship : Game
             background.DeathEffect();
         }*/
         Player player = FindObjectOfType<Player>();
-        player.pDead();
+        if (player != null)
+        {
+            player.pDead();
+
+        }
         deathCounter--;
         //fbmanager.DeathEffect();
         /*AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
@@ -87,7 +91,7 @@ public class RotatingSpaceship : Game
                 ui = new Ui();
                 AddChild(ui);
             }
-            music.Play()
+            noise = (SoundChannel)music.Play(false, 0, .2f);
         }
         }
 

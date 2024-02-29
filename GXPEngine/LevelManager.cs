@@ -16,7 +16,7 @@ internal class LevelManager : GameObject
     private bool gameStart = false;
     //Level[] levelObjects;
     List<Level> levelObjects = new List<Level>();
-    private string[] levels = new string[11];
+    private string[] levels = new string[18];
    // List<Level> Levels = new List<Level>();
 
 
@@ -25,8 +25,13 @@ internal class LevelManager : GameObject
     {
         _mygame = (RotatingSpaceship)game;
 
+        //MENU
         levels[0] = "Assets/empty.tmx";
+
+        //FIRST LEVEL
         levels[1] = "Assets/lvl0.tmx";
+
+        //EASY LEVELS
         levels[2] = "Assets/lvl1.tmx";
         levels[3] = "Assets/lvl2.tmx";
         levels[4] = "Assets/lvl3.tmx";
@@ -34,26 +39,30 @@ internal class LevelManager : GameObject
         levels[6] = "Assets/lvl5.tmx";
         levels[7] = "Assets/lvl6.tmx";
         levels[8] = "Assets/lvl7.tmx";
+
+        //TRANSITION
         levels[9] = "Assets/lvl8.tmx";
+
+        //NORMAL LEVELS
         levels[10] = "Assets/lvl9.tmx";
+        levels[11] = "Assets/lvl10.tmx";
+        levels[12] = "Assets/lvl11.tmx";
+        levels[13] = "Assets/lvl12.tmx";
+        levels[14] = "Assets/lvl13.tmx";
+        levels[15] = "Assets/lvl14.tmx";
+        levels[16] = "Assets/lvl15.tmx";
+        levels[17] = "Assets/lvl16.tmx";
 
-        /*        levels[7] = "Assets/level2_try1_pt0.tmx";
-                levels[8] = "Assets/level3_try1_pt0.tmx";
-                levels[9] = "Assets/level4_try1_pt0.tmx";*/
+        //HARD LEVELS
+
         StartGame();
-
-        
     }
 
     public void StartGame()
     {
-        /*Console.WriteLine("starting game...");*/
+        Console.WriteLine("starting game...");
         loadNumber--;
         LoadLevel(levels[0], false, .5f, .5f);
-        //player = FindObjectOfType<Player>();
-        /*LoadLevel(levels[1], true, .5f, .5f);
-        LoadLevel(levels[2], true, 0.5f, 640);
-        random = new Random((int)(DateTime.Now.Ticks));*/
     }
 
     public void DestroyAll()
@@ -125,7 +134,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevelNow()
     {
-        Console.WriteLine(loadNumber);
+        //Console.WriteLine(loadNumber);
         switch (loadNumber)
         {
             case 1:
@@ -144,11 +153,18 @@ internal class LevelManager : GameObject
                 LoadLevel(levels[5], true, 0.5f, 1280 * loadNumber);
                 break;
 
-            case int n when n > 4 && n < 10:
-                LoadLevel(levels[random.Next(5, 8)], true, 0.5f, 1280 * loadNumber);
+            case int n when n > 4 && n < 12:
+                LoadLevel(levels[random.Next(5, 9)], true, 0.5f, 1280 * loadNumber);
                 break;
 
-            
+            case 12:
+                LoadLevel(levels[9], true, 0.5f, 1280 * loadNumber);
+                break;
+
+            case int n when n > 12 && n < 20:
+                LoadLevel(levels[random.Next(10, 17)], true, 0.5f, 1280 * loadNumber);
+                break;
+
             default:
                 //LoadLevel(levels[0]);
                 break;

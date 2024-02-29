@@ -32,14 +32,17 @@ class Background : EasyDraw
     int g = 0;
     int b = 0;
 
-    int startR = 178;
-    int startG = 234;
-    int startB = 247;
+    int targetR = 178;
+    int targetG = 234;
+    int targetB = 247;
 
-    int targetR = 51;
-    int targetG = 83;
-    int targetB = 114;
+    /*    int startR = 51;
+        int startG = 83;
+        int startB = 114;*/
 
+    int startR = 0;
+    int startG = 0;
+    int startB = 0;
 
 
     public Background(int owidth, int oheight, int load) : base(owidth, oheight, false)
@@ -101,7 +104,7 @@ class Background : EasyDraw
                  g = g < 0 ? 0 : (g > 255 ? 255 : g);
                  b = b < 0 ? 0 : (b > 255 ? 255 : b);*/
 
-            float percentage = -player.position.y / 5000; // Adjust the divisor as needed
+            float percentage = -player.position.y / 100000; // Adjust the divisor as needed
 
             // Interpolate the color values based on the percentage
             int currentR = (int)(startR + (targetR - startR) * percentage);

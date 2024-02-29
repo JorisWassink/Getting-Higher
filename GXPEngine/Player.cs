@@ -71,13 +71,14 @@ class Player : AnimationSprite
     StreamReader highScoreReader;
     public string highScoreText;
     bool canCollide = true;
+    bool both = false;
 
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
 
     bool shieldOn = false;
     public bool pInput = true;
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 31, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/hitbox.png", 1, 1)
     {
         Initialize(obj);
     }
@@ -93,13 +94,14 @@ class Player : AnimationSprite
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scaleY = 10f;
-        scaleX = .3f;
-        scale = .5f;
+        //scaleY = 10f;
+        //scaleX = .3f;
+        //scale = .5f;
         /*_position.x = game.width / 2;*/
         _speed = 0.7f;
         _lives = 1;
-        pScore = position.y;
+        pScore = 0;
+        alpha = 0;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
@@ -113,8 +115,11 @@ class Player : AnimationSprite
         rightChannel = (SoundChannel)leftNoise.Play(false, 0, 0);
         leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
         littleFuelChannel = (SoundChannel)littleFuel.Play(false, 0, 0);
-        noFuelChannel = (SoundChannel)noFuel.Play(false, 0,0);
-      
+        noFuelChannel = (SoundChannel)noFuel.Play(false, 0, 0);
+
+        visual = new AnimationSprite("Assets/Player.png", 31, 1, -1, false, false);
+        visual.SetOrigin(visual.width / 2, visual.height / 2);
+        AddChild(visual);
 
         shieldX = position.x;
         shieldY = position.y;
@@ -128,6 +133,9 @@ class Player : AnimationSprite
         shield.SetColor(0, 100, 100);
         shield.alpha = 0;
         AddChild(shield);
+
+        Console.WriteLine("normal: " + width + " " + height);
+        Console.WriteLine("visual: " + visual.width + " " + visual.height);
     }
 
     void Update()
@@ -141,20 +149,28 @@ class Player : AnimationSprite
         if (_lives > 1)
         {
             shield.alpha = 0.7f;
-        } else
+        }
+        else
         {
             shield.alpha = 0;
         }
-        if(_mygame.deathCounter == 179)
+        if (_mygame.deathCounter == 179)
         {
             death.Play();
         }
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
+
         if (!moving)
-        { SetCycle(0, 1); }
-        Animate(0.07f);
+        { visual.SetCycle(0, 1); }
+        if (both)
+        {
+            visual.SetCycle(1, 4);
+        }
+        visual.Animate(0.07f);
+
+
     }
 
     void UpdateScreenPosition()
@@ -167,7 +183,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= /*velocity.y +*/ 30;
+            velocity.y -= 10;
             isBoosting = true;
             boostCount = 30;
         }
@@ -228,16 +244,16 @@ class Player : AnimationSprite
         }
         highScoreReader = new StreamReader("Assets/highscore.txt");
         highScoreText = highScoreReader.ReadLine();
-        
-        if (-pScore/3 > float.Parse(highScoreText))
+
+        if (-pScore / 3 > float.Parse(highScoreText))
         {
             highScoreReader.Close();
             highScore = new StreamWriter("Assets/highscore.txt");
-            highScore.WriteLine(Mathf.Round(-pScore/3));
+            highScore.WriteLine(Mathf.Round(-pScore / 3));
             highScore.Close();
-            
+
         }
-        Console.WriteLine(highScoreText);
+        //Console.WriteLine(highScoreText);
         if (highScoreReader != null)
         {
             highScoreReader.Close();
@@ -247,6 +263,15 @@ class Player : AnimationSprite
             ui.SetScore(-((int)(pScore) / 3));
         }
         _position += velocity * _speed;
+
+        if (fuel < 100)
+        {
+            littleFuelChannel.Volume = 0.1f;
+            littleFuelChannel.IsPaused = false;
+        } else
+        {
+            littleFuelChannel.IsPaused = true;
+        }
 
         if (fuel == 0)
         {
@@ -293,11 +318,8 @@ class Player : AnimationSprite
             if (velocity.y > -maxVel)
             {
                 velocity.y -= _speed * 1.5f;
-                SetCycle(5, 2);
-            }
-            else
-            {
-                SetCycle(7,1);
+                if(!both)
+                visual.SetCycle(9, 3);
             }
             _autoRotateLeft = true;
             if (rotation <= -50)
@@ -332,8 +354,8 @@ class Player : AnimationSprite
         {
             //boost right
             fuel -= 1;
-            if(ui != null)
-            ui.SetFuel((int)fuel);
+            if (ui != null)
+                ui.SetFuel((int)fuel);
             _autoRotateRight = true;
             if (velocity.x < maxVel)
             {
@@ -343,11 +365,8 @@ class Player : AnimationSprite
             {
                 // Add velocity
                 velocity.y -= _speed * 1.5f;
-                SetCycle(9, 3);
-            }
-            else
-            {
-                SetCycle(12, 1);
+                if(!both)
+                visual.SetCycle(5, 3);
             }
 
             if (rotation >= 50)
@@ -381,6 +400,7 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
+            both = true;
             if (rotation <= -maxVel)
             {
                 rotation += 1f;
@@ -392,7 +412,6 @@ class Player : AnimationSprite
             if (velocity.x > maxVel)
             {
                 velocity.x -= 1;
-                SetCycle(1, 3);
             }
             if (velocity.x < -maxVel)
             {
@@ -400,6 +419,7 @@ class Player : AnimationSprite
             }
             moving = true;
         }
+        else both = false;
     }
 
     void collisions()
@@ -414,14 +434,14 @@ class Player : AnimationSprite
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
                 refuel.Play();
-            } 
+            }
             if (collisions[i] is ShieldPickUp)
             {
                 ((ShieldPickUp)collisions[i]).Grab();
                 _lives = 2;
                 /*AddChild(shield);*/
                 shieldOn = true;
-                
+
             }
             if (collisions[i] is Spikes && canCollide)
             {
@@ -462,7 +482,7 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-            } 
+            }
             if (collisions[i] is LoadingZone)
             {
                 ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
@@ -474,7 +494,7 @@ class Player : AnimationSprite
                 fuel += 20;
                 Wall.WallTrigger = true;
                 boost.Play(false, 0, 0.2f);
-            } 
+            }
         }
     }
 
@@ -503,13 +523,13 @@ class Player : AnimationSprite
                     }
                 }
             }
-                if (coly.normal.y < 0)
+            if (coly.normal.y < 0)
             {
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                }
             }
+        }
         if (colx != null)
         {
             if (colx.normal.x > 0)
@@ -531,8 +551,8 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-                }
-                if (colx.normal.x < 0)
+            }
+            if (colx.normal.x < 0)
             {
                 velocity.x -= 10;
                 _position.x -= 1;
@@ -551,8 +571,8 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-                }
             }
+        }
     }
 
     void InvisFrames()
@@ -569,6 +589,7 @@ class Player : AnimationSprite
         rightChannel.IsPaused = true;
         rightChannel.Stop();
         leftChannel.Stop();
+        littleFuelChannel.Stop();
         pInput = false;
         gravity = 0;
         if (highScore != null)

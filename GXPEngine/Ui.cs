@@ -58,6 +58,7 @@ public class Ui : GameObject
     public void SetFuel(int fuelCount)
     {
         fuelBar.Text(String.Format("Fuel: " + (float)((int)fuelCount)), true);
+
     }
 
     public void SetScore(int scoreCount) {
@@ -67,6 +68,13 @@ public class Ui : GameObject
     {
         if (_mygame.dead && deathScreen != null)
         {
+            deathScreen = new EasyDraw(_mygame.width, _mygame.height, false);
+            deathScreen.TextFont(rowdies);
+            deathScreen.Stroke(Color.Black);
+            deathScreen.StrokeWeight(100);
+            deathScreen.TextAlign(CenterMode.Center, CenterMode.Center);
+            deathScreen.Fill(255, 0, 0);
+            deathScreen.Text("u ded");
             //AddChild(effect);
             AddChild(deathScreen);
             RemoveChild(fuelBar);

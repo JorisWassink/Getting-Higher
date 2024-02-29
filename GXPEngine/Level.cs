@@ -80,7 +80,7 @@ namespace GXPEngine {
 
         void Update()
         {
-            Console.WriteLine(Input.mouseX + " " + Input.mouseY);
+            //Console.WriteLine(Input.mouseX + " " + Input.mouseY);
         }
     }
 }
