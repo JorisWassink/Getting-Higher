@@ -424,7 +424,7 @@ class Player : AnimationSprite
 
     void collisions()
     {
-        //HandleWalls();
+        HandleWalls();
 
         GameObject[] collisions = GetCollisions();
         for (int i = 0; i < collisions.Length; i++)
