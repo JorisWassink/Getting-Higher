@@ -40,7 +40,7 @@ namespace GXPEngine {
             loader.autoInstance = true;
             loader.rootObject = this;
             loader.addColliders = false;
-            Background background = new Background(1366, 640);
+            Background background = new Background(1366, 640, levelManager.loadNumber);
             AddChild(background);
             loader.LoadImageLayers();
             loader.LoadTileLayers(0);

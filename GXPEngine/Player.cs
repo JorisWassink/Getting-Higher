@@ -405,11 +405,33 @@ class Player : AnimationSprite
                     Move(ouch.speed * ouch.direction, 0);
                     _mygame.dead = true;
                 }
+                if (_lives == 1)
+                {
+                    shieldOn = false;
+                }
             }
-            if (collisions[i] is Wall && isBoosting)
+            if (collisions[i] is Wall)
             {
-                ((Wall)collisions[i]).Destroy();
-                crash.Play();
+                if (isBoosting)
+                {
+                    ((Wall)collisions[i]).Destroy();
+                    crash.Play();
+                }
+                else
+                {
+                    _lives -= 1;
+                    velocity = velocity * -1;
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                    if (_lives == 1)
+                    {
+                        shieldOn = false;
+                    }
+                }
             } 
             if (collisions[i] is LoadingZone)
             {
@@ -438,12 +460,16 @@ class Player : AnimationSprite
                 _position.y += _speed + 1;
                 if (canCollide)
                 {
-                    /*_lives -= 1;*/
+                    _lives -= 1;
                     canCollide = false;
                     timeHit = Time.time;
                     if (_lives == 0)
                     {
                         _mygame.dead = true;
+                    }
+                    else
+                    {
+                        shieldOn = false;
                     }
                 }
             }
@@ -470,6 +496,10 @@ class Player : AnimationSprite
                     {
                         _mygame.dead = true;
                     }
+                    if (_lives == 1)
+                    {
+                        shieldOn = false;
+                    }
                 }
                 }
                 if (colx.normal.x < 0)
@@ -485,6 +515,10 @@ class Player : AnimationSprite
                     if (_lives == 0)
                     {
                         _mygame.dead = true;
+                    }
+                    else
+                    {
+                        shieldOn = false;
                     }
                 }
                 }

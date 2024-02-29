@@ -21,7 +21,7 @@ public class RotatingSpaceship : Game
         music = new Sound("Assets/Lift_Off_Soundtrack_with_delay.wav", true);
         //music.Play();
 
-        noise = (SoundChannel)music.Play();
+        noise = (SoundChannel)music.Play(false, 0, .5f);
         
 
         manager = new LevelManager();
