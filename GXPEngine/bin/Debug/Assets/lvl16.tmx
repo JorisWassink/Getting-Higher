@@ -69,7 +69,7 @@
 </data>
  </layer>
  <objectgroup id="17" name="Object Layer 1">
-  <object id="11" type="Shield" gid="114" x="1116" y="428" width="96" height="96"/>
+  <object id="11" type="ShieldPickUp" gid="114" x="1116" y="428" width="96" height="96"/>
   <object id="12" type="Spikes" gid="113" x="288.167" y="384" width="64" height="64"/>
   <object id="13" type="EnemyTurn" gid="41" x="703.333" y="478.667" width="32" height="222.667"/>
   <object id="14" type="EnemyTurn" gid="41" x="-6" y="472.666" width="32" height="222.667"/>

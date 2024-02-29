@@ -77,7 +77,7 @@ class Player : AnimationSprite
 
     bool shieldOn = false;
     public bool pInput = true;
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 31, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/hitbox.png", 1, 1)
     {
         Initialize(obj);
     }
@@ -93,13 +93,14 @@ class Player : AnimationSprite
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
         rotation = 270;
-        scaleY = 10f;
-        scaleX = .3f;
-        scale = .5f;
+        //scaleY = 10f;
+       //scaleX = .3f;
+        //scale = .5f;
         /*_position.x = game.width / 2;*/
         _speed = 0.7f;
         _lives = 1;
         pScore = position.y;
+        //alpha = 0;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
@@ -114,7 +115,10 @@ class Player : AnimationSprite
         leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
         littleFuelChannel = (SoundChannel)littleFuel.Play(false, 0, 0);
         noFuelChannel = (SoundChannel)noFuel.Play(false, 0,0);
-      
+
+        visual = new AnimationSprite("Assets/Player.png", 31, 1, -1, false, false);
+        visual.SetOrigin(visual.width / 2, visual.height / 2);
+        AddChild(visual);
 
         shieldX = position.x;
         shieldY = position.y;
@@ -128,6 +132,9 @@ class Player : AnimationSprite
         shield.SetColor(0, 100, 100);
         shield.alpha = 0;
         AddChild(shield);
+
+        Console.WriteLine("normal: " + width + " " + height);
+        Console.WriteLine("visual: " + visual.width + " " + visual.height);
     }
 
     void Update()
@@ -152,9 +159,12 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
+
         if (!moving)
-        { SetCycle(0, 1); }
-        Animate(0.07f);
+        { visual.SetCycle(0, 1); }
+        visual.Animate(0.07f);
+
+
     }
 
     void UpdateScreenPosition()
@@ -237,7 +247,7 @@ class Player : AnimationSprite
             highScore.Close();
             
         }
-        Console.WriteLine(highScoreText);
+        //Console.WriteLine(highScoreText);
         if (highScoreReader != null)
         {
             highScoreReader.Close();
@@ -293,11 +303,11 @@ class Player : AnimationSprite
             if (velocity.y > -maxVel)
             {
                 velocity.y -= _speed * 1.5f;
-                SetCycle(5, 2);
+                visual.SetCycle(5, 2);
             }
             else
             {
-                SetCycle(7,1);
+                visual.SetCycle(7,1);
             }
             _autoRotateLeft = true;
             if (rotation <= -50)
@@ -343,11 +353,11 @@ class Player : AnimationSprite
             {
                 // Add velocity
                 velocity.y -= _speed * 1.5f;
-                SetCycle(9, 3);
+                visual.SetCycle(9, 3);
             }
             else
             {
-                SetCycle(12, 1);
+                visual.SetCycle(12, 1);
             }
 
             if (rotation >= 50)
@@ -392,7 +402,7 @@ class Player : AnimationSprite
             if (velocity.x > maxVel)
             {
                 velocity.x -= 1;
-                SetCycle(1, 3);
+                visual.SetCycle(1, 3);
             }
             if (velocity.x < -maxVel)
             {
@@ -402,7 +412,7 @@ class Player : AnimationSprite
         }
     }
 
-    void collisions()
+    void collisions()   
     {
         HandleWalls();
 
