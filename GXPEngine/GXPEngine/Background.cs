@@ -19,6 +19,7 @@ class Background : EasyDraw
     EasyDraw purple;
     RotatingSpaceship _mygame;
     Random random;
+    LevelManager man;
     int starX;
     int starY;
 
@@ -39,11 +40,14 @@ class Background : EasyDraw
     int targetG = 83;
     int targetB = 114;
 
-    public Background(int owidth, int oheight) : base(owidth, oheight, false)
+
+
+    public Background(int owidth, int oheight, int load) : base(owidth, oheight, false)
     {
         _mygame = (RotatingSpaceship)game;
         width = owidth; height = oheight;
         background = new EasyDraw(1376, 1280, false);
+        level = load;
         /*InitializeHUD();
         for (int i = 0; i < 40; i += 1)
         {
@@ -55,7 +59,9 @@ class Background : EasyDraw
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
         }*/
-        //InitializeBackground();
+        InitializeBackground();
+
+        
 
     }
 
@@ -120,25 +126,25 @@ class Background : EasyDraw
     }
     void InitializeBackground()
     {
+        if (level != -1) {
+            background.ShapeAlign(CenterMode.Min, CenterMode.Min);
+            background.NoStroke();
+            //background.Fill(0, 0, 0);
+            background.Rect(x, y, width, height);
 
-        background.ShapeAlign(CenterMode.Min, CenterMode.Min);
-        background.NoStroke();
-        //background.Fill(0, 0, 0);
-        background.Rect(x, y, width, height);
-       
-        //background.blendMode = BlendMode.FILLEMPTY;
-        //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
-        AddChild(background);
+            //background.blendMode = BlendMode.FILLEMPTY;
+            //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
+            AddChild(background);
 
-        AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
-        sprite.blendMode = BlendMode.LIGHTING;
-        AddChild(sprite);
+            AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
+            sprite.blendMode = BlendMode.LIGHTING;
+            AddChild(sprite);
 
-        AnimationSprite sprite2 = new AnimationSprite("Assets/Space Background2.png", 1, 1, -1, false, false);
-        sprite2.SetXY(x, sprite.height);
-        sprite2.blendMode = BlendMode.LIGHTING;
-        AddChild(sprite2);
-
+            AnimationSprite sprite2 = new AnimationSprite("Assets/Space Background2.png", 1, 1, -1, false, false);
+            sprite2.SetXY(x, sprite.height);
+            sprite2.blendMode = BlendMode.LIGHTING;
+            AddChild(sprite2);
+        }
     }
    
 }

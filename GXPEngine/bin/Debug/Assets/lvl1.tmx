@@ -12,6 +12,9 @@
  <tileset firstgid="93" name="side_right" tilewidth="32" tileheight="32" tilecount="20" columns="1">
   <image source="side_right.png" width="32" height="640"/>
  </tileset>
+ <tileset firstgid="113" name="jerrycan" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="jerrycan.png" width="96" height="96"/>
+ </tileset>
  <imagelayer id="2" name="bg">
   <image source="secondbg.png" width="1366" height="1280"/>
  </imagelayer>

@@ -13,7 +13,7 @@ public class RotatingSpaceship : Game
     public bool dead;
     string[] levels = new string[2];
     public int currentLevel = 0;
-    int deathCounter = 180;
+    public int deathCounter = 120;
     Sound music;
     SoundChannel noise;
     public RotatingSpaceship() : base(1376, 768, false, false)
@@ -21,7 +21,7 @@ public class RotatingSpaceship : Game
         music = new Sound("Assets/Lift_Off_Soundtrack_with_delay.wav", true);
         //music.Play();
 
-        noise = (SoundChannel)music.Play();
+        noise = (SoundChannel)music.Play(false, 0, .2f);
         
 
         manager = new LevelManager();
@@ -69,6 +69,8 @@ public class RotatingSpaceship : Game
         int count = GetChildCount();
         SetChildIndex(sprite, count);
         AddChild(sprite);*/
+        noise.Stop();
+       
         if (deathCounter == 0)
         {
             deathCounter = 180;
@@ -85,6 +87,7 @@ public class RotatingSpaceship : Game
                 ui = new Ui();
                 AddChild(ui);
             }
+            music.Play()
         }
         }
 
