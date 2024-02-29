@@ -53,6 +53,7 @@ internal class LevelManager : GameObject
         levels[16] = "Assets/lvl15.tmx";
         levels[17] = "Assets/lvl16.tmx";
 
+        //HARD LEVELS
 
         StartGame();
     }
@@ -153,7 +154,7 @@ internal class LevelManager : GameObject
                 break;
 
             case int n when n > 4 && n < 12:
-                LoadLevel(levels[random.Next(5, 8)], true, 0.5f, 1280 * loadNumber);
+                LoadLevel(levels[random.Next(5, 9)], true, 0.5f, 1280 * loadNumber);
                 break;
 
             case 12:

@@ -119,11 +119,12 @@
 </data>
  </layer>
  <objectgroup id="6" name="Object Layer 1">
+  <object id="1" type="Spikes" gid="113" x="1056.67" y="576" width="64" height="64"/>
+  <object id="2" type="EnemyTurn" gid="113" x="1349.33" y="648.667" width="24" height="234"/>
+  <object id="3" type="EnemyTurn" gid="113" x="804" y="656.333" width="24" height="234"/>
   <object id="4" type="Spikes" gid="113" x="288.333" y="576.166" width="64" height="64"/>
   <object id="5" type="EnemyTurn" gid="113" x="548" y="668" width="24" height="234"/>
   <object id="6" type="EnemyTurn" gid="113" x="32" y="672" width="24" height="234"/>
-  <object id="8" type="Wall" gid="41" x="938" y="974" width="320" height="64"/>
-  <object id="17" type="BoostPad" gid="41" x="979.727" y="1231.33" width="236.727" height="64"/>
  </objectgroup>
  <layer id="1" name="Tile Layer 1" width="43" height="40">
   <data encoding="csv">

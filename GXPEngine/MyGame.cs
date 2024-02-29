@@ -59,7 +59,11 @@ public class RotatingSpaceship : Game
             background.DeathEffect();
         }*/
         Player player = FindObjectOfType<Player>();
-        player.pDead();
+        if (player != null)
+        {
+            player.pDead();
+
+        }
         deathCounter--;
         //fbmanager.DeathEffect();
         /*AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
