@@ -46,6 +46,7 @@ namespace GXPEngine {
             loader.LoadTileLayers(0);
             loader.addColliders = true;
             loader.LoadTileLayers(1);
+            loader.LoadTileLayers(2);
             loader.LoadObjectGroups(); // player is made -> child of Level
             y -= defaultOriginY;
             player = FindObjectOfType<Player>();

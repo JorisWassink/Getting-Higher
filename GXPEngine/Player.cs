@@ -55,6 +55,7 @@ class Player : AnimationSprite
     float falling;
     float maxVel = 15;
     float gravity = 0.25f;
+    bool moving;
 
     float tank = 500;
     public float fuel = 500;
@@ -76,7 +77,7 @@ class Player : AnimationSprite
 
     bool shieldOn = false;
     public bool pInput = true;
-    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 1, 1)
+    public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 31, 1)
     {
         Initialize(obj);
     }
@@ -151,6 +152,9 @@ class Player : AnimationSprite
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
+        if (!moving)
+        { SetCycle(0, 1); }
+        Animate(0.07f);
     }
 
     void UpdateScreenPosition()
@@ -262,9 +266,9 @@ class Player : AnimationSprite
 
     void PlayerInput()
     {
+        HandleStraightThrust();
         HandleLeftThrust();
         HandleRightThrust();
-        HandleStraightThrust();
     }
 
     void HandleLeftThrust()
@@ -278,12 +282,17 @@ class Player : AnimationSprite
                 velocity.x -= _speed * 1.5f;
             }
             fuel -= 1;
-            if(ui != null)
-            ui.SetFuel((int)fuel);
+            if (ui != null)
+                ui.SetFuel((int)fuel);
 
             if (velocity.y > -maxVel)
             {
                 velocity.y -= _speed * 1.5f;
+                SetCycle(5, 2);
+            }
+            else
+            {
+                SetCycle(7,1);
             }
             _autoRotateLeft = true;
             if (rotation <= -50)
@@ -293,6 +302,7 @@ class Player : AnimationSprite
 
             leftChannel.IsPaused = false;
             leftChannel.Volume = 0.7f;
+            moving = true;
         }
         else if (Input.GetKey(Key.D))
         {
@@ -301,6 +311,7 @@ class Player : AnimationSprite
         }
         else
         {
+            moving = false;
             leftChannel.IsPaused = true;
             if (rotation < 0)
             {
@@ -327,6 +338,11 @@ class Player : AnimationSprite
             {
                 // Add velocity
                 velocity.y -= _speed * 1.5f;
+                SetCycle(9, 3);
+            }
+            else
+            {
+                SetCycle(12, 1);
             }
 
             if (rotation >= 50)
@@ -335,6 +351,7 @@ class Player : AnimationSprite
             }
             rightChannel.IsPaused = false;
             rightChannel.Volume = 0.7f;
+            moving = true;
         }
         else if (Input.GetKey(Key.A))
         {
@@ -343,6 +360,7 @@ class Player : AnimationSprite
         }
         else
         {
+            moving = false;
             rightChannel.IsPaused = true;
             if (rotation > 0)
             {
@@ -369,11 +387,13 @@ class Player : AnimationSprite
             if (velocity.x > maxVel)
             {
                 velocity.x -= 1;
+                SetCycle(1, 3);
             }
             if (velocity.x < -maxVel)
             {
                 velocity.x += 1;
             }
+            moving = true;
         }
     }
 
