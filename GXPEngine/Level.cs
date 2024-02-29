@@ -32,7 +32,8 @@ namespace GXPEngine {
 
         public Level(string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
-            _mygame = (RotatingSpaceship)game;
+            /*_mygame = (RotatingSpaceship)game;*/
+            levelManager = (LevelManager)parent;
             loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
             loader.autoInstance = true;
             loader.rootObject = this;
@@ -55,7 +56,6 @@ namespace GXPEngine {
 
             StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
             string highScoreText = highScoreReader.ReadLine();
-            levelManager = (LevelManager)parent;
             //TODO: investigate why levelmanager is null
                 if (levelManager.onMenu)
                 {
