@@ -11,6 +11,7 @@ public class Ui : GameObject
     EasyDraw fuelBar;
     EasyDraw score;
     EasyDraw deathScreen;
+    EasyDraw effect;
     Font rowdies;
     RotatingSpaceship _mygame;
     public Ui()
@@ -41,6 +42,12 @@ public class Ui : GameObject
             deathScreen.Text("u ded");
            // deathScreen.SetXY(_mygame.width / 2, _mygame.height / 2);
         
+        effect = new EasyDraw(_mygame.width, _mygame.height, false);
+        effect.ShapeAlign(CenterMode.Min, CenterMode.Min);
+        effect.Rect(0,0, _mygame.width, _mygame.height);
+        effect.SetColor(0, 0, 0);
+        effect.alpha = 0.3f;
+        effect.blendMode = BlendMode.MULTIPLY;
     }
 
 
@@ -58,6 +65,7 @@ public class Ui : GameObject
         if (_mygame.dead && deathScreen != null)
         {
             AddChild(deathScreen);
+            AddChild(effect);
             RemoveChild(fuelBar);
         }
     }
