@@ -71,6 +71,7 @@ class Player : AnimationSprite
     StreamReader highScoreReader;
     public string highScoreText;
     bool canCollide = true;
+    bool both = false;
 
     bool _autoRotateLeft = false;
     bool _autoRotateRight = false;
@@ -94,7 +95,7 @@ class Player : AnimationSprite
         SetOrigin(width / 2, height / 2);
         rotation = 270;
         //scaleY = 10f;
-       //scaleX = .3f;
+        //scaleX = .3f;
         //scale = .5f;
         /*_position.x = game.width / 2;*/
         _speed = 0.7f;
@@ -114,7 +115,7 @@ class Player : AnimationSprite
         rightChannel = (SoundChannel)leftNoise.Play(false, 0, 0);
         leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
         littleFuelChannel = (SoundChannel)littleFuel.Play(false, 0, 0);
-        noFuelChannel = (SoundChannel)noFuel.Play(false, 0,0);
+        noFuelChannel = (SoundChannel)noFuel.Play(false, 0, 0);
 
         visual = new AnimationSprite("Assets/Player.png", 31, 1, -1, false, false);
         visual.SetOrigin(visual.width / 2, visual.height / 2);
@@ -148,11 +149,12 @@ class Player : AnimationSprite
         if (_lives > 1)
         {
             shield.alpha = 0.7f;
-        } else
+        }
+        else
         {
             shield.alpha = 0;
         }
-        if(_mygame.deathCounter == 179)
+        if (_mygame.deathCounter == 179)
         {
             death.Play();
         }
@@ -162,6 +164,10 @@ class Player : AnimationSprite
 
         if (!moving)
         { visual.SetCycle(0, 1); }
+        if (both)
+        {
+            visual.SetCycle(1, 4);
+        }
         visual.Animate(0.07f);
 
 
@@ -238,14 +244,14 @@ class Player : AnimationSprite
         }
         highScoreReader = new StreamReader("Assets/highscore.txt");
         highScoreText = highScoreReader.ReadLine();
-        
-        if (-pScore/3 > float.Parse(highScoreText))
+
+        if (-pScore / 3 > float.Parse(highScoreText))
         {
             highScoreReader.Close();
             highScore = new StreamWriter("Assets/highscore.txt");
-            highScore.WriteLine(Mathf.Round(-pScore/3));
+            highScore.WriteLine(Mathf.Round(-pScore / 3));
             highScore.Close();
-            
+
         }
         //Console.WriteLine(highScoreText);
         if (highScoreReader != null)
@@ -303,11 +309,8 @@ class Player : AnimationSprite
             if (velocity.y > -maxVel)
             {
                 velocity.y -= _speed * 1.5f;
-                visual.SetCycle(5, 2);
-            }
-            else
-            {
-                visual.SetCycle(7,1);
+                if(!both)
+                visual.SetCycle(9, 3);
             }
             _autoRotateLeft = true;
             if (rotation <= -50)
@@ -342,8 +345,8 @@ class Player : AnimationSprite
         {
             //boost right
             fuel -= 1;
-            if(ui != null)
-            ui.SetFuel((int)fuel);
+            if (ui != null)
+                ui.SetFuel((int)fuel);
             _autoRotateRight = true;
             if (velocity.x < maxVel)
             {
@@ -353,11 +356,8 @@ class Player : AnimationSprite
             {
                 // Add velocity
                 velocity.y -= _speed * 1.5f;
-                visual.SetCycle(9, 3);
-            }
-            else
-            {
-                visual.SetCycle(12, 1);
+                if(!both)
+                visual.SetCycle(5, 3);
             }
 
             if (rotation >= 50)
@@ -391,6 +391,7 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.A) && Input.GetKey(Key.D) && fuel > 0)
         {
+            both = true;
             if (rotation <= -maxVel)
             {
                 rotation += 1f;
@@ -402,7 +403,6 @@ class Player : AnimationSprite
             if (velocity.x > maxVel)
             {
                 velocity.x -= 1;
-                visual.SetCycle(1, 3);
             }
             if (velocity.x < -maxVel)
             {
@@ -410,9 +410,10 @@ class Player : AnimationSprite
             }
             moving = true;
         }
+        else both = false;
     }
 
-    void collisions()   
+    void collisions()
     {
         HandleWalls();
 
@@ -424,14 +425,14 @@ class Player : AnimationSprite
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
                 refuel.Play();
-            } 
+            }
             if (collisions[i] is ShieldPickUp)
             {
                 ((ShieldPickUp)collisions[i]).Grab();
                 _lives = 2;
                 /*AddChild(shield);*/
                 shieldOn = true;
-                
+
             }
             if (collisions[i] is Spikes && canCollide)
             {
@@ -472,7 +473,7 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-            } 
+            }
             if (collisions[i] is LoadingZone)
             {
                 ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
@@ -484,7 +485,7 @@ class Player : AnimationSprite
                 fuel += 20;
                 Wall.WallTrigger = true;
                 boost.Play(false, 0, 0.2f);
-            } 
+            }
         }
     }
 
@@ -513,13 +514,13 @@ class Player : AnimationSprite
                     }
                 }
             }
-                if (coly.normal.y < 0)
+            if (coly.normal.y < 0)
             {
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                }
             }
+        }
         if (colx != null)
         {
             if (colx.normal.x > 0)
@@ -541,8 +542,8 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-                }
-                if (colx.normal.x < 0)
+            }
+            if (colx.normal.x < 0)
             {
                 velocity.x -= 10;
                 _position.x -= 1;
@@ -561,8 +562,8 @@ class Player : AnimationSprite
                         shieldOn = false;
                     }
                 }
-                }
             }
+        }
     }
 
     void InvisFrames()
