@@ -186,7 +186,7 @@ class Player : AnimationSprite
         {
             velocity.y += 2;
         }
-        if (velocity.y == 0)
+        if (velocity.y == 1)
         {
             falling = position.y;
             /*Console.WriteLine(falling);*/
@@ -247,6 +247,11 @@ class Player : AnimationSprite
             ui.SetScore(-((int)(pScore) / 3));
         }
         _position += velocity * _speed;
+
+        if (fuel == 0)
+        {
+            _mygame.dead = true;
+        }
     }
 
     void SpeedCap()
