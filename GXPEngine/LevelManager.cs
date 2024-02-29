@@ -43,7 +43,7 @@ internal class LevelManager : GameObject
 
     public void StartGame()
     {
-        Console.WriteLine("starting game...");
+        /*Console.WriteLine("starting game...");*/
         loadNumber--;
         LoadLevel(levels[0], true, .5f, .5f);
         //player = FindObjectOfType<Player>();
@@ -60,7 +60,7 @@ internal class LevelManager : GameObject
             levels[i].LateDestroy();
         }
 
-        Console.WriteLine("Game cleared");
+        /*Console.WriteLine("Game cleared");*/
     }
 
     public void Update()

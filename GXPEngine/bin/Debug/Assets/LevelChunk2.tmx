@@ -110,6 +110,6 @@
   <object id="1" type="Spikes" gid="13" x="992" y="320" width="64.5" height="64.5" rotation="-90"/>
   <object id="2" type="EnemyTurn" gid="13" x="1312" y="320" width="32" height="32"/>
   <object id="3" type="EnemyTurn" gid="13" x="32" y="320" width="32" height="32"/>
-  <object id="7" type="FuelCan" gid="13" x="598.667" y="916" width="66.6667" height="66.6667"/>
+  <object id="7" type="Shooter" gid="72" x="1216" y="480" width="32" height="32"/>
  </objectgroup>
 </map>
