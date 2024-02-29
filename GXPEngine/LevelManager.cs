@@ -16,7 +16,7 @@ internal class LevelManager : GameObject
     private bool gameStart = false;
     //Level[] levelObjects;
     List<Level> levelObjects = new List<Level>();
-    private string[] levels = new string[7];
+    private string[] levels = new string[11];
    // List<Level> Levels = new List<Level>();
 
 
@@ -26,12 +26,16 @@ internal class LevelManager : GameObject
         _mygame = (RotatingSpaceship)game;
 
         levels[0] = "Assets/empty.tmx";
-        levels[1] = "Assets/LevelChunk1.tmx";
+        levels[1] = "Assets/lvl0.tmx";
         levels[2] = "Assets/lvl1.tmx";
         levels[3] = "Assets/lvl2.tmx";
         levels[4] = "Assets/lvl3.tmx";
-        levels[5] = "Assets/LevelChunkRest.tmx";
-        levels[6] = "Assets/LevelChunkSpikes.tmx";
+        levels[5] = "Assets/lvl4.tmx";
+        levels[6] = "Assets/lvl5.tmx";
+        levels[7] = "Assets/lvl6.tmx";
+        levels[8] = "Assets/lvl7.tmx";
+        levels[9] = "Assets/lvl8.tmx";
+        levels[10] = "Assets/lvl9.tmx";
 
         /*        levels[7] = "Assets/level2_try1_pt0.tmx";
                 levels[8] = "Assets/level3_try1_pt0.tmx";
@@ -137,11 +141,11 @@ internal class LevelManager : GameObject
                 break;
 
             case 4:
-                LoadLevel(levels[2], true, 0.5f, 1280 * loadNumber);
+                LoadLevel(levels[5], true, 0.5f, 1280 * loadNumber);
                 break;
 
-            case int n when n > 4:
-                LoadLevel(levels[random.Next(2, 6)], true, 0.5f, 1280 * loadNumber);
+            case int n when n > 4 && n < 10:
+                LoadLevel(levels[random.Next(5, 8)], true, 0.5f, 1280 * loadNumber);
                 break;
 
             

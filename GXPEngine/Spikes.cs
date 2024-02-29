@@ -57,7 +57,7 @@ class Spikes : AnimationSprite
             if (collisions[i] is EnemyTurn)
             {
                 direction *= -1;
-                scaleX *= -1;
+                //scaleX *= -1;
             }
         }
 

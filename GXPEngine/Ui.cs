@@ -39,7 +39,7 @@ public class Ui : GameObject
             deathScreen.TextAlign(CenterMode.Center, CenterMode.Center);
             deathScreen.Fill(255, 0, 0);
             deathScreen.Text("u ded");
-            deathScreen.SetXY(_mygame.width / 8, _mygame.height / 8);
+           // deathScreen.SetXY(_mygame.width / 2, _mygame.height / 2);
         
     }
 

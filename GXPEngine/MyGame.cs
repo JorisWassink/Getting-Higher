@@ -21,7 +21,7 @@ public class RotatingSpaceship : Game
         music = new Sound("Assets/Lift_Off_Soundtrack_with_delay.wav", true);
         //music.Play();
 
-        noise = (SoundChannel)music.Play(false, 0, .5f);
+        noise = (SoundChannel)music.Play(false, 0, .2f);
         
 
         manager = new LevelManager();
@@ -69,6 +69,7 @@ public class RotatingSpaceship : Game
         int count = GetChildCount();
         SetChildIndex(sprite, count);
         AddChild(sprite);*/
+        noise.Stop();
         if (deathCounter == 0)
         {
             deathCounter = 180;

@@ -126,6 +126,7 @@ class Player : AnimationSprite
         shield.alpha = 0;
         AddChild(shield);
     }
+
     void Update()
     {
         /*Console.WriteLine(position);*/
@@ -147,8 +148,7 @@ class Player : AnimationSprite
         HandleBoosting();
     }
 
-
-        void UpdateScreenPosition()
+    void UpdateScreenPosition()
     {
         x = _position.x;
         y = _position.y;
@@ -177,7 +177,7 @@ class Player : AnimationSprite
         {
             velocity.y += 2;
         }
-        if (velocity.y == 2)
+        if (velocity.y < 0)
         {
             falling = position.y;
             /*Console.WriteLine(falling);*/
