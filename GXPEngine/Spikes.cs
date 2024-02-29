@@ -9,18 +9,25 @@ class Spikes : AnimationSprite
     public int direction = 1;
     int animationDelay = 10;
     int frame = 1;
+    float startX;
 
 
     public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spritesheetMoth.png", 3, 2)
     {
         Initialize(obj);
+        
     }
 
     void Initialize(TiledObject obj)
     {
         SetOrigin(width/2, height/2);
         collider.isTrigger = true;
+        startX = obj.X;
         //alpha = 0;
+        if (startX > game.width / 2) 
+        {
+            direction *= -1;
+        }
 
     }
 
@@ -49,14 +56,21 @@ class Spikes : AnimationSprite
         {
             if (collisions[i] is EnemyTurn)
             {
-                //direction *= -1;
+                direction *= -1;
                 scaleX *= -1;
-               
             }
         }
-      
-        //TODO: flip it
-        x += speed * direction;
 
+        //TODO: flip it
+        if (direction == 1)
+        {
+            rotation = 90;
+        }
+        else if (direction == -1)
+        {
+            rotation = 270;
+        }
+
+        x += speed * direction;
     }
 }
