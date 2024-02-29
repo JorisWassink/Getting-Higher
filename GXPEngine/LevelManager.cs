@@ -54,20 +54,21 @@ internal class LevelManager : GameObject
 
     public void DestroyAll()
     {
+
         Level[] levels = FindObjectsOfType<Level>();
         for (int i = 0; i < levels.Length; i++)
         {
             levels[i].LateDestroy();
         }
+        /*player = FindObjectOfType<Player>();*/
 
         /*Console.WriteLine("Game cleared");*/
     }
 
     public void Update()
     {
-        //TODO: FIX THIS RYAN
-        player = FindObjectOfType<Player>();
-
+        //TODO: FIX THIS RYAn
+        /*player = FindObjectOfType<Player>();*/
         if (player != null && player.pInput)
         {
             Scroll();
@@ -80,33 +81,37 @@ internal class LevelManager : GameObject
 
         for (int i = 0; i < levelObjects.Count; i++)
         {
-            Level level = levelObjects[i];   
+            Level level = levelObjects[i];
             if (player != null)
             {
                 float dist = player.y - level.y;
                 if (dist < -900 && level.file != "Assets/LevelChunk1.tmx")
                 {
-                   // Console.WriteLine("Deleting: " + level.file);
+                    // Console.WriteLine("Deleting: " + level.file);
+                    player = FindObjectOfType<Player>();
                     level.Destroy();
 
                 }
             }
             else if (gameStart)
             {
-                    DestroyAll();
-                    level.Destroy();
-                    gameStart = false;
-                    LoadLevel(levels[1], true, .5f, .5f);
-                    //LoadLevel(levels[2], true, 0.5f, 1280);
-                    random = new Random((int)(DateTime.Now.Ticks));
-                    onMenu = false;
+                DestroyAll();
+                level.Destroy();
+                gameStart = false;
+                LoadLevel(levels[1], true, .5f, .5f);
+                //LoadLevel(levels[2], true, 0.5f, 1280);
+                random = new Random((int)(DateTime.Now.Ticks));
+                onMenu = false;
             }
         }
-
-        int count = GetChildCount();
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
 
         if (player != null)
         {
+            int count = GetChildCount();
             SetChildIndex(player, count); // int.MaxValue means the highest rendering order
         }
     }
@@ -114,7 +119,6 @@ internal class LevelManager : GameObject
     public void LoadLevelNow()
     {
         Console.WriteLine(loadNumber);
-
         switch (loadNumber)
         {
             case 1:
@@ -153,6 +157,7 @@ internal class LevelManager : GameObject
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);
         levelObjects.Add(level);
+        player = FindObjectOfType<Player>();
         loadNumber++;
     }
 
