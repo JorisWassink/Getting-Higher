@@ -65,12 +65,13 @@ class Spikes : AnimationSprite
         //TODO: flip it
         if (direction == -1)
         {
-            SetCycle(1, 3);
+            SetCycle(0, 3);
         }
         else if (direction == 1)
         {
             SetCycle(4, 3);
         }
+        Animate(0.07f);
         x += speed * direction;
     }
 }
