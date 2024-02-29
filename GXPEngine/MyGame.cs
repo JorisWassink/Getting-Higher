@@ -87,6 +87,7 @@ public class RotatingSpaceship : Game
                 ui = new Ui();
                 AddChild(ui);
             }
+            music.Play()
         }
         }
 
