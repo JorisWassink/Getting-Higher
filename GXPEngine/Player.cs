@@ -25,9 +25,19 @@ class Player : AnimationSprite
     Ui ui = null;
     Sound leftNoise;
     Sound rightNoise;
+    Sound boost;
+    Sound crash;
+    Sound littleFuel;
+    Sound noFuel;
+    Sound refuel;
 
     SoundChannel leftChannel;
     SoundChannel rightChannel;
+    SoundChannel boostChannel;
+    SoundChannel crashChannel;
+    SoundChannel littleFuelChannel;
+    SoundChannel noFuelChannel;
+    SoundChannel refuelChannel;
 
     RotatingSpaceship _mygame;
     Collider oldCollider;
@@ -88,19 +98,26 @@ class Player : AnimationSprite
         _speed = 0.7f;
         _lives = 1;
         pScore = position.y;
+
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
-        
+        boost = new Sound("Assets/BOOST.WAV", false, false);
+        crash = new Sound("Assets/Breaking through wood.WAV", false, false);
+        littleFuel = new Sound("Assets/Almost out of fuel.WAV", true, false);
+        noFuel = new Sound("Assets/Out of fuel.WAV", false, false);
+        refuel = new Sound("Assets/Refuel.WAV", false, false);
 
-        rightChannel = (SoundChannel)leftNoise.Play();
-        leftChannel = (SoundChannel)rightNoise.Play();
+        rightChannel = (SoundChannel)leftNoise.Play(false, 0, 0);
+        leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
+        littleFuelChannel = (SoundChannel)littleFuel.Play(false, 0, 0);
+        noFuelChannel = (SoundChannel)noFuel.Play(false, 0,0);
+      
 
         shieldX = position.x;
         shieldY = position.y;
         shieldWidth = this.width;
         shieldHeight = this.height;
         shield = new EasyDraw(2000, 2000, false);
-        //shield.SetOrigin(width, height);
         shield.Stroke(Color.Black);
         shield.StrokeWeight(5);
         shield.Ellipse(shieldX, shieldY, 350, 500);
@@ -108,12 +125,6 @@ class Player : AnimationSprite
         shield.SetColor(0, 100, 100);
         shield.alpha = 0;
         AddChild(shield);
-
-/*        highScore = new StreamWriter("Assets/highscore.txt");
-        highScore.WriteLine(fuel + 1);
-        highScore.Close();*/
-        //highScore.WriteLine(pScore);
-
     }
     void Update()
     {
@@ -276,6 +287,7 @@ class Player : AnimationSprite
             }
 
             leftChannel.IsPaused = false;
+            leftChannel.Volume = 0.7f;
         }
         else if (Input.GetKey(Key.D))
         {
@@ -317,6 +329,7 @@ class Player : AnimationSprite
                 _autoRotateRight = false;
             }
             rightChannel.IsPaused = false;
+            rightChannel.Volume = 0.7f;
         }
         else if (Input.GetKey(Key.A))
         {
@@ -370,13 +383,15 @@ class Player : AnimationSprite
             {
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
-            }
+                refuel.Play();
+            } 
             if (collisions[i] is ShieldPickUp)
             {
                 ((ShieldPickUp)collisions[i]).Grab();
                 _lives = 2;
                 /*AddChild(shield);*/
                 shieldOn = true;
+                
             }
             if (collisions[i] is Spikes && canCollide)
             {
@@ -394,7 +409,8 @@ class Player : AnimationSprite
             if (collisions[i] is Wall && isBoosting)
             {
                 ((Wall)collisions[i]).Destroy();
-            }
+                crash.Play();
+            } 
             if (collisions[i] is LoadingZone)
             {
                 ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
@@ -405,7 +421,8 @@ class Player : AnimationSprite
                 Boost();
                 fuel += 20;
                 Wall.WallTrigger = true;
-            }
+                boost.Play(false, 0, 0.4f);
+            } 
         }
     }
 
