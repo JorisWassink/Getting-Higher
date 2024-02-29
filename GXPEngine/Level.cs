@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -32,7 +32,8 @@ namespace GXPEngine {
 
         public Level(string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
-            _mygame = (RotatingSpaceship)game;
+            /*_mygame = (RotatingSpaceship)game;*/
+            levelManager = (LevelManager)parent;
             loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
             loader.autoInstance = true;
             loader.rootObject = this;
@@ -53,9 +54,8 @@ namespace GXPEngine {
             file = thislevelName;
 
 
-            //StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
-            //string highScoreText = highScoreReader.ReadLine();
-            //levelManager = (LevelManager)parent;
+            StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
+            string highScoreText = highScoreReader.ReadLine();
             //TODO: investigate why levelmanager is null
            /* if (levelManager.onMenu)
             {
