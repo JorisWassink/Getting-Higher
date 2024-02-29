@@ -271,7 +271,8 @@ namespace GXPEngine
 
 		/// <summary>
 		/// Draw text on the canvas, using the currently selected font, at position x,y.
-		/// This uses the current TextAlign values (e.g. if both are CenterMode.Center, (x,y) will be at the center of the rendered text).
+		/// This uses the current TextAlign values (e.g. if both are C
+		/// Mode.Center, (x,y) will be at the center of the rendered text).
 		/// </summary>
 		/// <param name="text">The text to be rendered</param>
 		/// <param name="x">The x coordinate to draw the text, using canvas (pixel) coordinates</param>

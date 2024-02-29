@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,36 +25,56 @@ class Player : AnimationSprite
     Ui ui = null;
     Sound leftNoise;
     Sound rightNoise;
+    Sound boost;
+    Sound crash;
+    Sound littleFuel;
+    Sound noFuel;
+    Sound refuel;
+
     SoundChannel leftChannel;
     SoundChannel rightChannel;
+    SoundChannel boostChannel;
+    SoundChannel crashChannel;
+    SoundChannel littleFuelChannel;
+    SoundChannel noFuelChannel;
+    SoundChannel refuelChannel;
+
     RotatingSpaceship _mygame;
     Collider oldCollider;
     AnimationSprite visual;
     EasyDraw shield;
-    /*Shield shield;*/
-    //LevelManager thisManager;
-    int shieldWidth;
-    int shieldHeight;
+
     float shieldX;
     float shieldY;
+
+    float shieldWidth;
+    float shieldHeight;
+
     float _speed;
     float falling;
     float maxVel = 15;
     float gravity = 0.25f;
+
     float tank = 500;
     public float fuel = 500;
-    bool _autoRotateLeft = false;
-    bool _autoRotateRight = false;
-    bool canCollide = true;
-    bool shieldOn = false;
-    public bool pInput = true;
+
     public float pScore;
-    public bool isBoosting = false;
     int boostCount;
+    public bool isBoosting = false;
+
     int _lives;
     int timeHit = 0;
     int coolDownTime = 1000;
+    StreamWriter highScore;
+    StreamReader highScoreReader;
+    public string highScoreText;
+    bool canCollide = true;
 
+    bool _autoRotateLeft = false;
+    bool _autoRotateRight = false;
+
+    bool shieldOn = false;
+    public bool pInput = true;
     public Player(string fileName, int cols, int rows, TiledObject obj = null) : base("Assets/Player.png", 1, 1)
     {
         Initialize(obj);
@@ -62,9 +83,10 @@ class Player : AnimationSprite
     void Initialize(TiledObject obj)
     {
         _mygame = (RotatingSpaceship)game;
+        x = obj.X;
+        y = obj.Y;
 
         oldCollider = _collider;
-
 
         _position = new Vec2(x, y);
         SetOrigin(width / 2, height / 2);
@@ -72,41 +94,57 @@ class Player : AnimationSprite
         scaleY = 10f;
         scaleX = .3f;
         scale = .5f;
-        _position.x = game.width / 2;
+        /*_position.x = game.width / 2;*/
         _speed = 0.7f;
         _lives = 1;
         pScore = position.y;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
+        boost = new Sound("Assets/BOOST.WAV", false, false);
+        crash = new Sound("Assets/Breaking through wood.WAV", false, false);
+        littleFuel = new Sound("Assets/Almost out of fuel.WAV", true, false);
+        noFuel = new Sound("Assets/Out of fuel.WAV", false, false);
+        refuel = new Sound("Assets/Refuel.WAV", false, false);
 
-        rightChannel = (SoundChannel)leftNoise.Play();
-        leftChannel = (SoundChannel)rightNoise.Play();
+        rightChannel = (SoundChannel)leftNoise.Play(false, 0, 0);
+        leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
+        littleFuelChannel = (SoundChannel)littleFuel.Play(false, 0, 0);
+        noFuelChannel = (SoundChannel)noFuel.Play(false, 0,0);
+      
+
+        shieldX = position.x;
+        shieldY = position.y;
+        shieldWidth = this.width;
+        shieldHeight = this.height;
+        shield = new EasyDraw(2000, 2000, false);
+        shield.Stroke(Color.Black);
+        shield.StrokeWeight(5);
+        shield.Ellipse(shieldX, shieldY, 350, 500);
+        shield.SetXY(-shieldX, -shieldY);
+        shield.SetColor(0, 100, 100);
+        shield.alpha = 0;
+        AddChild(shield);
     }
     void Update()
     {
+        /*Console.WriteLine(position);*/
         if (ui == null)
         {
             ui = game.FindObjectOfType<Ui>();
         }
 
+        if (_lives > 1)
+        {
+            shield.alpha = 0.7f;
+        } else
+        {
+            shield.alpha = 0;
+        }
+
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
-/*        shieldX = position.x;
-        shieldY = position.y;
-        shieldWidth = this.width;
-        shieldHeight = this.height;
-        shield = new EasyDraw(1000, 1000, false);
-        shield.Fill(255, 255, 255);
-        shield.StrokeWeight(10);
-        shield.Ellipse(shieldX, shieldY, 1000, 1000);
-        shield.SetXY(shieldX, shieldY);
-        if (shieldOn)
-        {
-            *//*AddChild(shield);*/
-            /*shield.Destroy();*//*
-        }*/
     }
 
 
@@ -120,7 +158,7 @@ class Player : AnimationSprite
     {
         if (velocity.y > -78 && velocity.y < -0.1f)
         {
-            velocity.y -= /*velocity.y +*/ 50;
+            velocity.y -= /*velocity.y +*/ 30;
             isBoosting = true;
             boostCount = 30;
         }
@@ -142,7 +180,7 @@ class Player : AnimationSprite
         if (velocity.y == 2)
         {
             falling = position.y;
-            Console.WriteLine(falling);
+            /*Console.WriteLine(falling);*/
         }
         if (position.y >= falling + 700)
         {
@@ -160,6 +198,7 @@ class Player : AnimationSprite
     {
         SpeedCap();
         collisions();
+
         if (pInput)
         {
             PlayerInput();
@@ -178,11 +217,26 @@ class Player : AnimationSprite
         {
             pScore = position.y;
         }
+        highScoreReader = new StreamReader("Assets/highscore.txt");
+        highScoreText = highScoreReader.ReadLine();
+        
+        if (-pScore/3 > float.Parse(highScoreText))
+        {
+            highScoreReader.Close();
+            highScore = new StreamWriter("Assets/highscore.txt");
+            highScore.WriteLine(Mathf.Round(-pScore/3));
+            highScore.Close();
+            
+        }
+        Console.WriteLine(highScoreText);
+        if (highScoreReader != null)
+        {
+            highScoreReader.Close();
+        }
         if (pInput && ui != null)
         {
             ui.SetScore(-((int)(pScore) / 3));
         }
-
         _position += velocity * _speed;
     }
 
@@ -212,6 +266,7 @@ class Player : AnimationSprite
     {
         if (Input.GetKey(Key.A) && fuel > 0)
         {
+
             //boost left
             if (velocity.x > -maxVel)
             {
@@ -232,6 +287,7 @@ class Player : AnimationSprite
             }
 
             leftChannel.IsPaused = false;
+            leftChannel.Volume = 0.7f;
         }
         else if (Input.GetKey(Key.D))
         {
@@ -273,6 +329,7 @@ class Player : AnimationSprite
                 _autoRotateRight = false;
             }
             rightChannel.IsPaused = false;
+            rightChannel.Volume = 0.7f;
         }
         else if (Input.GetKey(Key.A))
         {
@@ -326,13 +383,15 @@ class Player : AnimationSprite
             {
                 ((FuelCan)collisions[i]).Grab();
                 fuel += 250;
-            }
+                refuel.Play();
+            } 
             if (collisions[i] is ShieldPickUp)
             {
                 ((ShieldPickUp)collisions[i]).Grab();
                 _lives = 2;
                 /*AddChild(shield);*/
                 shieldOn = true;
+                
             }
             if (collisions[i] is Spikes && canCollide)
             {
@@ -350,12 +409,20 @@ class Player : AnimationSprite
             if (collisions[i] is Wall && isBoosting)
             {
                 ((Wall)collisions[i]).Destroy();
-            }
+                crash.Play();
+            } 
             if (collisions[i] is LoadingZone)
             {
                 ((LoadingZone)collisions[i]).thisManager.LoadLevelNow();
                 ((LoadingZone)collisions[i]).Destroy();
             }
+            if (collisions[i] is BoostPad)
+            {
+                Boost();
+                fuel += 20;
+                Wall.WallTrigger = true;
+                boost.Play(false, 0, 0.2f);
+            } 
         }
     }
 
@@ -367,35 +434,61 @@ class Player : AnimationSprite
         {
             if (coly.normal.y > 0)
             {
-                velocity.y = 0;
+                velocity = velocity * -1;
                 _position.y += _speed + 1;
-                _mygame.dead = true;
+                if (canCollide)
+                {
+                    /*_lives -= 1;*/
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
             }
-            if (coly.normal.y < 0)
+                if (coly.normal.y < 0)
             {
                 velocity.y = 0;
                 velocity.x = 0;
                 rotation = 0;
-                _mygame.dead = true;
+                }
             }
-        }
         if (colx != null)
         {
             if (colx.normal.x > 0)
             {
-                velocity.x = 0;
+                velocity.x += 10;
                 _position.x += 1;
                 rotation = 0;
-                _mygame.dead = true;
-            }
-            if (colx.normal.x < 0)
+                if (canCollide)
+                {
+                    /*_lives -= 1;*/
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
+                }
+                if (colx.normal.x < 0)
             {
-                velocity.x = 0;
+                velocity.x -= 10;
                 _position.x -= 1;
                 rotation = 0;
-                _mygame.dead = true;
+                if (canCollide)
+                {
+                    /*_lives -= 1;*/
+                    canCollide = false;
+                    timeHit = Time.time;
+                    if (_lives == 0)
+                    {
+                        _mygame.dead = true;
+                    }
+                }
+                }
             }
-        }
     }
 
     void InvisFrames()
@@ -408,9 +501,15 @@ class Player : AnimationSprite
 
     public void pDead()
     {
+        leftChannel.IsPaused = true;
+        rightChannel.IsPaused = true;
         rightChannel.Stop();
         leftChannel.Stop();
         pInput = false;
         gravity = 0;
+        if (highScore != null)
+        {
+            highScore.Close();
+        }
     }
 }

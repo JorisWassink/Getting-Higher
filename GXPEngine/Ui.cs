@@ -55,7 +55,7 @@ public class Ui : GameObject
     }
     void Update()
     {
-        if (_mygame.dead)
+        if (_mygame.dead && deathScreen != null)
         {
             AddChild(deathScreen);
             RemoveChild(fuelBar);

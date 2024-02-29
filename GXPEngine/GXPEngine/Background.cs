@@ -43,7 +43,7 @@ class Background : EasyDraw
     {
         _mygame = (RotatingSpaceship)game;
         width = owidth; height = oheight;
-        background = new EasyDraw(1376, 640, false);
+        background = new EasyDraw(1376, 1280, false);
         /*InitializeHUD();
         for (int i = 0; i < 40; i += 1)
         {
@@ -55,7 +55,7 @@ class Background : EasyDraw
             //   currentWave.SetXY(60, 60 + 2); // Adjusted the Y coordinate with the offset
             AddChild(currentWave);
         }*/
-        InitializeBackground();
+        //InitializeBackground();
 
     }
 
@@ -65,7 +65,7 @@ class Background : EasyDraw
         
         if (!_mygame.dead)
         {
-            currentWave = new EasyDraw(1376, 640, false);
+            currentWave = new EasyDraw(1376, 1280, false);
             currentWave.ShapeAlign(CenterMode.Min, CenterMode.Min);
             currentWave.NoStroke();
             currentWave.Fill(Color.Yellow);
@@ -114,7 +114,7 @@ class Background : EasyDraw
             
         } else
         {
-            Console.WriteLine("fdsg");
+            /*Console.WriteLine("fdsg");*/
         }
 
     }
@@ -133,6 +133,11 @@ class Background : EasyDraw
         AnimationSprite sprite = new AnimationSprite("Assets/Space Background.png", 1, 1, -1, false, false);
         sprite.blendMode = BlendMode.LIGHTING;
         AddChild(sprite);
+
+        AnimationSprite sprite2 = new AnimationSprite("Assets/Space Background2.png", 1, 1, -1, false, false);
+        sprite2.SetXY(x, sprite.height);
+        sprite2.blendMode = BlendMode.LIGHTING;
+        AddChild(sprite2);
 
     }
    

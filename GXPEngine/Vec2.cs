@@ -36,8 +36,9 @@ public struct Vec2
     public void Normalize()
     {
         if (x == 0 && y == 0) return;
-        x = x / Length();
-        y = y / Length();
+        float length = Length();
+        x = x / length;
+        y = y / length;
     }
 
     // TODO: Implement subtract, scale operators
@@ -46,6 +47,10 @@ public struct Vec2
     {
         return new Vec2(left.x + right.x, left.y + right.y);
     }
+    /*public static Vec2 operator +(Vec2 left, float number)
+    {
+        return new Vec2(left.x + number, left.y + number);
+    }*/
 
     public static Vec2 operator -(Vec2 left, Vec2 right)
     {
@@ -62,6 +67,6 @@ public struct Vec2
 
     public override string ToString()
     {
-        return String.Format("({0},{1})", x, y);
+        return String.Format("(x={0}.y={1})", x, y);
     }
 }

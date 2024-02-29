@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bullet.cs" />
+    <Compile Include="Shooting enemie.cs" />
     <Compile Include="Colliders.cs" />
     <Compile Include="FuelCan.cs" />
     <Compile Include="BoostPad.cs" />
