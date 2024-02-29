@@ -13,7 +13,7 @@ public class RotatingSpaceship : Game
     public bool dead;
     string[] levels = new string[2];
     public int currentLevel = 0;
-    public int deathCounter = 180;
+    public int deathCounter = 120;
     Sound music;
     SoundChannel noise;
     public RotatingSpaceship() : base(1376, 768, false, false)
@@ -70,6 +70,7 @@ public class RotatingSpaceship : Game
         SetChildIndex(sprite, count);
         AddChild(sprite);*/
         noise.Stop();
+       
         if (deathCounter == 0)
         {
             deathCounter = 180;

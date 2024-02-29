@@ -37,17 +37,20 @@ public class Ui : GameObject
 
             deathScreen = new EasyDraw(_mygame.width, _mygame.height, false);
             deathScreen.TextFont(rowdies);
-            deathScreen.TextAlign(CenterMode.Center, CenterMode.Center);
+        deathScreen.Stroke(Color.Black);
+        deathScreen.StrokeWeight(100);
+        deathScreen.TextAlign(CenterMode.Center, CenterMode.Center);
             deathScreen.Fill(255, 0, 0);
             deathScreen.Text("u ded");
+
            // deathScreen.SetXY(_mygame.width / 2, _mygame.height / 2);
         
         effect = new EasyDraw(_mygame.width, _mygame.height, false);
         effect.ShapeAlign(CenterMode.Min, CenterMode.Min);
+        effect.Fill(Color.Black, 100);
         effect.Rect(0,0, _mygame.width, _mygame.height);
-        effect.SetColor(0, 0, 0);
-        effect.alpha = 0.3f;
-        effect.blendMode = BlendMode.MULTIPLY;
+        //effect.SetColor(0, 0, 0);
+        //effect.blendMode = BlendMode.MULTIPLY;
     }
 
 
@@ -64,8 +67,8 @@ public class Ui : GameObject
     {
         if (_mygame.dead && deathScreen != null)
         {
+            //AddChild(effect);
             AddChild(deathScreen);
-            AddChild(effect);
             RemoveChild(fuelBar);
         }
     }

@@ -54,7 +54,7 @@ class Player : AnimationSprite
     float _speed;
     float falling;
     float maxVel = 15;
-    float gravity = 0.25f;
+    float gravity = 0.35f;
 
     float tank = 500;
     public float fuel = 500;
@@ -182,7 +182,7 @@ class Player : AnimationSprite
         {
             velocity.y += 2;
         }
-        if (velocity.y == 0)
+        if (velocity.y == 1)
         {
             falling = position.y;
             /*Console.WriteLine(falling);*/
@@ -243,6 +243,11 @@ class Player : AnimationSprite
             ui.SetScore(-((int)(pScore) / 3));
         }
         _position += velocity * _speed;
+
+        if (fuel == 0)
+        {
+            _mygame.dead = true;
+        }
     }
 
     void SpeedCap()
