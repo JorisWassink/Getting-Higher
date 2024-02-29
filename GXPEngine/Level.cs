@@ -68,10 +68,10 @@ namespace GXPEngine {
                 menu = new EasyDraw(1000, 200, false);
                 menu.TextFont(rowdies);
                 menu.Fill(Color.Yellow);
-                menu.TextAlign(CenterMode.Center, CenterMode.Center);
-                menu.Text("GETTING HIGHER" + " \nCURRENT HIGHSCORE:" + highScoreText);
-                menu.SetOrigin(menu.TextWidth("HIGHSCORE:" + highScoreText)/2, menu.TextHeight("HIGHSCORE:" + "\n GETTING") / 2);
-                menu.SetXY(_mygame.width/3, _mygame.height/3);
+                //menu.TextAlign(CenterMode.Center, CenterMode.Center);
+                menu.Text("GETTING HIGHER" + " \nCURRENT HIGHSCORE:" + highScoreText + "\nPRESS THE BUTTON TO PLAY");
+                menu.SetOrigin(menu.TextWidth("CURRENT HIGHSCORE:" + highScoreText)/2, menu.TextHeight("HIGHSCORE:" + "\n GETTING" + "ENTER") / 2);
+                menu.SetXY(_mygame.width/2, _mygame.height/3);
                 LateAddChild(menu);
             }
             highScoreReader.Close();
