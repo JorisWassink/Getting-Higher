@@ -66,9 +66,9 @@ namespace GXPEngine {
                 rowdies = Utils.LoadFont("Assets/Rowdies-Regular.ttf", 40);
                 menu = new EasyDraw(1000, 200, false);
                 menu.TextFont(rowdies);
-                menu.Fill(Color.Yellow);
+                menu.Fill(Color.Black);
                 //menu.TextAlign(CenterMode.Center, CenterMode.Center);
-                menu.Text("GETTING HIGHER" + " \nCURRENT HIGHSCORE:" + highScoreText + "\nPRESS THE BUTTON TO PLAY");
+                menu.Text(" \nCURRENT HIGHSCORE:" + highScoreText + "\nPRESS THE BUTTON TO PLAY");
                 menu.SetOrigin(menu.TextWidth("CURRENT HIGHSCORE:" + highScoreText)/2, menu.TextHeight("HIGHSCORE:" + "\n GETTING" + "ENTER") / 2);
                 menu.SetXY(_mygame.width/2, _mygame.height/3);
                 LateAddChild(menu);
