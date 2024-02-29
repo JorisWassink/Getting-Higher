@@ -20,7 +20,7 @@ class Spikes : AnimationSprite
 
     void Initialize(TiledObject obj)
     {
-        SetOrigin(width/2, height/2);
+        SetOrigin(width / 2, height / 2);
         collider.isTrigger = true;
         startX = obj.X;
         //alpha = 0;
