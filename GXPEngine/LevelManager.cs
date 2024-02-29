@@ -27,9 +27,9 @@ internal class LevelManager : GameObject
 
         levels[0] = "Assets/empty.tmx";
         levels[1] = "Assets/LevelChunk1.tmx";
-        levels[2] = "Assets/LevelChunk2.tmx";
-        levels[3] = "Assets/LevelChunk3.tmx";
-        levels[4] = "Assets/LevelChunk4.tmx";
+        levels[2] = "Assets/lvl1.tmx";
+        levels[3] = "Assets/lvl2.tmx";
+        levels[4] = "Assets/lvl3.tmx";
         levels[5] = "Assets/LevelChunkRest.tmx";
         levels[6] = "Assets/LevelChunkSpikes.tmx";
 
@@ -68,11 +68,10 @@ internal class LevelManager : GameObject
     public void Update()
     {
  
-        if (player == null)
-        {
+      
             player = FindObjectOfType<Player>();
            
-        }
+        
         if (player != null && player.pInput)
         {
             Scroll();
@@ -82,6 +81,7 @@ internal class LevelManager : GameObject
             gameStart = true;
             //onMenu = false;
         }
+
 
 
         for (int i = 0; i < levelObjects.Count; i++)
@@ -106,9 +106,16 @@ internal class LevelManager : GameObject
                 //LoadLevel(levels[2], true, 0.5f, 1280);
                 random = new Random((int)(DateTime.Now.Ticks));
                 onMenu = false;
+
+
             }
         }
 
+        if (player != null)
+        {
+            int count = GetChildCount();
+            SetChildIndex(player, count);
+        }
 
     }
 
