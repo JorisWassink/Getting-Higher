@@ -34,7 +34,7 @@ class Spikes : AnimationSprite
     void Update()
     {
         MoveEnemies();
-        animationDelay--;
+        /*animationDelay--;
         if (animationDelay == 0)
         {
             if(frame == 5)
@@ -46,7 +46,7 @@ class Spikes : AnimationSprite
             }
             animationDelay = 10;
         }
-       SetFrame(frame);
+       SetFrame(frame);*/
     }
 
     void MoveEnemies()
@@ -57,20 +57,19 @@ class Spikes : AnimationSprite
             if (collisions[i] is EnemyTurn)
             {
                 direction *= -1;
-                scaleX *= -1;
+                /*scaleX *= -1;*/
             }
         }
 
         //TODO: flip it
-        if (direction == 1)
+        /*if (direction == 1)
         {
             rotation = 90;
         }
         else if (direction == -1)
         {
             rotation = 270;
-        }
-
+        }*/
         x += speed * direction;
     }
 }
