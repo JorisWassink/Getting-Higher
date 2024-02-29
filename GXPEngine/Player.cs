@@ -421,7 +421,7 @@ class Player : AnimationSprite
                 Boost();
                 fuel += 20;
                 Wall.WallTrigger = true;
-                boost.Play(false, 0, 0.4f);
+                boost.Play(false, 0, 0.2f);
             } 
         }
     }

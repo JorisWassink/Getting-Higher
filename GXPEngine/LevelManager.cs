@@ -151,7 +151,7 @@ internal class LevelManager : GameObject
 
     public void LoadLevel(string name, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
     {
-        Level level = new Level(name, addColliders, defaultOriginX, defaultOriginY);
+        Level level = new Level(this, name, addColliders, defaultOriginX, defaultOriginY);
         LateAddChild(level);
         LoadingZone zone = new LoadingZone(0, level.y, 1366, 500, this);
         LateAddChild(zone);

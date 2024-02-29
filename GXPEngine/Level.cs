@@ -30,10 +30,10 @@ namespace GXPEngine {
         
         public string file;
 
-        public Level(string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
+        public Level(LevelManager manag, string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
-            /*_mygame = (RotatingSpaceship)game;*/
-            levelManager = (LevelManager)parent;
+            _mygame = (RotatingSpaceship)game;
+            levelManager = manag;
             loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
             loader.autoInstance = true;
             loader.rootObject = this;
@@ -53,21 +53,22 @@ namespace GXPEngine {
             shooter = FindObjectOfType<Shooter>();
             file = thislevelName;
 
-
-            StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
-            string highScoreText = highScoreReader.ReadLine();
-            //TODO: investigate why levelmanager is null
-           /* if (levelManager.onMenu)
-            {
-                    menu = new EasyDraw(1376, 768);
-                    menu.Text("HIGHSCORE:" + highScoreText);
-                    menu.SetXY(1376 / 2, 768 / 2);
-                    menu.SetColor(100, 0, 10);
-                    menu.TextSize(100);
-                    AddChild(menu);
-            }*/
-           
+            HighScore();
         }
 
+        void HighScore()
+        {
+            StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
+            string highScoreText = highScoreReader.ReadLine();
+            if (!levelManager.onMenu)
+            {
+                menu = new EasyDraw(1376, 768, false);
+                menu.Text("HIGHSCORE:" + highScoreText);
+                //menu.SetXY(1376 / 2, 768 / 2);
+                menu.SetColor(100, 0, 10);
+                menu.TextSize(100);
+                AddChild(menu);
+            }
+        }
     }
 }
