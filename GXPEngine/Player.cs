@@ -99,8 +99,8 @@ class Player : AnimationSprite
         /*_position.x = game.width / 2;*/
         _speed = 0.7f;
         _lives = 1;
-        pScore = position.y;
-        //alpha = 0;
+        pScore = 0;
+        alpha = 0;
 
         rightNoise = new Sound("Assets/Jetpack_middle_left.mp3", true, false);
         leftNoise = new Sound("Assets/Jetpack_middle_right.WAV", true, false);
@@ -257,6 +257,15 @@ class Player : AnimationSprite
             ui.SetScore(-((int)(pScore) / 3));
         }
         _position += velocity * _speed;
+
+        if (fuel < 100)
+        {
+            littleFuelChannel.Volume = 0.1f;
+            littleFuelChannel.IsPaused = false;
+        } else
+        {
+            littleFuelChannel.IsPaused = true;
+        }
 
         if (fuel == 0)
         {
@@ -579,6 +588,7 @@ class Player : AnimationSprite
         rightChannel.IsPaused = true;
         rightChannel.Stop();
         leftChannel.Stop();
+        littleFuelChannel.Stop();
         pInput = false;
         gravity = 0;
         if (highScore != null)

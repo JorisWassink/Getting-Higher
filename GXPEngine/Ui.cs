@@ -58,6 +58,7 @@ public class Ui : GameObject
     public void SetFuel(int fuelCount)
     {
         fuelBar.Text(String.Format("Fuel: " + (float)((int)fuelCount)), true);
+
     }
 
     public void SetScore(int scoreCount) {
