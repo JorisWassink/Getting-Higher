@@ -6,8 +6,8 @@
  <tileset firstgid="36" name="Background" tilewidth="1376" tileheight="640" tilecount="1" columns="1">
   <image source="Space Background4.png" width="1376" height="640"/>
  </tileset>
- <tileset firstgid="37" name="jerrycan" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="jerrycan.png" width="35" height="40"/>
+ <tileset firstgid="37" name="jerrycan" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="jerrycan.png" width="96" height="96"/>
  </tileset>
  <imagelayer id="4" name="Background">
   <image source="Trunk2.png" width="1366" height="640"/>
@@ -104,7 +104,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="1" name="fuel" type="FuelCan" gid="23" x="321.774" y="1140.04" width="32" height="32"/>
+  <object id="1" name="fuel" type="FuelCan" gid="23" x="321.774" y="1140.04" width="64" height="64"/>
   <object id="2" type="BoostPad" gid="18" x="707.5" y="384" width="124.5" height="32"/>
   <object id="3" type="Wall" gid="37" x="611.534" y="189.438" width="266.786" height="32"/>
  </objectgroup>

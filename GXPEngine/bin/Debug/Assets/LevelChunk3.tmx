@@ -6,8 +6,8 @@
  <tileset firstgid="36" name="Background" tilewidth="1376" tileheight="640" tilecount="1" columns="1">
   <image source="Space Background3.png" width="1376" height="640"/>
  </tileset>
- <tileset firstgid="37" name="jerrycan" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="jerrycan.png" width="35" height="40"/>
+ <tileset firstgid="37" name="jerrycan" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="jerrycan.png" width="96" height="96"/>
  </tileset>
  <layer id="6" name="Tile Layer 2" width="43" height="40">
   <data encoding="csv">
@@ -107,6 +107,5 @@
   <object id="1" type="BoostPad" gid="18" x="540.333" y="320.333" width="221.333" height="32"/>
   <object id="3" type="Wall" gid="18" x="480" y="160" width="320.303" height="32"/>
   <object id="10" type="Wall" gid="18" x="1088" y="224" width="32" height="32"/>
-  <object id="13" type="Shooter" gid="13" x="1312" y="960" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -57,6 +57,7 @@ class Player : AnimationSprite
     int coolDownTime = 1000;
     StreamWriter highScore;
     StreamReader highScoreReader;
+    public string highScoreText;
     bool canCollide = true;
 
     bool _autoRotateLeft = false;
@@ -206,23 +207,24 @@ class Player : AnimationSprite
             pScore = position.y;
         }
         highScoreReader = new StreamReader("Assets/highscore.txt");
-        string high = highScoreReader.ReadLine();
+        highScoreText = highScoreReader.ReadLine();
         
-        if (pScore < float.Parse(high))
+        if (-pScore/3 > float.Parse(highScoreText))
         {
             highScoreReader.Close();
             highScore = new StreamWriter("Assets/highscore.txt");
-            highScore.WriteLine(pScore);
+            highScore.WriteLine(Mathf.Round(-pScore/3));
             highScore.Close();
+            
         }
-        Console.WriteLine(high);
+        Console.WriteLine(highScoreText);
         if (highScoreReader != null)
         {
             highScoreReader.Close();
         }
         if (pInput && ui != null)
         {
-            ui.SetScore(-((int)(pScore) / 3) + 140);
+            ui.SetScore(-((int)(pScore) / 3));
         }
         _position += velocity * _speed;
     }

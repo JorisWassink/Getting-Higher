@@ -98,6 +98,6 @@
 </data>
  </layer>
  <objectgroup id="8" name="Object Layer 1">
-  <object id="1" type="ShieldPickUp" gid="13" x="646" y="596" width="32" height="32"/>
+  <object id="1" type="ShieldPickUp" gid="13" x="646" y="596" width="64" height="64"/>
  </objectgroup>
 </map>

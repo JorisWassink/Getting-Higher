@@ -177,5 +177,8 @@ internal class LevelManager : GameObject
         }
 
         y += 420;
+
+
+
     }
 }

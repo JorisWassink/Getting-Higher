@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Remoting.Messaging;
@@ -23,10 +25,14 @@ namespace GXPEngine {
         Shooter shooter;
         TiledLoader loader;
         RotatingSpaceship _mygame;
+        LevelManager levelManager;
+        EasyDraw menu;
+        
         public string file;
 
         public Level(string thislevelName, bool addColliders = true, float defaultOriginX = 0.5f, float defaultOriginY = 0.5f)
         {
+            _mygame = (RotatingSpaceship)game;
             loader = new TiledLoader(thislevelName, null, addColliders, defaultOriginX, defaultOriginY);
             loader.autoInstance = true;
             loader.rootObject = this;
@@ -46,7 +52,21 @@ namespace GXPEngine {
             shooter = FindObjectOfType<Shooter>();
             file = thislevelName;
 
-            
+
+            StreamReader highScoreReader = new StreamReader("Assets/highscore.txt");
+            string highScoreText = highScoreReader.ReadLine();
+
+         
+
+                    menu = new EasyDraw(1376, 768, false);
+                    menu.Text("HIGHSCORE:" + highScoreText);
+                    menu.SetXY(1376 / 2, 768 / 2);
+                    menu.SetColor(100, 0, 10);
+                    menu.TextSize(100);
+                    AddChild(menu);
+                highScoreReader.Close();
+           
         }
+
     }
 }

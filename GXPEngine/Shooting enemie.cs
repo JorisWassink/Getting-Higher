@@ -23,13 +23,16 @@ class Shooter : AnimationSprite
     void Update()
     {
         player = game.FindObjectOfType<Player>();
-        Vec2 distance = player.position - this.position;
-        float distance2 = distance.Length();
-        if (distance2 < 100)
+        if (player != null)
         {
-            Shoot();
-            Console.WriteLine(bulletcount);
-            Console.WriteLine();
+            Vec2 distance = player.position - this.position;
+            float distance2 = distance.Length();
+            if (distance2 < 400)
+            {
+                Shoot();
+                Console.WriteLine(bulletcount);
+                Console.WriteLine();
+            }
         }
         UpdateScreenPosition();
 
