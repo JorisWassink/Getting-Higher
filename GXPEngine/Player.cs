@@ -30,6 +30,7 @@ class Player : AnimationSprite
     Sound littleFuel;
     Sound noFuel;
     Sound refuel;
+    Sound death;
 
     SoundChannel leftChannel;
     SoundChannel rightChannel;
@@ -106,6 +107,7 @@ class Player : AnimationSprite
         littleFuel = new Sound("Assets/Almost out of fuel.WAV", true, false);
         noFuel = new Sound("Assets/Out of fuel.WAV", false, false);
         refuel = new Sound("Assets/Refuel.WAV", false, false);
+        death = new Sound("Assets/Death.WAV", false, false);
 
         rightChannel = (SoundChannel)leftNoise.Play(false, 0, 0);
         leftChannel = (SoundChannel)rightNoise.Play(false, 0, 0);
@@ -142,7 +144,10 @@ class Player : AnimationSprite
         {
             shield.alpha = 0;
         }
-
+        if(_mygame.deathCounter == 179)
+        {
+            death.Play();
+        }
         Movement();
         UpdateScreenPosition();
         HandleBoosting();
@@ -177,7 +182,7 @@ class Player : AnimationSprite
         {
             velocity.y += 2;
         }
-        if (velocity.y < 0)
+        if (velocity.y == 0)
         {
             falling = position.y;
             /*Console.WriteLine(falling);*/

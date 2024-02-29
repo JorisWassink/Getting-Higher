@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GXPEngine;
 using GXPEngine.Core;
@@ -12,7 +12,7 @@ class Spikes : AnimationSprite
     float startX;
 
 
-    public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spritesheetMoth.png", 3, 2)
+    public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spritesheetMoth.png", 6, 1)
     {
         Initialize(obj);
         
@@ -34,19 +34,20 @@ class Spikes : AnimationSprite
     void Update()
     {
         MoveEnemies();
-        animationDelay--;
+        /*animationDelay--;
         if (animationDelay == 0)
         {
-            if(frame == 5)
+            if (frame == 5)
             {
                 frame = 0;
-            } else
+            }
+            else
             {
                 frame++;
             }
             animationDelay = 10;
         }
-       SetFrame(frame);
+        SetFrame(frame);*/
     }
 
     void MoveEnemies()
@@ -57,20 +58,19 @@ class Spikes : AnimationSprite
             if (collisions[i] is EnemyTurn)
             {
                 direction *= -1;
-                //scaleX *= -1;
+                /*scaleX *= -1;*/
             }
         }
 
         //TODO: flip it
-        if (direction == 1)
+        if (direction == -1)
         {
-            rotation = 90;
+            SetCycle(1, 3);
         }
-        else if (direction == -1)
+        else if (direction == 1)
         {
-            rotation = 270;
+            SetCycle(4, 3);
         }
-
         x += speed * direction;
     }
 }
