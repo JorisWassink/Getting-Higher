@@ -12,7 +12,7 @@ class Spikes : AnimationSprite
     float startX;
 
 
-    public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spritesheetMoth.png", 3, 2)
+    public Spikes(String fileName, int cols, int rows, TiledObject obj = null) : base("Assets/spritesheetMoth.png", 6, 1)
     {
         Initialize(obj);
         
@@ -37,16 +37,17 @@ class Spikes : AnimationSprite
         /*animationDelay--;
         if (animationDelay == 0)
         {
-            if(frame == 5)
+            if (frame == 5)
             {
                 frame = 0;
-            } else
+            }
+            else
             {
                 frame++;
             }
             animationDelay = 10;
         }
-       SetFrame(frame);*/
+        SetFrame(frame);*/
     }
 
     void MoveEnemies()
@@ -62,14 +63,14 @@ class Spikes : AnimationSprite
         }
 
         //TODO: flip it
-        /*if (direction == 1)
+        if (direction == -1)
         {
-            rotation = 90;
+            SetCycle(1, 3);
         }
-        else if (direction == -1)
+        else if (direction == 1)
         {
-            rotation = 270;
-        }*/
+            SetCycle(4, 3);
+        }
         x += speed * direction;
     }
 }

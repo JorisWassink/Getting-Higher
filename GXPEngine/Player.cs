@@ -182,7 +182,7 @@ class Player : AnimationSprite
         {
             velocity.y += 2;
         }
-        if (velocity.y == 2)
+        if (velocity.y == 0)
         {
             falling = position.y;
             /*Console.WriteLine(falling);*/
