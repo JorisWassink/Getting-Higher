@@ -43,10 +43,8 @@ namespace GXPEngine {
             Background background = new Background(1366, 640, levelManager.loadNumber);
             AddChild(background);
             loader.LoadImageLayers();
-            loader.LoadTileLayers(0);
             loader.addColliders = true;
-            loader.LoadTileLayers(1);
-            loader.LoadTileLayers(2);
+            loader.LoadTileLayers();
             loader.LoadObjectGroups(); // player is made -> child of Level
             y -= defaultOriginY;
             player = FindObjectOfType<Player>();

@@ -16,7 +16,7 @@ internal class LevelManager : GameObject
     private bool gameStart = false;
     //Level[] levelObjects;
     List<Level> levelObjects = new List<Level>();
-    private string[] levels = new string[18];
+    private string[] levels = new string[29];
    // List<Level> Levels = new List<Level>();
 
 
@@ -54,7 +54,17 @@ internal class LevelManager : GameObject
         levels[17] = "Assets/lvl16.tmx";
 
         //HARD LEVELS
-
+        levels[18] = "Assets/lvl17.tmx";
+        levels[19] = "Assets/lvl18.tmx";
+        levels[20] = "Assets/lvl19.tmx";
+        levels[21] = "Assets/lvl20.tmx";
+        levels[22] = "Assets/lvl21.tmx";
+        levels[23] = "Assets/lvl22.tmx";
+        levels[24] = "Assets/lvl23.tmx";
+        levels[25] = "Assets/lvl24.tmx";
+        levels[26] = "Assets/lvl25.tmx";
+        levels[27] = "Assets/lvl26.tmx";
+        levels[28] = "Assets/lvl27.tmx";
         StartGame();
     }
 
@@ -164,7 +174,12 @@ internal class LevelManager : GameObject
             case int n when n > 12 && n < 20:
                 LoadLevel(levels[random.Next(10, 17)], true, 0.5f, 1280 * loadNumber);
                 break;
-
+            case 20:
+                LoadLevel(levels[17], true, 0.5f, 1280 * loadNumber);
+                break;
+            case int n when n > 20:
+                LoadLevel(levels[random.Next(18, 28)], true, 0.5f, 1280 * loadNumber);
+                break;
             default:
                 //LoadLevel(levels[0]);
                 break;
