@@ -16,7 +16,7 @@ public class RotatingSpaceship : Game
     public int deathCounter = 120;
     Sound music;
     SoundChannel noise;
-    public RotatingSpaceship() : base(1376, 768, false, false)
+    public RotatingSpaceship() : base(1376, 768, true, false)
     {
         music = new Sound("Assets/Lift_Off_Soundtrack_with_delay.wav", true);
         //music.Play();
