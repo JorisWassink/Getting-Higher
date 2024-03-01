@@ -164,6 +164,6 @@
  </layer>
  <objectgroup id="8" name="Object Layer 1">
   <object id="1" type="Wall" gid="113" x="489" y="456" width="400" height="80"/>
-  <object id="2" type="BoostPad" gid="114" x="654" y="686" width="64" height="64"/>
+  <object id="2" type="BoostPad" gid="114" x="578" y="686" width="216" height="64"/>
  </objectgroup>
 </map>
