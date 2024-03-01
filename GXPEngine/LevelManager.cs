@@ -172,13 +172,13 @@ internal class LevelManager : GameObject
                 break;
 
             case int n when n > 12 && n < 20:
-                LoadLevel(levels[random.Next(10, 17)], true, 0.5f, 1280 * loadNumber);
+                LoadLevel(levels[random.Next(10, 18)], true, 0.5f, 1280 * loadNumber);
                 break;
             case 20:
-                LoadLevel(levels[17], true, 0.5f, 1280 * loadNumber);
+                LoadLevel(levels[19], true, 0.5f, 1280 * loadNumber);
                 break;
             case int n when n > 20:
-                LoadLevel(levels[random.Next(18, 28)], true, 0.5f, 1280 * loadNumber);
+                LoadLevel(levels[random.Next(20, 28)], true, 0.5f, 1280 * loadNumber);
                 break;
             default:
                 //LoadLevel(levels[0]);
